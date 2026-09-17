@@ -79,3 +79,44 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 @media(max-width:380px){.partner-grid>span{font-size:12px;min-height:104px;padding:18px 6px;gap:10px;letter-spacing:-.005em}
 .partner-grid img{width:33px;height:33px}
 }
+
+
+/* V0.12 — the partners row as quiet, verifiable cards.
+   Same move as V0.9 -> V0.10 on the growth engine: divided list becomes
+   restrained cards. The wash is forest at ~4% over paper, the light-surface
+   counterpart of the engine card's white-over-forest. Cells are now links to
+   each partner directory listing, so the lift is honest. Supersedes the
+   V0.11 `.partner-grid>span` rules above. */
+.partner-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;border-block:0}
+.partner-grid>a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-height:168px;padding:32px 20px;border:1px solid var(--line);border-radius:16px;background:#1c38300a;box-shadow:0 6px 18px #1c383012;font-size:15px;font-weight:600;letter-spacing:-.015em;line-height:1.4;text-align:center;transition:transform .25s,border-color .25s,background .25s,box-shadow .25s}
+.partner-grid>a img{width:56px;height:56px;object-fit:contain;flex-shrink:0}
+.partner-grid>a em{font-style:normal}
+.partner-grid>a:hover{transform:translateY(-3px);border-color:#1c383052;background:#1c383012;box-shadow:0 12px 26px #1c38301a}
+
+@media(max-width:1180px){.partner-grid{gap:14px}
+.partner-grid>a{min-height:158px;padding:30px 12px;gap:16px}
+.partner-grid>a img{width:52px;height:52px}
+}
+
+@media(max-width:950px){.partner-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.partner-grid>a{min-height:168px;padding:32px 20px;gap:18px;font-size:15px}
+.partner-grid>a img{width:56px;height:56px}
+}
+
+@media(max-width:720px){.partner-grid{gap:14px}
+.partner-grid>a{min-height:142px;padding:26px 14px;gap:14px;font-size:14px;border-radius:14px}
+.partner-grid>a img{width:46px;height:46px}
+}
+
+@media(max-width:540px){.partner-grid{gap:12px}
+.partner-grid>a{min-height:130px;padding:22px 10px;gap:13px;font-size:13px}
+.partner-grid>a img{width:42px;height:42px}
+}
+
+@media(max-width:380px){.partner-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.partner-grid>a{min-height:134px;padding:24px 12px;gap:14px;font-size:14px}
+.partner-grid>a img{width:46px;height:46px}
+}
+
+@media(prefers-reduced-motion:reduce){.partner-grid>a{transition:none}
+}

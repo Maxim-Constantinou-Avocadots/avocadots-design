@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.11 · 17 September 2026  
+**Design baseline:** V0.12 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -315,7 +315,7 @@ The user requested an elevated homepage while keeping its existing sections. Pre
 | Services | Light-lime section with four generous linked service rows |
 | Studio introduction | Real team photograph, short introduction, existing metrics |
 | Unified Growth Engine | Current subtle forest cards described above |
-| Partners | Six platform partners as real logo tiles with names, in the existing divided six-cell row |
+| Partners | Six platform partners as restrained linked cards, each a real logo tile above its name |
 | Insights | Three real article thumbnails and links |
 | Awards | Contact-inspired white panel within a forest section |
 | About / Careers | Yellow and light-lime destination panels |
@@ -349,50 +349,66 @@ Main homepage assets are under `dist/assets/`:
 
 Use `object-fit: cover` for project photography inside an intentional frame, and `contain` for certificates and logos. Preserve intrinsic ratios. The asset filenames identify existing files; they are not included in this Markdown document.
 
-## 11b. Partners row — current V0.11
+## 11b. Partners row — current V0.12
 
-The redesign originally set the six platforms as text wordmarks. The user asked for the real logos, as already used on the production site.
+The redesign originally set the six platforms as text wordmarks. The user asked for the real logos, as already used on the production site (V0.11), then said the section could be more interesting.
+
+V0.12 answers that the same way V0.10 answered it for the Growth Engine: a divided list becomes restrained cards. It is the light-surface counterpart of that component's logic, not a copy of its composition.
 
 ### Structure
 
-- The existing composition is unchanged: `05 / Our partners` eyebrow, the two-line heading, the aside paragraph and `Work with us` link, then the six-cell divided row.
-- Each cell stacks the logo tile above the platform name. Cells stay non-interactive `<span>`s, as before — the logos are evidence, not navigation.
-- Six columns on desktop; three columns at/below 950px, so the row becomes 3x2 with a single divider between the two rows.
+- The heading block is unchanged: `05 / Our partners` eyebrow, two-line heading, aside paragraph, `Work with us` link.
+- The divided six-cell strip becomes six separated cards with a 16px gap. The grid's `border-block` and the per-cell `border-right` are gone.
+- Each card stacks the logo tile above the platform name.
+- Cards are links to each platform's partner directory listing, so the section is verifiable evidence rather than decoration. The hover lift is legitimate because the destination is real.
+- Six columns on desktop; three at/below 950px; two at/below 380px.
 
 ### Logo assets
 
 Six 49x49 rounded-square SVG tiles, taken from the production Wix site's own partner badges, in full brand colour and at their original 1:1 ratio.
 
-| File | Name | Tile |
-| --- | --- | --- |
-| `partners-shopify.svg` | Shopify | White tile, green bag |
-| `partners-wix-studio.svg` | Wix Studio | Indigo gradient tile |
-| `partners-meta.svg` | Meta | Blue tile, white infinity |
-| `partners-google-ads.svg` | Google Ads | White tile, colour mark |
-| `partners-tiktok.svg` | TikTok | White tile, colour note |
-| `partners-gohighlevel.svg` | GoHighLevel | Navy tile, colour arrows |
+| File | Name | Tile | Destination |
+| --- | --- | --- | --- |
+| `partners-shopify.svg` | Shopify | White tile, green bag | Shopify Partner directory |
+| `partners-wix-studio.svg` | Wix Studio | Indigo gradient tile | Wix Studio partner profile |
+| `partners-meta.svg` | Meta | Blue tile, white infinity | Meta for Business |
+| `partners-google-ads.svg` | Google Ads | White tile, colour mark | Google Partners agency 2247645641 |
+| `partners-tiktok.svg` | TikTok | White tile, colour note | TikTok for Business |
+| `partners-gohighlevel.svg` | GoHighLevel | Navy tile, colour arrows | GoHighLevel |
 
 Do not redraw, recolour, monochrome or flatten these marks — they are third-party brand assets and must stay as issued. Do not substitute generic icon-set glyphs.
 
-### Exact treatment
+### Exact card treatment
 
 ```css
-.partner-grid>span{flex-direction:column;gap:16px;min-height:150px;padding:30px 18px;
-  font-size:15px;font-weight:600;letter-spacing:-.015em;line-height:1.4;text-align:center}
-.partner-grid img{width:46px;height:46px;object-fit:contain;flex-shrink:0}
+.partner-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;border-block:0}
+
+.partner-grid>a{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;min-height:168px;padding:32px 20px;
+  border:1px solid var(--line);border-radius:16px;
+  background:#1c38300a;box-shadow:0 6px 18px #1c383012;
+  font-size:15px;font-weight:600;letter-spacing:-.015em;line-height:1.4;text-align:center;
+}
+
+.partner-grid>a img{width:56px;height:56px;object-fit:contain;flex-shrink:0}
+.partner-grid>a:hover{transform:translateY(-3px);border-color:#1c383052;
+  background:#1c383012;box-shadow:0 12px 26px #1c38301a}
 ```
+
+The wash is forest at roughly 4% **over paper** — the light-surface mirror of the engine card's white-at-4%-over-forest. Do not make it a solid white panel: three of the six tiles are themselves white, and they would lose their silhouette. Do not make it a solid pale green card either.
 
 The name drops the display wordmark's tight `-.065em` tracking, because it is now a caption under a mark rather than the mark itself.
 
-- Below 1180px: 43px logo, 142px cell.
-- Below 950px: back to 46px logo and 150px cell — three columns leave more room per cell.
-- Below 720px: 40px logo, 14px name, 128px cell.
-- Below 540px: 36px logo, 13px name, 116px cell.
-- Below 380px: 33px logo, 12px name, 104px cell.
+- Below 1180px: 52px logo, 158px card, `30px 12px` padding. The narrow horizontal padding is deliberate — at 951px six cards plus gaps leave the least room of any width, and `GoHighLevel` is the longest name.
+- Below 950px: three columns, back to 56px logo and 168px card.
+- Below 720px: 46px logo, 14px name, 142px card, 14px radius.
+- Below 540px: 42px logo, 13px name, 130px card.
+- Below 380px: two columns, 46px logo, 14px name, 134px card.
 
-The cell dividers, section padding and heading are inherited from the original partners rule and must stay.
+Hover lift is 3px over 250ms, in the button's range. Focus uses the existing `.partners a:focus-visible` green outline. Motion is disabled under `prefers-reduced-motion`.
 
-This is the latest implementation; the user has not separately approved its final rendered result.
+Measured in Chromium from 1600px down to 320px: no name clips its card and the page never overflows horizontally. This is the latest implementation; the user has not separately approved its final rendered result.
 
 ## 12. Motion and interaction
 
