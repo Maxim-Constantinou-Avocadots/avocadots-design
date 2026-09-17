@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.14 · 17 September 2026  
+**Design baseline:** V0.15 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -156,7 +156,7 @@ The 1600px limit includes padding because the site uses `box-sizing: border-box`
 
 Do not give every component a large pill shape. Soft corners should belong to a consistent family.
 
-## 7. Canonical Growth Engine component — current V0.14
+## 7. Canonical Growth Engine component — current V0.15
 
 This is the most important current component to preserve when continuing the latest work.
 
@@ -318,6 +318,49 @@ goes. If it must carry more, the next step is evidence, not ornament: a real fig
 discipline, or one real project per discipline. Both need the user's confirmation — §10's
 figures must not be silently moved or merged, and which project demonstrates which discipline
 is not something to guess.
+
+### V0.15 — the headline gets the page's display scale
+
+V0.13 and V0.14 both failed to make this section land. The reason was structural, not a matter
+of tuning: **the heading was trapped in a half-width column**, so it capped at 82px while the
+hero runs `clamp(64px,8.05vw,128px)` and the footer invite `clamp(58px,8.5vw,130px)`. No
+type-size value inside that column could ever reach the page's own display scale.
+
+The heading now spans the full container at that scale. This is the page's proven "stop"
+device, reused, not a new one imported from outside the concept.
+
+### Structure
+
+```html
+<div class="wrap engine-layout">
+  <div class="engine-head">   <!-- eyebrow + h2, spans both columns -->
+  <div class="engine-copy">   <!-- intro + CTA -->
+  <ol class="engine-disciplines">  <!-- the V0.14 panel -->
+```
+
+```css
+.engine-layout{display:grid;grid-template-columns:.78fr 1.22fr;
+  column-gap:clamp(44px,5vw,88px);row-gap:clamp(44px,4.6vw,72px);align-items:start}
+.engine-head{grid-column:1/-1;min-width:0}
+.engine-head h2{font-size:clamp(46px,7.9vw,122px);font-weight:500;
+  line-height:1.01;letter-spacing:-.072em}
+```
+
+- `align-items:start` is load-bearing. Centring the second row left a visible void between the
+  headline and the intro; the intro must sit flush with the panel's top edge.
+- 122px cap, measured: **the heading holds exactly two lines from 1920px down to 320px**, and no
+  discipline title wraps. Re-measure if the cap, the column ratio or the copy changes.
+- The intro rises to 19px, the disciplines to a 58px cap, both to hold their own against the
+  larger heading.
+- Reveal cascades `.engine-head` → `.engine-copy` (0.08s) → `.engine-disciplines` (0.14s).
+
+§3's "continue with" still holds: intro and the stacked disciplines keep their two-column
+relationship beneath the headline. No diagram, hub, connector, tag, badge or control was added,
+and the rows stay non-interactive.
+
+**Remaining lever.** This is still the only major section with no real visual content. Three
+rounds of composition work have exhausted the design-only route; anything further should be
+evidence (a real figure or a real project per discipline) and needs the user's confirmation.
 
 ## 8. Canonical Contact-inspired awards component
 

@@ -223,3 +223,56 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
    rows fading in inside an already-visible panel read as broken. */
 .motion-ready .engine-disciplines>li:nth-child(2),
 .motion-ready .engine-disciplines>li:nth-child(3){transition-delay:0s}
+
+
+/* V0.15 — the headline gets the page's display scale.
+   Three rounds of tuning inside a half-width column could not make this section
+   land, because the column was the ceiling: the heading capped at 82px while the
+   hero runs 128px and the footer invite 130px. The heading now spans the full
+   container at that same scale, which is the page's own proven "stop" device
+   rather than a new one. Intro/CTA and the V0.14 panel keep their two-column
+   relationship beneath it, so §3's "continue with" still holds. */
+.engine-layout{display:grid;grid-template-columns:.78fr 1.22fr;column-gap:clamp(44px,5vw,88px);row-gap:clamp(44px,4.6vw,72px);align-items:start}
+.engine-head{grid-column:1/-1;min-width:0}
+.engine-head .eyebrow{font-size:12px;letter-spacing:.1em;color:#cfddd2;margin-bottom:30px}
+.engine-head h2{font-size:clamp(46px,7.9vw,122px);font-weight:500;line-height:1.01;letter-spacing:-.072em}
+.engine-head h2>span{color:var(--yellow)}
+
+.engine-copy{max-width:none}
+.engine-intro{font-size:19px;line-height:1.7;max-width:440px;margin-top:0}
+.engine-cta{margin-top:34px}
+
+.engine-disciplines h3{font-size:clamp(34px,3.7vw,58px)}
+.engine-disciplines p{max-width:440px}
+
+.motion-ready .engine-copy{transition-delay:.08s}
+.motion-ready .engine-disciplines{transition-delay:.14s}
+
+@media(max-width:1180px){.engine-layout{column-gap:52px;row-gap:52px}
+.engine-head .eyebrow{margin-bottom:24px}
+.engine-head h2{font-size:clamp(44px,8vw,92px)}
+.engine-intro{font-size:17px}
+.engine-cta{margin-top:28px}
+.engine-disciplines h3{font-size:44px}
+}
+
+@media(max-width:950px){.engine-layout{grid-template-columns:1fr;row-gap:44px}
+.engine-head h2{font-size:clamp(44px,8.6vw,78px)}
+.engine-intro{max-width:560px}
+.engine-disciplines h3{font-size:46px}
+}
+
+@media(max-width:720px){.engine-layout{row-gap:36px}
+.engine-head .eyebrow{margin-bottom:20px}
+.engine-head h2{font-size:clamp(38px,9.4vw,62px);letter-spacing:-.062em}
+.engine-intro{font-size:16px;line-height:1.75}
+.engine-cta{margin-top:26px}
+.engine-disciplines h3{font-size:36px}
+}
+
+@media(max-width:380px){.engine-head h2{font-size:36px}
+.engine-disciplines h3{font-size:32px}
+}
+
+/* Intro sits flush with the panel top: centring it left a void under the headline. */
+.engine-copy{padding-top:4px}
