@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.16 · 17 September 2026  
+**Design baseline:** V0.17 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -502,6 +502,62 @@ When extending the Contact design, retain the screenshot's hierarchy: a human in
 - Do not add chips or input-like boxes to purely informational sections just to repeat the form's appearance.
 
 The exact homepage CSS in the appendix does not include the separate Contact form implementation. Its role here is the user-approved visual reference, not a claim of pixel-identical form specifications.
+
+## 9b. Contact page — as built
+
+The Contact page was supplied as a ChatGPT "Design guide V0.4" review harness containing an
+About page (`avo-*`), this Contact page (`ac-*`), a desktop/mobile switch and a style guide, with
+all images inlined as base64 (962KB). Only the Contact page was extracted.
+
+- `dist/contact.html`, `dist/contact.css`, `dist/contact.js` — self-contained, every rule scoped
+  under `#avo-contact-page`, so it shares nothing with the homepage cascade and cannot regress it.
+- New assets: `team-andreas.png`, `team-paris.png`, `team-olga.png` (cut-out headshots).
+  The nav logo and studio photo in the source were **byte-identical** to the existing
+  `brand-mark.png` and `team.jpg`, so they are reused rather than duplicated. This is why the
+  page is a few KB rather than 962KB.
+
+### Sections
+
+Forest hero (eyebrow, `Big ideas. / Real people. / Let's talk.` with the yellow last line and
+green full stop, lead, crew panel with three portraits, direct-email row) beside the white form
+panel with its green top edge · light `What happens after hello?` 01/02/03 steps · yellow
+`Prefer a more direct hello?` panel beside the studio photo · three-question FAQ · slim footer.
+
+### The form
+
+It meets §9 without exception: every field labelled, required marked `*` and optional marked in
+words, chips are real `aria-pressed` buttons, `Not sure yet` is mutually exclusive with the other
+five, validation uses `setCustomValidity` with real messages, and the result region is
+`role="status" aria-live="polite"`. It states plainly that it does not send:
+**"Interactive design preview. This form does not send an enquiry."** Do not wire a fake backend
+or add a response-time promise.
+
+`Prefer to book a call?` points at a **real** Calendly booking
+(`calendly.com/avocadots-design-studio/free-digital-consultation`) — verified in the source, not
+assumed. Email, phone and address match the homepage footer exactly.
+
+### Fixed on integration
+
+- `.ac-logo` and `.ac-footer-brand img` had no colour treatment, so the dark `brand-mark.png`
+  rendered dark-on-dark in both the nav and the footer and was effectively invisible. They now
+  carry `filter:brightness(0) invert(1)`, which is what the homepage's `.brand img` does to the
+  identical file.
+- Home / Our Work / Blogs in the nav pointed at the live Wix site; they now point at this build
+  so the prototype is navigable. The homepage's six `avocadots.com/contact` links now point at
+  `contact.html`.
+
+### Known divergences from the homepage — not yet resolved
+
+These are real inconsistencies, left as the user's call rather than silently reconciled:
+
+| Divergence | Homepage | Contact page |
+| --- | --- | --- |
+| Masthead | full-width bar, `1px` bottom hairline | inset rounded pill, translucent, blurred |
+| Brand lockup | mark + `avocadots` wordmark | mark only |
+| Numbered triad | small **yellow text** index (§7 forbids badges) | grey circular **badges** |
+| Service names | `Web Design`, `E-Commerce`, `CRM`, plus `GEO` | `Web design`, `E-commerce`, `CRM integration`, **no GEO** |
+
+Mobile navigation opens at/below 720px on both pages, which matches §13.
 
 ## 10. Preserve the homepage's content and rhythm
 
