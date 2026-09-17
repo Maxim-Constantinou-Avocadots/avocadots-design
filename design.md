@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.18 · 17 September 2026  
+**Design baseline:** V0.19 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -607,6 +607,41 @@ links and every in-page anchor verified to resolve.
 
 Measured in Chromium across 16 widths from 1920px to 320px: no overflow, no broken images, no
 element wider than its viewport, no stuck reveals.
+
+### V0.19 — the service name is the page
+
+V0.18 was reported as not stunning enough. Two causes, both measured, and both the same faults
+that made the growth engine invisible (§7):
+
+1. **The service name was a 12px eyebrow** while the headline sentence took 60px. `Branding`,
+   `Web Design`, `E-Commerce` — the one word a visitor scans for — were the smallest thing in
+   the block. The name now runs `clamp(46px,7.4vw,124px)` and the headline becomes the
+   supporting statement beneath it at `clamp(21px,1.9vw,29px)`.
+2. **The page carried one `<img>` before the work strip, and it was the header logo.** Hero plus
+   six blocks was pure type.
+
+### Platform marks — evidence, not ornament
+
+Each service now shows the platforms **its own copy already names**, using the real brand SVGs
+from the partners row:
+
+| Service | Marks | The sentence that justifies it |
+| --- | --- | --- |
+| Web Design | Wix Studio | "high-performing **Wix** websites" |
+| E-Commerce | Shopify | "we design **Shopify** stores" |
+| Digital Marketing | Meta, Google Ads, TikTok | "From **Meta** to **Google**, **TikTok**, and LinkedIn" |
+| CRM | GoHighLevel | "we set up and customize **GoHighLevel**" |
+
+**The rule: no logo appears unless that service's own text names that platform.** Branding and
+GEO therefore carry none — Branding names no platform, and GEO names ChatGPT, Gemini and
+Perplexity, whose marks are not in `dist/assets/`. Do not add a logo to even things up, and do
+not substitute a generic icon; that would turn evidence into decoration.
+
+LinkedIn is named in the marketing copy but has no mark in the repo, so it is absent from the
+row while remaining in the sentence. Add `partners-linkedin.svg` and it should join.
+
+Measured 1920px → 320px: the name scales 124px → 37px, never overflows its column, and every
+platform mark loads at every width.
 
 ## 10. Preserve the homepage's content and rhythm
 

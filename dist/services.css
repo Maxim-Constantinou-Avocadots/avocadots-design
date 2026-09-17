@@ -103,3 +103,57 @@
 .svc-index-name{font-size:19px}
 .svc h2{font-size:28px}
 }
+
+
+/* V0.19 — the service name is the page, not an eyebrow.
+   The names were 12px while the headline sentence took 60px: the one word a
+   visitor scans for was the smallest thing in the block. Same inversion that
+   made the growth engine invisible. The name now runs at display scale and the
+   headline becomes the supporting statement under it.
+   The page also carried no imagery at all before the work strip. Each service
+   now shows the platforms its own copy already names - Wix, Shopify, Meta,
+   Google, TikTok, GoHighLevel - as the real brand marks. Evidence, not
+   ornament: no logo appears unless that service text names that platform. */
+.svc h2{display:block;font-size:inherit;letter-spacing:normal;line-height:inherit}
+.svc-name{display:block;font-size:clamp(46px,7.4vw,124px);font-weight:500;line-height:.94;letter-spacing:-.07em}
+.svc-head{display:block;font-size:clamp(21px,1.9vw,29px);font-weight:500;line-height:1.28;letter-spacing:-.035em;margin-top:22px;max-width:20ch}
+.svc-light .svc-head{color:var(--forest)}
+.svc-dark .svc-head{color:#eef0ec}
+.svc-num{font-size:12px;margin-bottom:18px}
+.svc-lead{font-size:17px;margin-top:20px;max-width:430px}
+.svc-cta{margin-top:30px}
+
+.svc-platforms{margin-top:38px;padding-top:26px}
+.svc-light .svc-platforms{border-top:1px solid var(--line)}
+.svc-dark .svc-platforms{border-top:1px solid #ffffff2b}
+.svc-platforms-label{display:block;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;margin-bottom:18px}
+.svc-light .svc-platforms-label{color:var(--muted)}
+.svc-dark .svc-platforms-label{color:#a9c2b0}
+.svc-platforms ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:14px 26px}
+.svc-platforms li{display:flex;align-items:center;gap:11px;font-size:15px;font-weight:600;letter-spacing:-.015em}
+.svc-platforms img{width:40px;height:40px;object-fit:contain;flex-shrink:0}
+
+@media(max-width:1180px){.svc-name{font-size:clamp(44px,8vw,86px)}
+.svc-head{font-size:25px;margin-top:18px}
+.svc-platforms{margin-top:32px;padding-top:22px}
+.svc-platforms img{width:37px;height:37px}
+}
+
+@media(max-width:950px){.svc-name{font-size:clamp(46px,9.4vw,82px)}
+.svc-head{max-width:22ch}
+.svc-lead{max-width:560px}
+}
+
+@media(max-width:720px){.svc-name{font-size:clamp(40px,11vw,62px);letter-spacing:-.055em}
+.svc-head{font-size:21px;margin-top:15px;max-width:26ch}
+.svc-lead{font-size:16px;margin-top:17px}
+.svc-platforms{margin-top:28px;padding-top:20px}
+.svc-platforms ul{gap:12px 20px}
+.svc-platforms li{font-size:14px;gap:9px}
+.svc-platforms img{width:34px;height:34px}
+}
+
+@media(max-width:380px){.svc-name{font-size:37px}
+.svc-head{font-size:19px}
+.svc-platforms img{width:31px;height:31px}
+}
