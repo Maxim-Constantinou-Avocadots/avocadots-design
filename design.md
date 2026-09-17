@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.15 · 17 September 2026  
+**Design baseline:** V0.16 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -70,7 +70,7 @@ The current awards treatment adopts the Contact page's visual language: forest s
 | Huge stretched or heavily tilted certificate artwork | Looked broken and made the evidence hard to read | Original 1:1 ratio, upright artwork, full-size viewer |
 | Large yellow/forest split awards box with oversized year, repeated labels and extra CTA | Felt information-heavy | One heading, one shared award issuer/year, two simple award entries |
 | Bare light-background certificate gallery | Clean but felt cheap and lacked personality | Contact-inspired forest/white contrast and a composed panel |
-| Overlapping Growth Engine circles, hub, selector boxes, extra tags and descriptions | Visually messy and harder to understand | Three immediately visible disciplines with concise explanations |
+| Overlapping Growth Engine circles, hub, selector boxes, extra tags and descriptions | Visually messy and harder to understand | Three immediately visible disciplines, now connected by the V0.16 diagram — see §7. Connections are wanted; mess is not |
 | Generic three-card process strip with arrows | Felt generic | Current two-column composition with vertically stacked, quiet cards |
 | Decorative grids covering whole sections | Can compete with the content | Current Growth Engine and awards have no decorative grid |
 | Adding more labels, badges, icons and controls to make things “premium” | Increases visual and information density | Better proportions, hierarchy, spacing, and restrained surfaces |
@@ -156,7 +156,7 @@ The 1600px limit includes padding because the site uses `box-sizing: border-box`
 
 Do not give every component a large pill shape. Soft corners should belong to a consistent family.
 
-## 7. Canonical Growth Engine component — current V0.15
+## 7. Canonical Growth Engine component — current V0.16
 
 This is the most important current component to preserve when continuing the latest work.
 
@@ -361,6 +361,72 @@ and the rows stay non-interactive.
 **Remaining lever.** This is still the only major section with no real visual content. Three
 rounds of composition work have exhausted the design-only route; anything further should be
 evidence (a real figure or a real project per discipline) and needs the user's confirmation.
+
+### V0.16 — the engine shown as a connected system
+
+**This supersedes part of §3.** After V0.15 the user said the section still read as "title,
+description, CTA and a few cards", and supplied references (a community-network graphic, Slack's
+"brings your team and your tools together") whose common property was *visible connections that
+are easy to understand*. They asked for connections, branded, not copied.
+
+§3 rejected an earlier diagram — overlapping circles, a central logo hub, boxed selectors,
+changing explanations. The recorded reason is "visually messy and harder to understand". That
+rejection stands **as a reason, not as a ban on the idea**: this version keeps every constraint
+that made the old one fail, and shows connections anyway.
+
+### The idea
+
+Three discipline nodes on the left. One path leaves each. The three paths **merge into a single
+line before they reach the outcome**. The merge is the "Better together." claim made visible,
+which is what neither the V0.10 cards nor the V0.14 panel could do — both showed separation
+while the headline claimed union.
+
+- No hub, no overlapping shapes, no selectors, no tags, nothing that changes on click.
+- Nothing in the diagram is focusable or clickable; the CTA remains the only action.
+- Feeder paths use brand green, the merged segment and the outcome use brand yellow — inputs in
+  the brand colour, result in the action colour.
+- The outcome reads `Growth`, a word already in the section's own eyebrow and intro. No new
+  claim, figure or label was invented.
+
+### Geometry contract — read before moving anything
+
+The SVG `viewBox` is `1200 600` with `preserveAspectRatio="xMidYMid meet"`, and
+`.engine-diagram` is `aspect-ratio:2/1`. Because those match, a node at `left:30%` sits exactly
+on viewBox `x=360`. **Node positions and path endpoints are one system: move a node and you must
+move its path endpoint by the same amount, or the wire detaches.**
+
+| Node | CSS position | Path endpoint |
+| --- | --- | --- |
+| Brand | `left:0; top:15.83%` (w 30%) | `360 95` |
+| Website | `left:7.5%; top:50%` (w 30%) | `450 300` |
+| Marketing | `left:0; top:84.17%` (w 30%) | `360 505` |
+| Merge point | — | `830 300` |
+| Growth | `left:85%; top:50%`, w 18.33% | circle edge `910 300` |
+
+All nodes use `transform:translateY(-50%)`, so they are anchored by their vertical centre.
+
+### The 1024px floor
+
+Below roughly 1024px the container height falls faster than the node text can, and the outer
+nodes escape the container — measured 6px over at 990px, 9px at 951px. So the diagram has a
+hard floor: **at/below 1023px it becomes a stack** of the same nodes in reading order, joined by
+short green connectors, ending on the same yellow outcome. The concept survives; only the
+geometry is dropped.
+
+This is the one component with a breakpoint outside §13's set, because the floor is set by the
+diagram's own geometry rather than by the page grid. Do not "tidy" it back to 950.
+
+When stacking, the `:nth-child` position rules must be neutralised explicitly — they outrank a
+plain `.engine-disciplines>li` override, and leaving their `translateY(-50%)` in place pulls
+every card up over the CTA. That bug was found in rendering, not in review.
+
+### Motion
+
+The paths draw in once on reveal (`stroke-dasharray`/`dashoffset`, 1.15s, staggered
+0.18/0.30/0.42s), then the merged segment, then the outcome fades in at 1.3s. The connection
+reads as something that happens rather than ornament that was always there. Under
+`prefers-reduced-motion` the whole diagram is simply present and fully drawn — verified, nothing
+stays hidden.
 
 ## 8. Canonical Contact-inspired awards component
 

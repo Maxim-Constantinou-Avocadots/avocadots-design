@@ -276,3 +276,92 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 
 /* Intro sits flush with the panel top: centring it left a void under the headline. */
 .engine-copy{padding-top:4px}
+
+
+/* V0.16 — the growth engine shown as a connected system.
+   The user asked for the section to read as connections rather than a list of
+   cards. §3 rejected an earlier diagram for being "visually messy and harder to
+   understand" (overlapping circles, a logo hub, selector boxes); this keeps the
+   rejection's *reason* by staying legible: three static nodes, three paths that
+   merge into one before the outcome. The merge is the "Better together" claim
+   made visible. No hub, no overlap, no selectors, nothing clickable.
+
+   Geometry contract: the SVG viewBox is 1200x600 and the container is
+   aspect-ratio 2/1, so a node placed at left:30% sits exactly on viewBox x=360.
+   Move a node and you must move its path endpoint by the same amount. */
+.engine-layout{grid-template-columns:1fr;row-gap:clamp(40px,4vw,60px)}
+.engine-head,.engine-copy,.engine-diagram{grid-column:1/-1}
+.engine-copy{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-top:0}
+.engine-intro{max-width:560px;margin-top:0}
+.engine-cta{margin-top:0;flex-shrink:0}
+
+.engine-diagram{position:relative;aspect-ratio:2/1}
+.engine-wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.wire{stroke:var(--brand-lime);stroke-opacity:.55;stroke-width:2.5}
+.wire-merged{stroke:var(--yellow);stroke-width:5}
+.wire-dots circle{fill:var(--brand-lime)}
+
+.engine-disciplines{display:block;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;gap:0}
+.engine-disciplines>li{position:absolute;width:30%;padding:24px 26px;gap:18px;grid-template-columns:32px minmax(0,1fr);border:1px solid #ffffff2e;border-radius:18px;background:var(--forest);box-shadow:0 16px 38px #06120d40}
+.engine-disciplines>li+li{border-top:1px solid #ffffff2e}
+.engine-disciplines>li:nth-child(1){left:0;top:15.83%;transform:translateY(-50%)}
+.engine-disciplines>li:nth-child(2){left:7.5%;top:50%;transform:translateY(-50%)}
+.engine-disciplines>li:nth-child(3){left:0;top:84.17%;transform:translateY(-50%)}
+.engine-disciplines h3{font-size:clamp(26px,2.6vw,40px)}
+.engine-disciplines p{font-size:15px;line-height:1.6;margin-top:8px;max-width:none}
+.engine-number{font-size:13px;padding-top:9px}
+
+.engine-outcome{position:absolute;left:85%;top:50%;transform:translate(-50%,-50%);width:18.33%;aspect-ratio:1;border-radius:50%;background:var(--yellow);color:var(--deep);display:grid;place-items:center;text-align:center;font-size:clamp(22px,2.3vw,38px);font-weight:600;letter-spacing:-.05em;box-shadow:0 22px 54px #0a1a1259;margin:0}
+
+/* One-shot draw-in: the paths arrive after the nodes, so the connection reads
+   as something that happens rather than decoration that was always there. */
+.motion-ready .engine-diagram .wire,.motion-ready .engine-diagram .wire-merged{stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 1.15s cubic-bezier(.25,.7,.35,1)}
+.motion-ready .engine-diagram .wire:nth-child(1){transition-delay:.18s}
+.motion-ready .engine-diagram .wire:nth-child(2){transition-delay:.3s}
+.motion-ready .engine-diagram .wire:nth-child(3){transition-delay:.42s}
+.motion-ready .engine-diagram .wire-merged{transition-delay:1.05s;transition-duration:.5s}
+.motion-ready .engine-diagram.visible .wire,.motion-ready .engine-diagram.visible .wire-merged{stroke-dashoffset:0}
+.motion-ready .engine-diagram .wire-dots circle,.motion-ready .engine-diagram .engine-outcome{opacity:0;transition:opacity .6s}
+.motion-ready .engine-diagram .wire-dots circle{transition-delay:.5s}
+.motion-ready .engine-diagram .engine-outcome{transition-delay:1.3s}
+.motion-ready .engine-diagram.visible .wire-dots circle,.motion-ready .engine-diagram.visible .engine-outcome{opacity:1}
+
+@media(max-width:1180px){.engine-disciplines>li{padding:20px 22px;gap:14px;grid-template-columns:28px minmax(0,1fr);border-radius:16px}
+.engine-disciplines h3{font-size:34px}
+.engine-disciplines p{font-size:14px;margin-top:6px}
+.engine-number{font-size:12px;padding-top:7px}
+}
+
+/* The diagram needs a floor: below ~1024 the container height drops faster than
+   the node text can, and the outer nodes escape it (measured: 6px over at 990,
+   9px at 951). So it becomes an honest stack below 1024 - the same nodes in
+   reading order, joined by short connectors, ending on the same outcome.
+   This is the one component that needs a breakpoint outside §13's set, because
+   the floor is set by the diagram's geometry, not by the page grid. */
+@media(max-width:1023px){.engine-diagram{aspect-ratio:auto;display:block}
+.engine-wires{display:none}
+.engine-disciplines{display:grid;gap:16px}
+.engine-disciplines>li,.engine-disciplines>li:nth-child(1),.engine-disciplines>li:nth-child(2),.engine-disciplines>li:nth-child(3){position:relative;left:auto;top:auto;width:auto;transform:none}
+.engine-disciplines>li{padding:26px 28px;gap:22px;grid-template-columns:36px minmax(0,1fr);border-radius:18px}
+.engine-disciplines>li+li{margin-top:0}
+.engine-disciplines>li:before{content:"";position:absolute;left:50%;top:-16px;width:2px;height:16px;background:#86bd4266}
+.engine-disciplines>li:first-child:before{display:none}
+.engine-disciplines h3{font-size:42px}
+.engine-disciplines p{font-size:16px;margin-top:8px}
+.engine-number{font-size:15px;padding-top:11px}
+.engine-outcome{position:relative;left:auto;top:auto;transform:none;width:auto;aspect-ratio:auto;border-radius:100px;padding:20px;margin-top:16px;font-size:26px}
+.engine-outcome:before{content:"";position:absolute;left:50%;top:-16px;width:2px;height:16px;background:#86bd4266}
+.motion-ready .engine-diagram .engine-outcome{transition-delay:.2s}
+}
+
+@media(max-width:720px){.engine-copy{gap:26px}
+.engine-disciplines>li{padding:22px 20px;gap:16px;grid-template-columns:28px minmax(0,1fr)}
+.engine-disciplines h3{font-size:34px}
+.engine-number{font-size:13px;padding-top:9px}
+.engine-outcome{font-size:23px;padding:17px}
+}
+
+@media(max-width:380px){.engine-disciplines h3{font-size:30px}
+.engine-disciplines>li{padding:20px 17px;gap:13px;grid-template-columns:24px minmax(0,1fr)}
+.engine-outcome{font-size:21px}
+}
