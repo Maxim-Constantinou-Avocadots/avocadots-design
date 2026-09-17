@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.12 · 17 September 2026  
+**Design baseline:** V0.13 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -156,7 +156,7 @@ The 1600px limit includes padding because the site uses `box-sizing: border-box`
 
 Do not give every component a large pill shape. Soft corners should belong to a consistent family.
 
-## 7. Canonical Growth Engine component — current V0.10
+## 7. Canonical Growth Engine component — current V0.13
 
 This is the most important current component to preserve when continuing the latest work.
 
@@ -227,6 +227,55 @@ The background is white at approximately 4% opacity **over forest**. Do not turn
 - Below 380px: 22px vertical / 20px horizontal card padding; 29px title.
 
 Do not restore rings, diagrams, connector arrows, a central logo hub, service tags, selection controls, or a second paragraph that changes when a card is clicked. Do not add hover movement that implies these informational cards are links.
+
+### V0.13 — presence pass
+
+The user reported they could scroll past this section without stopping, and asked it to carry
+the page's "wow" moment, because it is where the studio's difference is explained. Four
+measurable causes were found in the V0.10 build, and all four are now fixed:
+
+1. It carried the **smallest display heading on the page** (68px cap, against 86px for awards,
+   85px for the people cards and 78px for a generic section H2).
+2. It was the **third forest section**, sharing a surface with the hero and awards.
+3. It was **absent from the reveal system** — `.section-heading, .project-link, .studio-copy,
+   .blog-link, .people-card` named no engine selector, so nothing happened on scroll.
+4. It is the **only major section with no imagery**, so the eye has nothing to land on.
+
+The fix adds no new elements. Per §1, the lift comes from surface, scale and contrast:
+
+```css
+.growth{background:var(--deep);padding-block:136px;position:relative;isolation:isolate;overflow:hidden}
+.growth:before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(ellipse at 84% 6%,#86bd4218,transparent 62%);pointer-events:none}
+
+.engine-layout{grid-template-columns:1.1fr 1fr;gap:clamp(48px,6vw,104px)}
+.engine-copy h2{font-size:clamp(44px,5.2vw,82px);line-height:1.04;letter-spacing:-.062em}
+.engine-disciplines>li{padding:30px 32px;gap:22px;grid-template-columns:34px minmax(0,1fr);
+  border:1px solid #ffffff26;background:#ffffff0f;box-shadow:0 10px 28px #0818110f}
+.engine-disciplines h3{font-size:clamp(34px,3.5vw,54px);letter-spacing:-.05em}
+```
+
+- `--deep` makes this the darkest surface on the page, so it stops reading as another forest
+  band and yellow hits harder. The wash follows the Contact reference and is intentionally faint.
+- The heading moves from the smallest display size on the page to among the largest. The left
+  column widens to `1.1fr` so the two documented lines still hold; **measured in Chromium, the
+  heading stays exactly two lines from 1600px down to 320px.** Change either value and re-measure.
+- The disciplines become typographic statements (54px cap, up from 40px) rather than card titles.
+  With no imagery in this section, the type is the visual.
+- The card wash rises from 4% to 6% white and the border from 12% to 15%, which keeps the same
+  *perceived* contrast now that the ground is darker. It is still white-over-dark, not a solid
+  pale green card.
+- `.engine-copy` and `.engine-disciplines>li` join the existing reveal system, with the three
+  cards staggered 0 / 0.09 / 0.18s. This uses the site's existing 28px/700ms reveal, not a new
+  motion language, and `prefers-reduced-motion` still disables it.
+
+What did **not** change: the two-column composition, the copy, the CTA, the non-interactive
+cards, and every rejected treatment in §3 stays rejected. The cards gained no hover, because
+they still have no destination.
+
+Still open: this remains the only major section with no real visual content. If it needs to
+carry more, the next step is evidence rather than ornament — and that needs the user's input,
+not invented material.
 
 ## 8. Canonical Contact-inspired awards component
 

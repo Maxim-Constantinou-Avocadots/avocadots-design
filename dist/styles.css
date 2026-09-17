@@ -120,3 +120,68 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 
 @media(prefers-reduced-motion:reduce){.partner-grid>a{transition:none}
 }
+
+
+/* V0.13 — the growth engine is the differentiation statement, so give it the
+   weight to match. No new elements: the lift comes from surface, scale and
+   contrast, which is where this concept is allowed to find its "wow".
+   - Deepest surface on the page, so it stops reading as a third forest band.
+   - Heading moves from the smallest display size on the page to among the
+     largest; the disciplines become typographic statements, not card titles.
+   - The section joins the existing reveal system it was never wired into.
+   Supersedes the V0.9/V0.10 sizing above; the composition, copy, card logic
+   and non-interactive cards are unchanged. */
+.growth{background:var(--deep);padding-block:136px;position:relative;isolation:isolate;overflow:hidden}
+.growth:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 84% 6%,#86bd4218,transparent 62%);pointer-events:none}
+
+.engine-layout{grid-template-columns:1.1fr 1fr;gap:clamp(48px,6vw,104px)}
+.engine-copy h2{font-size:clamp(44px,5.2vw,82px);line-height:1.04;letter-spacing:-.062em}
+.engine-intro{font-size:18px;line-height:1.75;max-width:470px;margin-top:30px}
+.engine-cta{margin-top:38px}
+
+.engine-disciplines{gap:18px}
+.engine-disciplines>li{padding:30px 32px;gap:22px;grid-template-columns:34px minmax(0,1fr);border:1px solid #ffffff26;background:#ffffff0f;box-shadow:0 10px 28px #0818110f}
+.engine-disciplines h3{font-size:clamp(34px,3.5vw,54px);letter-spacing:-.05em}
+.engine-disciplines p{font-size:17px;line-height:1.65;max-width:400px;margin-top:12px}
+.engine-number{font-size:13px;padding-top:14px}
+
+.motion-ready .engine-disciplines>li:nth-child(2){transition-delay:.09s}
+.motion-ready .engine-disciplines>li:nth-child(3){transition-delay:.18s}
+
+@media(max-width:1180px){.growth{padding-block:112px}
+.engine-layout{gap:56px}
+.engine-copy h2{font-size:clamp(42px,5.4vw,62px)}
+.engine-intro{font-size:17px;margin-top:26px}
+.engine-cta{margin-top:32px}
+.engine-disciplines>li{padding:26px 26px;gap:18px;grid-template-columns:30px minmax(0,1fr)}
+.engine-disciplines h3{font-size:42px}
+.engine-disciplines p{font-size:16px;margin-top:10px}
+.engine-number{padding-top:12px}
+}
+
+@media(max-width:950px){.engine-layout{grid-template-columns:1fr;gap:52px}
+.engine-copy{max-width:640px}
+.engine-copy h2{font-size:clamp(44px,6.6vw,64px)}
+.engine-disciplines>li{padding:28px 30px;gap:22px;grid-template-columns:34px minmax(0,1fr)}
+.engine-disciplines>li>div{grid-template-columns:1fr 1.05fr;gap:30px}
+.engine-disciplines h3{font-size:46px}
+.engine-disciplines p{max-width:360px;margin-top:0}
+}
+
+@media(max-width:720px){.growth{padding-block:80px}
+.engine-layout{gap:40px}
+.engine-copy h2{font-size:clamp(38px,8.2vw,54px)}
+.engine-intro{font-size:16px;margin-top:22px}
+.engine-cta{margin-top:28px}
+.engine-disciplines{gap:14px}
+.engine-disciplines>li{padding:24px 22px;gap:16px;grid-template-columns:26px minmax(0,1fr)}
+.engine-disciplines h3{font-size:36px}
+.engine-disciplines p{font-size:16px;margin-top:9px;max-width:360px}
+.engine-number{font-size:12px;padding-top:10px}
+}
+
+@media(max-width:380px){.engine-copy h2{font-size:35px}
+.engine-disciplines>li{padding:22px 18px;gap:13px;grid-template-columns:22px minmax(0,1fr)}
+.engine-disciplines h3{font-size:32px}
+.engine-number{padding-top:9px}
+}
