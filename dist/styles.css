@@ -185,3 +185,41 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 .engine-disciplines h3{font-size:32px}
 .engine-number{padding-top:9px}
 }
+
+
+/* V0.14 — three disciplines, one panel.
+   The headline claims "Better together" while three separated cards argued the
+   opposite, which is why the section read as a generic service list. The cards
+   become three rows inside a single panel: distinct on their own, visibly one
+   thing. Borrows the composed-panel language of the contact/awards sections the
+   user called on brand, with the green top edge §4 reserves for panel edges.
+   Copy, CTA, two-column layout and the stacked order are unchanged, and the
+   rows stay non-interactive. Supersedes the V0.10/V0.13 per-card surfaces. */
+.engine-disciplines{display:block;gap:0;border:1px solid #ffffff24;border-top:4px solid var(--brand-lime);border-radius:24px;background:#ffffff0d;box-shadow:0 18px 44px #0818111f;overflow:hidden}
+
+.engine-disciplines>li{border:0;border-radius:0;background:transparent;box-shadow:none;padding:34px 36px;gap:24px;grid-template-columns:38px minmax(0,1fr)}
+.engine-disciplines>li+li{border-top:1px solid #ffffff1c}
+.engine-number{font-size:17px;font-weight:500;letter-spacing:.01em;padding-top:13px}
+
+@media(max-width:1180px){.engine-disciplines{border-radius:22px}
+.engine-disciplines>li{padding:28px 30px;gap:20px;grid-template-columns:34px minmax(0,1fr)}
+.engine-number{font-size:16px;padding-top:11px}
+}
+
+@media(max-width:950px){.engine-disciplines>li{padding:30px 32px;gap:24px;grid-template-columns:38px minmax(0,1fr)}
+.engine-number{font-size:17px}
+}
+
+@media(max-width:720px){.engine-disciplines{border-radius:18px}
+.engine-disciplines>li{padding:26px 22px;gap:16px;grid-template-columns:28px minmax(0,1fr)}
+.engine-number{font-size:14px;padding-top:9px}
+}
+
+@media(max-width:380px){.engine-disciplines>li{padding:22px 18px;gap:13px;grid-template-columns:24px minmax(0,1fr)}
+.engine-number{font-size:13px;padding-top:8px}
+}
+
+/* The panel now arrives as one unit, so the V0.13 per-row stagger is retired:
+   rows fading in inside an already-visible panel read as broken. */
+.motion-ready .engine-disciplines>li:nth-child(2),
+.motion-ready .engine-disciplines>li:nth-child(3){transition-delay:0s}

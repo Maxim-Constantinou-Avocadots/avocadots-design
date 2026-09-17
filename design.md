@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.13 · 17 September 2026  
+**Design baseline:** V0.14 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -156,7 +156,7 @@ The 1600px limit includes padding because the site uses `box-sizing: border-box`
 
 Do not give every component a large pill shape. Soft corners should belong to a consistent family.
 
-## 7. Canonical Growth Engine component — current V0.13
+## 7. Canonical Growth Engine component — current V0.14
 
 This is the most important current component to preserve when continuing the latest work.
 
@@ -276,6 +276,48 @@ they still have no destination.
 Still open: this remains the only major section with no real visual content. If it needs to
 carry more, the next step is evidence rather than ornament — and that needs the user's input,
 not invented material.
+
+### V0.14 — three disciplines, one panel
+
+After V0.13 the user still found the section uninteresting. The remaining fault was not scale,
+it was that **the composition argued against the copy**: a headline reading "Better together"
+was rendered as three separated, near-identical cards, so the section read as a generic
+three-service list rather than the studio's differentiator.
+
+The three cards become three rows inside one panel — distinct on their own, visibly one thing.
+This borrows the composed-panel language of the contact and awards sections the user called on
+brand, and the green top edge §4 already reserves for panel edges. It is the first brand green
+in this section.
+
+```css
+.engine-disciplines{display:block;gap:0;
+  border:1px solid #ffffff24;border-top:4px solid var(--brand-lime);
+  border-radius:24px;background:#ffffff0d;box-shadow:0 18px 44px #0818111f;overflow:hidden}
+
+.engine-disciplines>li{border:0;border-radius:0;background:transparent;box-shadow:none;
+  padding:34px 36px;gap:24px;grid-template-columns:38px minmax(0,1fr)}
+.engine-disciplines>li+li{border-top:1px solid #ffffff1c}
+.engine-number{font-size:17px;font-weight:500;padding-top:13px}
+```
+
+- `overflow:hidden` is load-bearing: it clips the row dividers to the panel's radius.
+- The yellow index grows to 17px. It is still a text index, not a badge or icon.
+- The panel reveals as **one unit** — `.engine-disciplines`, not its rows. The V0.13 per-row
+  stagger is retired and explicitly zeroed, because rows fading in inside an already-visible
+  panel read as broken.
+- Row padding steps: 28px/30px at 1180, 30px/32px at 950, 26px/22px at 720, 22px/18px at 380.
+
+What did **not** change: the two-column composition and stacked order §3 says to continue with,
+the copy, the CTA, and the rows staying non-interactive. No diagram, hub, connector, tag, badge
+or control was added. Measured in Chromium 1600px→320px: heading holds two lines, no title
+wraps, no overflow.
+
+**Still the open lever.** This section remains the only major one with no real visual content,
+and three rounds of composition work have now taken the design-only route about as far as it
+goes. If it must carry more, the next step is evidence, not ornament: a real figure per
+discipline, or one real project per discipline. Both need the user's confirmation — §10's
+figures must not be silently moved or merged, and which project demonstrates which discipline
+is not something to guess.
 
 ## 8. Canonical Contact-inspired awards component
 
