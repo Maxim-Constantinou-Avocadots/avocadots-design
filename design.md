@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.19 · 17 September 2026  
+**Design baseline:** V0.20 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -642,6 +642,45 @@ row while remaining in the sentence. Add `partners-linkedin.svg` and it should j
 
 Measured 1920px → 320px: the name scales 124px → 37px, never overflows its column, and every
 platform mark loads at every width.
+
+### V0.20 — imagery in, prose out
+
+The user reported the page as too text-heavy and too busy, and asked for imagery. Measured
+before: **631 words across the six blocks, 48 bullet items, and not one picture.** Each block
+stacked *three* overlapping prose layers — headline, lead, body paragraph — before a single
+bullet, then an eight-item bordered checklist.
+
+- The headline and body paragraph are **cut**. Once the name runs at display scale it *is* the
+  headline, so the other two were saying the same thing twice more. One sentence per service now.
+  **334 words, down from 631.**
+- Deliverables keep every item but become quiet pill tags instead of a bordered two-column list.
+  Same information, a fraction of the visual weight.
+- Blocks alternate **side as well as surface** (`.svc-flip` on the even ones), so the eye moves
+  rather than tracking straight down a column.
+
+### Every service carries a visual — and what the image may claim
+
+| Service | Visual | Basis |
+| --- | --- | --- |
+| Branding | Minerva Insurance | project |
+| Web Design | German Medical Institute | **their own URL taxonomy: `/web-design-projects/…`** |
+| E-Commerce | Scandia | their own label for it: "Electronics Store" |
+| Digital Marketing | Air Control | project |
+| CRM | typographic panel, GoHighLevel mark + their own line | — |
+| GEO | typographic panel, the three real prompts from their GEO page | — |
+
+**CRM and GEO deliberately get no photograph.** Neither service produces a website, so putting a
+site screenshot beside them would imply a case study that service did not make. A typographic
+panel is the honest form, and it still gives the block a visual.
+
+Captions state only the project name and its industry, both factual. **The pairing of project to
+service is a placement, not a claim sourced from the user** — only Web Design is evidenced (by
+their URL structure) and E-Commerce is inferred from their own industry label. If the user gives
+a real mapping, swap the images; the caption markup does not need to change.
+
+Measured 1920px → 320px: names scale 112px → 38px, no overflow, nothing wider than its viewport,
+every image loads, and on stacked layouts the copy always precedes its visual (checked, because
+`order` reversal would otherwise strand the heading below the picture).
 
 ## 10. Preserve the homepage's content and rhythm
 
