@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.20 · 17 September 2026  
+**Design baseline:** V0.21 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -681,6 +681,49 @@ a real mapping, swap the images; the caption markup does not need to change.
 Measured 1920px → 320px: names scale 112px → 38px, no overflow, nothing wider than its viewport,
 every image loads, and on stacked layouts the copy always precedes its visual (checked, because
 `order` reversal would otherwise strand the heading below the picture).
+
+## 9d. Services mega menu — V0.21
+
+Six services could not breathe in the old 220px dropdown. The panel now spans the header width.
+
+### Structure
+
+- **Left**: a promo card carrying the real Growth Engine line — `Good on their own. / Better
+  together.` with the second line yellow — linking to `/unified-growth`. Real copy and a real
+  destination; it ties the menu to the studio's differentiator instead of inventing a slogan.
+- **Right**: the six services in two columns, each an icon tile, name, and one condensed line
+  from that service's own copy.
+- **Foot**: `See all six services` → `services.html`.
+
+Icons are six hand-drawn inline SVGs (24px box, `currentColor`, 1.6 stroke) — a sparkle, browser,
+bag, rising bars, connected nodes, and a chat bubble with a sparkle. They are navigation aids in
+a menu, which is not the badge-and-icon accretion §3 rejects; do not carry them onto the page.
+
+### No new JavaScript
+
+The `<details class="nav-dropdown">` element is kept, so open/close, Escape and click-outside
+all still come from `app.js` / `services.js`. Verified on both pages.
+
+### Specificity — read before editing
+
+Two legacy rules already style this element and its links:
+
+| Selector | Specificity |
+| --- | --- |
+| `.nav-dropdown>div` | (0,1,1) |
+| `.nav-dropdown>div a` | (0,1,2) |
+| a bare `.mega` / `.mega-item` | (0,1,0) — **loses** |
+
+So every selector targeting the panel or a link inside it is prefixed with `.nav-dropdown` to
+reach (0,2,0). **Drop the prefix and the panel renders transparent with its cards collapsed back
+to plain blocks** — that exact bug appeared on the first build and was caught in rendering.
+
+### Responsive
+
+Two columns down to 1081px; the promo turns horizontal below 1080; at/below 720px the panel
+becomes a plain list inside the collapsed mobile menu with the promo hidden. Verified 1440px →
+320px: no overflow, panel never off-screen, and the icon hover
+(`#86bd421f` lime → `#e9c334` yellow) fires on both pages.
 
 ## 10. Preserve the homepage's content and rhythm
 

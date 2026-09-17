@@ -365,3 +365,63 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 .engine-disciplines>li{padding:20px 17px;gap:13px;grid-template-columns:24px minmax(0,1fr)}
 .engine-outcome{font-size:21px}
 }
+
+
+/* V0.21 — services mega menu.
+   Six services could not breathe in a 220px dropdown. The panel now spans the
+   header: a promo card carrying the real Growth Engine line on the left, the
+   six services with icons on the right, and a link to the full page.
+   The <details> element is kept, so Escape, click-outside and keyboard
+   behaviour all still come from the existing script - no new JS.
+
+   SPECIFICITY: the legacy rules `.nav-dropdown>div` (0,1,1) and
+   `.nav-dropdown>div a` (0,1,2) already style this element and its links, and
+   both outrank a bare `.mega` / `.mega-item` (0,1,0). Every selector below that
+   targets the panel or a link inside it is therefore prefixed with
+   `.nav-dropdown` to reach (0,2,0) and win. Drop the prefix and the panel goes
+   transparent and its cards collapse back to plain blocks. */
+@media(min-width:721px){
+  /* the header becomes the positioning context so the panel can span it */
+  .nav-dropdown{position:static}
+  .nav-dropdown>.mega{position:absolute;left:0;right:0;top:calc(100% + 14px);width:auto}
+}
+.nav-dropdown>.mega{display:grid;grid-template-columns:.9fr 1.6fr;gap:14px;padding:14px;background:var(--deep);border:1px solid #ffffff2b;border-radius:20px;box-shadow:0 30px 70px #04100b66}
+
+.nav-dropdown .mega-promo{display:flex;flex-direction:column;justify-content:space-between;gap:30px;padding:30px;border-radius:14px;background:var(--forest);border:1px solid #ffffff1f;transition:border-color .25s}
+.nav-dropdown .mega-promo:hover{border-color:#e9c33459}
+.mega-promo-eyebrow{display:block;font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#a9c2b0}
+.mega-promo-title{display:block;font-size:clamp(23px,1.8vw,30px);font-weight:500;line-height:1.16;letter-spacing:-.045em;color:#eef0ec}
+.mega-promo-title em{font-style:normal;color:var(--yellow)}
+.mega-promo-cta{display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--yellow)}
+.mega-promo-cta>span{transition:transform .25s}
+.nav-dropdown .mega-promo:hover .mega-promo-cta>span{transform:translate(3px,-3px)}
+
+.mega-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;align-content:start}
+.nav-dropdown .mega-item{display:flex;align-items:flex-start;gap:14px;padding:16px;border-radius:12px;transition:background .2s}
+.nav-dropdown .mega-item:hover{background:#ffffff0f}
+.mega-icon{flex-shrink:0;width:42px;height:42px;display:grid;place-items:center;border-radius:10px;background:#86bd421f;color:var(--lime);transition:background .2s,color .2s}
+.mega-icon svg{width:21px;height:21px;display:block}
+.nav-dropdown .mega-item:hover .mega-icon{background:var(--yellow);color:var(--deep)}
+.mega-text{display:block;min-width:0}
+.mega-text strong{display:block;font-size:15px;font-weight:600;letter-spacing:-.02em;color:#eef0ec;margin-bottom:5px}
+.mega-text>span{display:block;font-size:12.5px;line-height:1.5;color:#a9c2b0}
+
+.nav-dropdown .mega-all{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;padding:15px;margin-top:2px;border-top:1px solid #ffffff1f;font-size:13px;font-weight:600;color:#eef0ec;transition:color .2s}
+.nav-dropdown .mega-all:hover{color:var(--yellow)}
+
+@media(max-width:1080px){.nav-dropdown>.mega{grid-template-columns:1fr}
+.nav-dropdown .mega-promo{flex-direction:row;align-items:center;justify-content:space-between;gap:24px;padding:22px 26px}
+.mega-promo-title{font-size:22px}
+}
+
+/* Inside the collapsed mobile menu the panel is already a plain block; it just
+   needs to stop looking like a floating card and drop the promo. */
+@media(max-width:720px){.nav-dropdown>.mega{position:static;grid-template-columns:1fr;gap:2px;padding:6px 0;background:none;border:0;border-radius:0;box-shadow:none}
+.nav-dropdown .mega-promo{display:none}
+.mega-grid{grid-template-columns:1fr;gap:0}
+.nav-dropdown .mega-item{padding:13px 4px;border-radius:0}
+.nav-dropdown .mega-item:hover{background:none}
+.mega-icon{width:36px;height:36px;border-radius:9px}
+.mega-icon svg{width:19px;height:19px}
+.nav-dropdown .mega-all{justify-content:flex-start;padding:15px 4px;margin-top:6px}
+}
