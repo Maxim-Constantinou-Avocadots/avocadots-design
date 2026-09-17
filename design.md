@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.17 · 17 September 2026  
+**Design baseline:** V0.18 · 17 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -558,6 +558,55 @@ These are real inconsistencies, left as the user's call rather than silently rec
 | Service names | `Web Design`, `E-Commerce`, `CRM`, plus `GEO` | `Web design`, `E-commerce`, `CRM integration`, **no GEO** |
 
 Mobile navigation opens at/below 720px on both pages, which matches §13.
+
+## 9c. Services page — as built
+
+A full redesign of `avocadots.com/services`, which the user described as looking "like a Canva
+PDF". **All copy is the real content, scraped from the live service pages — nothing was
+invented.** The live services page details five services; **GEO is a sixth**, present in the nav
+but absent from that page, so its copy came from `/generative-engine-optimisation`.
+
+### Why it shares the homepage cascade
+
+`services.html` loads `styles.css` **and** `services.css`. The masthead, footer, `.button`,
+`.eyebrow`, `.wrap`, `.section-heading`, `.project-grid` and `.faq-list` are therefore literally
+the same components as the homepage, not lookalikes. This is the opposite of the contact page's
+scoped approach and deliberately so — it removes the divergence problem recorded in §9b rather
+than repeating it. `services.js` mirrors `app.js` minus the award modal, which would throw on a
+page with no `.award-dialog`.
+
+### Composition
+
+- **Hero** — the live page's own sentence set at display scale (`clamp(34px,4.5vw,70px)`) with
+  `expertise` and `works` in lime, which is how the live page emphasises them.
+- **Index** — all six services as a 3-column jump grid, doubling as the page's first visual beat
+  and its table of contents. 3 → 2 → 1 columns.
+- **Six service blocks**, surfaces alternating `paper / forest` (verified `LDLDLD`). Each is
+  sticky copy left (number, headline, lead, real "View service" link) and detail right (body,
+  then deliverables as a two-column dotted checklist). The alternation is what stops six blocks
+  reading as six identical panels; do not flatten it to one surface.
+- **Work** — four real projects on `#e0e6dc`, reusing `.project-grid`.
+- **FAQ** — eight real questions, native `<details>`, homepage FAQ styling.
+- **Close** — deep-forest band with the contact CTA and the real Calendly link.
+
+### Content notes
+
+- The live page's work strip lists Hadjiloucas, for which no project image exists in
+  `dist/assets/`. Limassol Agora was used in its place rather than shipping a broken image or
+  inventing artwork. **Supply a Hadjiloucas project image and it should be swapped back.**
+- The ninth live FAQ ("What is the best digital agency in Cyprus?") was left out: it is an
+  SEO-shaped answer that reads oddly in a designed FAQ. It is not deleted content — say the word
+  and it goes back.
+- Service links point at the real live service pages; the CTA points at `contact.html`.
+
+### Cross-linking
+
+The three pages now interlink: the homepage dropdown gains `All services`, the contact page's
+`Services` points here, and this page's `Home`/`Our Work`/`Blogs` point back. All 12 internal
+links and every in-page anchor verified to resolve.
+
+Measured in Chromium across 16 widths from 1920px to 320px: no overflow, no broken images, no
+element wider than its viewport, no stuck reveals.
 
 ## 10. Preserve the homepage's content and rhythm
 

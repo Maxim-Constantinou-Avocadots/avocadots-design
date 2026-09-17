@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.17**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.18**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
@@ -16,6 +16,9 @@ No build step. `dist/` is the site: plain HTML, one stylesheet, one script.
 ```
 dist/
   index.html      homepage — markup for every section
+  services.html   services page (shares styles.css, adds services.css)
+  services.css    services page composition
+  services.js     nav, FAQ and reveals for the services page
   contact.html    contact page (own cascade, scoped under #avo-contact-page)
   contact.css     contact page styles
   contact.js      chips, mobile menu, form validation (the form never sends)
