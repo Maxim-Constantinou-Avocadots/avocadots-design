@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Avocadots — Three hero concepts</title><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/png" href="assets/brand-mark.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
+<style>
+body{background:#0b1a14}
+.lab{position:relative;z-index:1;display:flex;align-items:center;gap:18px;padding:16px clamp(24px,4.5vw,80px);background:#0b1a14;border-bottom:1px solid #ffffff1f;color:#eef0ec}
+.lab-n{flex-shrink:0;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--deep);font-size:14px;font-weight:700}
+.lab strong{display:block;font-size:15px;font-weight:600;letter-spacing:-.02em}
+.lab span{font-size:13px;color:#a9c2b0}
+.concept{position:relative}
+
+/* ── A · cinematic ─────────────────────────────────────────────── */
+.cA{position:relative;min-height:min(92vh,880px);display:flex;flex-direction:column;isolation:isolate;overflow:hidden;background:var(--forest);color:var(--paper)}
+.cA-bg{position:absolute;inset:0;z-index:-2}
+.cA-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.cA:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0b1d16f2 0%,#0b1d16bf 13%,#0b1d1659 40%,#0b1d16e8 76%,#0b1d16 100%)}
+.cA .header{border-bottom-color:#ffffff2b}
+.cA-body{margin-top:auto;padding-block:clamp(40px,6vw,86px)}
+.cA-eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#d7e4da;margin-bottom:26px}
+.cA h1{font-size:clamp(44px,7.4vw,116px);font-weight:600;line-height:.96;letter-spacing:-.07em;color:#fff;max-width:14ch}
+.cA h1 em{font-style:normal;color:var(--lime)}
+.cA-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:36px;flex-wrap:wrap;margin-top:clamp(30px,3.4vw,46px)}
+.cA-foot p{font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:#e2ebe4;max-width:430px;margin:0}
+.cA-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.cA-actions .text-link{border:0;color:#eef0ec}
+
+/* ── B · light editorial ───────────────────────────────────────── */
+.cB{background:var(--paper);color:var(--forest)}
+.cB .header{border-bottom-color:#1c383026}
+.cB .header nav>a,.cB .header .nav-dropdown>summary,.cB .brand{color:var(--forest)}
+.cB .brand img{filter:none}
+.cB-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(34px,4.6vw,76px);align-items:center;padding-block:clamp(44px,5.4vw,84px)}
+.cB-eyebrow{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#6d8a3a;margin-bottom:26px}
+.cB h1{font-size:clamp(44px,6.6vw,104px);font-weight:600;line-height:.98;letter-spacing:-.07em}
+.cB h1 em{font-style:normal;white-space:nowrap;background:linear-gradient(transparent 56%,var(--lime) 56%,var(--lime) 92%,transparent 92%)}
+.cB-lead{font-size:clamp(16px,1.3vw,19px);line-height:1.65;color:var(--muted);max-width:440px;margin-top:28px}
+.cB-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:34px}
+.cB-proof{display:flex;align-items:center;gap:22px;margin-top:44px;padding-top:26px;border-top:1px solid var(--line)}
+.cB-proof strong{font-size:clamp(30px,2.6vw,42px);font-weight:500;letter-spacing:-.06em;line-height:1}
+.cB-proof strong span{color:#6d8a3a}
+.cB-proof>span{font-size:13px;color:var(--muted);line-height:1.5}
+.cB-art{position:relative;min-width:0}
+.cB-art>img{width:100%;aspect-ratio:.9;object-fit:cover;border-radius:20px;display:block}
+.cB-chip{position:absolute;left:-22px;bottom:34px;display:flex;align-items:center;gap:13px;padding:14px 20px;border-radius:14px;background:#fff;box-shadow:0 18px 44px #1c383026}
+.cB-chip img{width:34px;height:34px;object-fit:contain}
+.cB-chip strong{display:block;font-size:14px;font-weight:600;letter-spacing:-.02em}
+.cB-chip span{font-size:12px;color:var(--muted)}
+.cB-logos{display:flex;align-items:center;gap:clamp(20px,3vw,46px);flex-wrap:wrap;padding-bottom:clamp(36px,4vw,56px)}
+.cB-logos>span{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.cB-logos img{height:26px;width:auto;object-fit:contain;opacity:.55}
+
+/* ── C · bento ─────────────────────────────────────────────────── */
+.cC{background:var(--deep);color:var(--paper);padding-block:clamp(18px,2.2vw,30px) clamp(30px,4vw,56px)}
+.cC .header{border-bottom-color:#ffffff24}
+.cC-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:12px;height:min(74vh,720px);margin-top:clamp(18px,2.4vw,32px)}
+.cC-tile{border-radius:20px;overflow:hidden;position:relative;min-height:0}
+.cC-say{grid-column:1/3;grid-row:1/3;background:var(--forest);border:1px solid #ffffff1f;padding:clamp(28px,2.8vw,44px);display:flex;flex-direction:column;justify-content:space-between;gap:26px}
+.cC-say .cC-eyebrow{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#a9c2b0}
+.cC-say h1{font-size:clamp(34px,3.9vw,64px);font-weight:600;line-height:1;letter-spacing:-.06em;color:#eef0ec}
+.cC-say h1 em{font-style:normal;color:var(--lime)}
+.cC-say p{font-size:15px;line-height:1.6;color:#cfddd2;max-width:38ch;margin:0}
+.cC-shot{padding:0}
+.cC-s1{grid-column:3/5;grid-row:1/3}
+.cC-s2{grid-column:3/4;grid-row:3/4}
+.cC-stat{grid-column:1/2;grid-row:3/4}
+.cC-team{grid-column:2/3;grid-row:3/4}
+.cC-cta{grid-column:4/5;grid-row:3/4}
+.cC-shot img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.cC-tile a.cC-full{position:absolute;inset:0}
+.cC-shot:hover img{transform:scale(1.05)}
+.cC-cap{position:absolute;left:18px;bottom:16px;display:flex;align-items:center;gap:10px;padding:9px 15px;border-radius:40px;background:#0e231bd9;color:#eef0ec;font-size:13px;font-weight:600;backdrop-filter:blur(8px)}
+.cC-stat{background:var(--yellow);color:var(--deep);padding:clamp(22px,2.2vw,30px);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.cC-stat strong{font-size:clamp(40px,4.2vw,66px);font-weight:500;letter-spacing:-.06em;line-height:.95}
+.cC-stat>span{font-size:13px;line-height:1.5;font-weight:600}
+.cC-stat strong span{font-size:inherit;color:inherit}
+.cC-cta{background:var(--lime);color:var(--forest);padding:clamp(22px,2.2vw,30px);display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.cC-cta strong{font-size:clamp(20px,1.8vw,27px);font-weight:600;letter-spacing:-.04em;line-height:1.15}
+.cC-cta span{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--forest);color:var(--lime);font-size:21px;transition:transform .3s}
+.cC-cta:hover span{transform:rotate(45deg)}
+.cC-team img{width:100%;height:100%;object-fit:cover}
+
+@media(max-width:950px){.cB-grid{grid-template-columns:1fr;gap:38px}
+.cC-grid{height:auto;grid-template-rows:none;grid-auto-rows:minmax(180px,auto)}
+.cC-say,.cC-s1{grid-column:1/3;grid-row:auto}
+.cC-stat,.cC-team,.cC-s2,.cC-cta{grid-column:auto;grid-row:auto}
+.cC-s1{min-height:280px}
+.cB-art>img{aspect-ratio:1.3}
+.cC-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:720px){.cA{min-height:640px}
+.cA h1{font-size:clamp(34px,9vw,52px);max-width:none}
+.cA-foot{gap:24px}
+.cB h1{font-size:clamp(36px,9.4vw,58px)}
+.cB-chip{left:12px;bottom:14px;padding:11px 15px}
+.cC-grid{grid-template-columns:1fr;gap:10px}
+.cC-say,.cC-s1{grid-column:auto}
+.cC-tile{min-height:160px}
+}
+</style></head>
+<body>
+
+<div class="concept"><div class="lab"><span class="lab-n">A</span><div><strong>Cinematic</strong><span>Full-bleed photograph, type sitting on the image. Mood-led and human.</span></div></div>
+<section class="cA">
+  <div class="cA-bg"><img src="assets/team.jpg" alt=""></div>
+  <header class="header wrap"><a class="brand" href="#" aria-label="Avocadots home"><img src="assets/brand-mark.png" alt=""><span>avocadots</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">+</span></button><nav id="main-nav" aria-label="Main navigation"><a class="active" href="#" aria-current="page">Home</a><details class="nav-dropdown"><summary>Services <span aria-hidden="true">⌄</span></summary><div class="mega"><a class="mega-promo" href="https://www.avocadots.com/unified-growth"><span class="mega-promo-eyebrow">The Unified Growth Engine</span><span class="mega-promo-title">Good on their own.<br><em>Better together.</em></span><span class="mega-promo-cta">Explore the growth engine <span aria-hidden="true">↗</span></span></a><div class="mega-grid"><a class="mega-item" href="https://www.avocadots.com/logo-branding-design"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 14.1 8.9 19.5 11 14.1 13.1 12 18.5 9.9 13.1 4.5 11 9.9 8.9Z"/></svg></span><span class="mega-text"><strong>Branding</strong><span>Identity that’s clear, consistent, and impossible to forget.</span></span></a><a class="mega-item" href="https://www.avocadots.com/web-design"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9.5h18M6.4 7h.01M9 7h.01"/></svg></span><span class="mega-text"><strong>Web Design</strong><span>Fast, scalable Wix sites built to convert visitors.</span></span></a><a class="mega-item" href="https://www.avocadots.com/ecommerce-shopify"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 11.4a1.6 1.6 0 0 1-1.6 1.6H7.6A1.6 1.6 0 0 1 6 19.4Z"/><path d="M9 8V6.6a3 3 0 0 1 6 0V8"/></svg></span><span class="mega-text"><strong>E-Commerce</strong><span>Shopify stores that load instantly and sell effortlessly.</span></span></a><a class="mega-item" href="https://www.avocadots.com/digital-marketing"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7.5 20v-5M12 20v-9.5M16.5 20v-13"/></svg></span><span class="mega-text"><strong>Digital Marketing</strong><span>Campaigns powered by creativity and data.</span></span></a><a class="mega-item" href="https://www.avocadots.com/crm"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17.6" r="2.4"/><path d="M8.4 7h7.2M7.5 9.1l3.1 6.4M16.5 9.1l-3.1 6.4"/></svg></span><span class="mega-text"><strong>CRM</strong><span>Workflows that automate, capture, and scale.</span></span></a><a class="mega-item" href="https://www.avocadots.com/generative-engine-optimisation"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12.3a8 8 0 0 1-11.6 7.1L4 20.6l1.2-4.8A8 8 0 1 1 20.5 12.3Z"/><path d="M12.4 8.4l.85 2.45 2.45.85-2.45.85-.85 2.45-.85-2.45-2.45-.85 2.45-.85Z"/></svg></span><span class="mega-text"><strong>GEO</strong><span>Be part of the answer, not just the results.</span></span></a></div><a class="mega-all" href="services.html">See all six services <span aria-hidden="true">↗</span></a></div></details><a href="#work">Our Work</a><a href="https://www.avocadots.com/about-avocadots-design-studio">About Us</a><a href="https://www.avocadots.com/careers">Careers</a><a href="#insights">Blogs</a></nav><a class="button small yellow header-contact" href="contact.html">Let’s talk <span aria-hidden="true">↗</span></a></header>
+  <div class="wrap cA-body">
+    <p class="cA-eyebrow"><span class="status-dot" aria-hidden="true"></span>Independent thinking. Connected expertise.</p>
+    <h1>Creative precision. <em>Built for growth.</em></h1>
+    <div class="cA-foot">
+      <p>We bring branding, websites, and marketing together to move ambitious businesses forward.</p>
+      <div class="cA-actions"><a class="button yellow" href="contact.html">Work with us <span aria-hidden="true">↗</span></a><a class="text-link" href="#">See the work <span aria-hidden="true">↓</span></a></div>
+    </div>
+  </div>
+</section></div>
+
+<div class="concept"><div class="lab"><span class="lab-n">B</span><div><strong>Light editorial</strong><span>Flips the page to paper. Forest type, a lime marker, one framed project.</span></div></div>
+<section class="cB">
+  <header class="header wrap"><a class="brand" href="#" aria-label="Avocadots home"><img src="assets/brand-mark.png" alt=""><span>avocadots</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">+</span></button><nav id="main-nav" aria-label="Main navigation"><a class="active" href="#" aria-current="page">Home</a><details class="nav-dropdown"><summary>Services <span aria-hidden="true">⌄</span></summary><div class="mega"><a class="mega-promo" href="https://www.avocadots.com/unified-growth"><span class="mega-promo-eyebrow">The Unified Growth Engine</span><span class="mega-promo-title">Good on their own.<br><em>Better together.</em></span><span class="mega-promo-cta">Explore the growth engine <span aria-hidden="true">↗</span></span></a><div class="mega-grid"><a class="mega-item" href="https://www.avocadots.com/logo-branding-design"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 14.1 8.9 19.5 11 14.1 13.1 12 18.5 9.9 13.1 4.5 11 9.9 8.9Z"/></svg></span><span class="mega-text"><strong>Branding</strong><span>Identity that’s clear, consistent, and impossible to forget.</span></span></a><a class="mega-item" href="https://www.avocadots.com/web-design"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9.5h18M6.4 7h.01M9 7h.01"/></svg></span><span class="mega-text"><strong>Web Design</strong><span>Fast, scalable Wix sites built to convert visitors.</span></span></a><a class="mega-item" href="https://www.avocadots.com/ecommerce-shopify"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 11.4a1.6 1.6 0 0 1-1.6 1.6H7.6A1.6 1.6 0 0 1 6 19.4Z"/><path d="M9 8V6.6a3 3 0 0 1 6 0V8"/></svg></span><span class="mega-text"><strong>E-Commerce</strong><span>Shopify stores that load instantly and sell effortlessly.</span></span></a><a class="mega-item" href="https://www.avocadots.com/digital-marketing"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7.5 20v-5M12 20v-9.5M16.5 20v-13"/></svg></span><span class="mega-text"><strong>Digital Marketing</strong><span>Campaigns powered by creativity and data.</span></span></a><a class="mega-item" href="https://www.avocadots.com/crm"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17.6" r="2.4"/><path d="M8.4 7h7.2M7.5 9.1l3.1 6.4M16.5 9.1l-3.1 6.4"/></svg></span><span class="mega-text"><strong>CRM</strong><span>Workflows that automate, capture, and scale.</span></span></a><a class="mega-item" href="https://www.avocadots.com/generative-engine-optimisation"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12.3a8 8 0 0 1-11.6 7.1L4 20.6l1.2-4.8A8 8 0 1 1 20.5 12.3Z"/><path d="M12.4 8.4l.85 2.45 2.45.85-2.45.85-.85 2.45-.85-2.45-2.45-.85 2.45-.85Z"/></svg></span><span class="mega-text"><strong>GEO</strong><span>Be part of the answer, not just the results.</span></span></a></div><a class="mega-all" href="services.html">See all six services <span aria-hidden="true">↗</span></a></div></details><a href="#work">Our Work</a><a href="https://www.avocadots.com/about-avocadots-design-studio">About Us</a><a href="https://www.avocadots.com/careers">Careers</a><a href="#insights">Blogs</a></nav><a class="button small yellow header-contact" href="contact.html">Let’s talk <span aria-hidden="true">↗</span></a></header>
+  <div class="wrap cB-grid">
+    <div>
+      <p class="cB-eyebrow">Independent thinking. Connected expertise.</p>
+      <h1>Creative precision.<br>Built for <em>growth.</em></h1>
+      <p class="cB-lead">We bring branding, websites, and marketing together to move ambitious businesses forward.</p>
+      <div class="cB-actions"><a class="button yellow" href="contact.html">Work with us <span aria-hidden="true">↗</span></a><a class="text-link" href="#">See the work <span aria-hidden="true">↓</span></a></div>
+      <div class="cB-proof"><strong>150<span>+</span></strong><span>companies.<br>A whole lot of possibility.</span></div>
+    </div>
+    <div class="cB-art">
+      <img src="assets/projects-scandia.webp" alt="Scandia — Avocadots project">
+      <span class="cB-chip"><img src="assets/clients-scandia.webp" alt=""><span><strong>Scandia</strong><span>Electronics store</span></span></span>
+    </div>
+  </div>
+  <div class="wrap cB-logos"><span>Good company</span>
+    <img src="assets/clients-minerva-insurance.webp" alt="Minerva Insurance">
+    <img src="assets/clients-gizet.webp" alt="Gizet">
+    <img src="assets/clients-german-medical-institute.webp" alt="German Medical Institute">
+    <img src="assets/clients-boussias.webp" alt="Boussias">
+    <img src="assets/clients-air-control.webp" alt="Air Control">
+  </div>
+</section></div>
+
+<div class="concept"><div class="lab"><span class="lab-n">C</span><div><strong>Bento</strong><span>Everything in one screen as tiles — statement, work, proof, action.</span></div></div>
+<section class="cC">
+  <header class="header wrap"><a class="brand" href="#" aria-label="Avocadots home"><img src="assets/brand-mark.png" alt=""><span>avocadots</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">+</span></button><nav id="main-nav" aria-label="Main navigation"><a class="active" href="#" aria-current="page">Home</a><details class="nav-dropdown"><summary>Services <span aria-hidden="true">⌄</span></summary><div class="mega"><a class="mega-promo" href="https://www.avocadots.com/unified-growth"><span class="mega-promo-eyebrow">The Unified Growth Engine</span><span class="mega-promo-title">Good on their own.<br><em>Better together.</em></span><span class="mega-promo-cta">Explore the growth engine <span aria-hidden="true">↗</span></span></a><div class="mega-grid"><a class="mega-item" href="https://www.avocadots.com/logo-branding-design"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 14.1 8.9 19.5 11 14.1 13.1 12 18.5 9.9 13.1 4.5 11 9.9 8.9Z"/></svg></span><span class="mega-text"><strong>Branding</strong><span>Identity that’s clear, consistent, and impossible to forget.</span></span></a><a class="mega-item" href="https://www.avocadots.com/web-design"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9.5h18M6.4 7h.01M9 7h.01"/></svg></span><span class="mega-text"><strong>Web Design</strong><span>Fast, scalable Wix sites built to convert visitors.</span></span></a><a class="mega-item" href="https://www.avocadots.com/ecommerce-shopify"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 11.4a1.6 1.6 0 0 1-1.6 1.6H7.6A1.6 1.6 0 0 1 6 19.4Z"/><path d="M9 8V6.6a3 3 0 0 1 6 0V8"/></svg></span><span class="mega-text"><strong>E-Commerce</strong><span>Shopify stores that load instantly and sell effortlessly.</span></span></a><a class="mega-item" href="https://www.avocadots.com/digital-marketing"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7.5 20v-5M12 20v-9.5M16.5 20v-13"/></svg></span><span class="mega-text"><strong>Digital Marketing</strong><span>Campaigns powered by creativity and data.</span></span></a><a class="mega-item" href="https://www.avocadots.com/crm"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17.6" r="2.4"/><path d="M8.4 7h7.2M7.5 9.1l3.1 6.4M16.5 9.1l-3.1 6.4"/></svg></span><span class="mega-text"><strong>CRM</strong><span>Workflows that automate, capture, and scale.</span></span></a><a class="mega-item" href="https://www.avocadots.com/generative-engine-optimisation"><span class="mega-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12.3a8 8 0 0 1-11.6 7.1L4 20.6l1.2-4.8A8 8 0 1 1 20.5 12.3Z"/><path d="M12.4 8.4l.85 2.45 2.45.85-2.45.85-.85 2.45-.85-2.45-2.45-.85 2.45-.85Z"/></svg></span><span class="mega-text"><strong>GEO</strong><span>Be part of the answer, not just the results.</span></span></a></div><a class="mega-all" href="services.html">See all six services <span aria-hidden="true">↗</span></a></div></details><a href="#work">Our Work</a><a href="https://www.avocadots.com/about-avocadots-design-studio">About Us</a><a href="https://www.avocadots.com/careers">Careers</a><a href="#insights">Blogs</a></nav><a class="button small yellow header-contact" href="contact.html">Let’s talk <span aria-hidden="true">↗</span></a></header>
+  <div class="wrap">
+    <div class="cC-grid">
+      <div class="cC-tile cC-say">
+        <p class="cC-eyebrow">Independent thinking. Connected expertise.</p>
+        <h1>Creative precision.<br><em>Built for growth.</em></h1>
+        <p>We bring branding, websites, and marketing together to move ambitious businesses forward.</p>
+      </div>
+      <div class="cC-tile cC-shot cC-s1"><img src="assets/projects-scandia.webp" alt="Scandia — Avocadots project"><span class="cC-cap">Scandia <span aria-hidden="true">↗</span></span><a class="cC-full" href="https://www.avocadots.com/project/scandia" aria-label="Scandia project"></a></div>
+      <div class="cC-tile cC-stat"><strong>150<span>+</span></strong><span>companies.<br>A whole lot of possibility.</span></div>
+      <div class="cC-tile cC-team"><img src="assets/team.jpg" alt="The Avocadots team"></div>
+      <div class="cC-tile cC-shot cC-s2"><img src="assets/projects-minerva-insurance.webp" alt="Minerva Insurance — Avocadots project"><span class="cC-cap">Minerva Insurance <span aria-hidden="true">↗</span></span><a class="cC-full" href="https://www.avocadots.com/project/minerva-insurance" aria-label="Minerva Insurance project"></a></div>
+      <a class="cC-tile cC-cta" href="contact.html"><strong>Let’s build<br>what’s next.</strong><span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section></div>
+
+</body></html>
