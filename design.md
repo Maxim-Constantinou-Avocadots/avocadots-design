@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.21 · 17 September 2026  
+**Design baseline:** V0.22 · 18 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -745,6 +745,52 @@ The user requested an elevated homepage while keeping its existing sections. Pre
 | Footer | Large closing contact invitation, navigation, contacts, social and legal links |
 
 Do not make every section look like the Growth Engine. Consistency means shared typography, colours, spacing and component logic; it does not require identical compositions.
+
+### V0.22 — hero rebuild
+
+The user asked for a hero that captures attention. Audited first: the old one held **19 separate
+text blocks in one viewport** — eyebrow, location, headline, description, two CTAs, a stat, two
+project captions, a note, and a two-part footer bar — inside a 912px band where the headline
+occupied only the top third, above dead space.
+
+Three faults, all structural:
+
+1. **Nothing dominated.** Ten competing elements, no focal point.
+2. **The two rotated project cards** were the most dated thing on the page — the tilted-mockup
+   trope reads as a 2021 template.
+3. **Type and imagery never met.** Headline top-left, images bottom-right, copy bottom-left:
+   three separate zones.
+
+### Now
+
+```
+eyebrow
+Creative precision. / Built for growth.      clamp(50px,9vw,142px), lime second line
+[ copy ] [ Work with us · See the work ] [ 150+ ]     one baseline-aligned meta row
+────────────────────────────────────────────────────  full-bleed
+[ Scandia ][ Minerva ][ GMI ][ Limassol Agora ]       4 real projects, edge to edge
+```
+
+- `.hero-strip` sits **outside** `.hero` (which carries `.wrap`) so it can run the full viewport
+  width. Verified: strip width == viewport width at every size. Do not move it back inside the
+  container.
+- Cards are square-on, not rotated. The arrow reveals on hover and is **always visible at/below
+  720px**, since a touch device has no hover.
+- Dropped as chrome: the location, the "A few fresh perspectives" note, and the
+  `Strategy × Design × Performance` bar. The 150+ figure and its label are untouched, per §10.
+- Their old rules (`.hero-kicker`, `.hero-showcase`, `.hero-project`, `.hero-end`,
+  `.hero-location`) are now **inert** — no element carries those classes.
+
+### Two cascade traps found in rendering
+
+- `.hero-actions` still had `flex-direction:column` from the original stylesheet. The new rule
+  set `flex-wrap:nowrap` but not the direction, so the CTA and link stacked and broke the meta
+  row's baseline. **A new `.hero-actions` rule must set `flex-direction:row` explicitly.**
+- At 320px the headline broke to three lines. The `≤380px` size is therefore
+  `clamp(26px,9vw,38px)`, not a fixed 38px — verified two lines down to 300px.
+
+Measured 1920px → 300px: heading holds two lines, never escapes its column, strip is full-bleed
+at every width (4 → 2 → 1 columns), no page overflow, no broken images.
 
 ### Existing figures need distinct labels
 
