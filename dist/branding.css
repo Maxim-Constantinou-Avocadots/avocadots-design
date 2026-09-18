@@ -1,0 +1,122 @@
+/* Branding service page — V0.23.
+   Follows the web-design page's newer structure: SEO-forward hero, a trust bar,
+   the problem named hard, the system, what you get, the client roster, FAQ, and
+   a CTA that names a human. Shares styles.css so the masthead, footer, buttons,
+   eyebrow, wrap and FAQ are the same components as the rest of the site. */
+
+/* ---- hero ---------------------------------------------------------------- */
+.br-hero{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(44px,5vw,78px)}
+.br-hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.09em;color:#cfddd2;margin-bottom:clamp(26px,3vw,42px)}
+.br-hero h1{font-size:clamp(40px,6.4vw,104px);font-weight:600;line-height:.98;letter-spacing:-.07em;color:#eef0ec;max-width:17ch}
+.br-hero h1>span{color:var(--lime)}
+.br-hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(28px,4vw,64px);flex-wrap:wrap;margin-top:clamp(32px,3.6vw,52px)}
+.br-hero-foot>p{font-size:clamp(16px,1.35vw,19px);line-height:1.65;color:#cfddd2;max-width:460px;margin:0}
+.br-hero-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.br-hero-actions .text-link{border:0;color:#e5ece5}
+
+/* ---- trust bar ----------------------------------------------------------- */
+.br-trust{background:var(--deep);color:var(--paper)}
+.br-trust ul{list-style:none;margin:0;padding-block:clamp(22px,2.4vw,32px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px clamp(20px,3vw,48px)}
+.br-trust li{display:flex;flex-direction:column;gap:5px;padding-left:20px;border-left:2px solid var(--brand-lime)}
+.br-trust strong{font-size:clamp(17px,1.5vw,22px);font-weight:600;letter-spacing:-.035em;line-height:1.15}
+.br-trust span{font-size:13px;line-height:1.45;color:#a9c2b0}
+
+/* ---- problem ------------------------------------------------------------- */
+.br-problem{background:var(--paper);color:var(--forest);padding-block:clamp(72px,8vw,124px)}
+.br-problem .eyebrow{color:#6d8a3a}
+.br-problem h2{font-size:clamp(34px,4.8vw,78px);font-weight:500;line-height:1.06;letter-spacing:-.06em}
+.br-problem h2>span{color:var(--muted)}
+.br-problem-body{font-size:clamp(17px,1.4vw,20px);line-height:1.75;color:var(--muted);max-width:620px;margin-top:clamp(30px,3.4vw,46px)}
+
+/* ---- the system ---------------------------------------------------------- */
+.br-system{background:var(--forest);color:var(--paper);padding-block:clamp(72px,8vw,118px)}
+.br-system .eyebrow{color:#cfddd2}
+.br-system-head{display:grid;grid-template-columns:1fr .85fr;gap:clamp(30px,4vw,72px);align-items:end;margin-bottom:clamp(44px,5vw,72px)}
+.br-system-head h2{font-size:clamp(34px,4.4vw,70px);font-weight:500;line-height:1.05;letter-spacing:-.06em}
+.br-system-head>p{font-size:17px;line-height:1.7;color:#cfddd2;max-width:420px;margin:0}
+.br-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:#ffffff1f;border:1px solid #ffffff1f;border-radius:20px;overflow:hidden}
+.br-steps>li{display:flex;gap:20px;padding:clamp(26px,2.6vw,38px);background:var(--forest)}
+.br-steps>li:last-child{grid-column:span 2}
+.br-step-n{flex-shrink:0;font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--yellow);padding-top:6px}
+.br-steps h3{font-size:clamp(20px,1.7vw,26px);font-weight:600;letter-spacing:-.035em;line-height:1.2}
+.br-steps p{font-size:15px;line-height:1.65;color:#cfddd2;margin-top:12px}
+
+/* ---- what you get -------------------------------------------------------- */
+.br-gets{background:var(--paper);color:var(--forest);padding-block:clamp(72px,8vw,118px)}
+.br-gets .eyebrow{color:#6d8a3a}
+.br-gets-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,84px);align-items:center}
+.br-gets h2{font-size:clamp(32px,3.9vw,60px);font-weight:500;line-height:1.08;letter-spacing:-.055em}
+.br-gets-list{list-style:none;margin:clamp(30px,3.2vw,42px) 0 0;padding:0;display:grid;gap:0}
+.br-gets-list li{position:relative;padding:16px 0 16px 30px;font-size:clamp(16px,1.35vw,19px);border-top:1px solid var(--line)}
+.br-gets-list li:last-child{border-bottom:1px solid var(--line)}
+.br-gets-list li:before{content:"";position:absolute;left:0;top:24px;width:10px;height:10px;border-radius:50%;background:var(--brand-lime)}
+.br-gets-cta{margin-top:clamp(30px,3.2vw,40px)}
+.br-gets-art{margin:0;min-width:0}
+.br-gets-art img{width:100%;aspect-ratio:1.08;object-fit:cover;border-radius:20px;display:block}
+.br-gets-art figcaption{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-top:18px}
+.br-gets-art strong{font-size:clamp(17px,1.5vw,22px);font-weight:600;letter-spacing:-.035em}
+.br-gets-art span{font-size:13px;color:var(--muted)}
+
+/* ---- client roster ------------------------------------------------------- */
+.br-work{background:var(--deep);color:var(--paper);padding-block:clamp(72px,8vw,118px)}
+.br-work .eyebrow{color:#a9c2b0}
+.br-work-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:clamp(36px,4vw,56px)}
+.br-work-head h2{font-size:clamp(34px,4.4vw,70px);font-weight:500;line-height:1.05;letter-spacing:-.06em}
+.br-work .text-link{border-bottom-color:#ffffff40;color:#eef0ec}
+.br-clients{list-style:none;margin:0;padding:0;border-top:1px solid #ffffff26}
+.br-clients li{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:clamp(20px,2.2vw,30px) 4px;border-bottom:1px solid #ffffff26}
+.br-client-name{font-size:clamp(26px,3.4vw,52px);font-weight:500;letter-spacing:-.05em;line-height:1.1}
+.br-client-sector{font-size:13px;color:#a9c2b0;text-align:right;flex-shrink:0}
+
+/* ---- faq + close --------------------------------------------------------- */
+.br-faq{background:var(--paper);padding-block:clamp(72px,8vw,118px)}
+.br-close{background:var(--yellow);color:var(--deep);padding-block:clamp(60px,6.4vw,96px)}
+.br-close .eyebrow{color:#6b5a11}
+.br-close-inner{display:grid;grid-template-columns:1fr auto;gap:clamp(36px,5vw,72px);align-items:center}
+.br-close h2{font-size:clamp(34px,4.6vw,74px);font-weight:500;line-height:1.02;letter-spacing:-.06em}
+.br-close-copy>p:not(.eyebrow){font-size:17px;line-height:1.7;max-width:480px;margin-top:24px;color:#3d3208}
+.br-close-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:34px}
+.br-close-actions .button.yellow{background:var(--deep);color:var(--paper)}
+.br-close-actions .button.yellow:hover{background:var(--forest)}
+.br-close-actions .text-link{color:var(--deep)}
+.br-close-face{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.br-close-face img{width:clamp(120px,12vw,168px);height:clamp(120px,12vw,168px);border-radius:50%;object-fit:cover;background:#ffffff4d}
+.br-close-face span{font-size:13px;line-height:1.5;color:#3d3208}
+.br-close-face strong{display:block;font-size:16px;font-weight:600;color:var(--deep)}
+
+/* ---- responsive ---------------------------------------------------------- */
+@media(max-width:1180px){.br-trust ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+.br-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+.br-steps>li:last-child{grid-column:auto}
+}
+
+@media(max-width:950px){.br-hero h1{max-width:none}
+.br-system-head{grid-template-columns:1fr;gap:24px;align-items:start}
+.br-gets-grid{grid-template-columns:1fr;gap:38px}
+.br-gets-art img{aspect-ratio:1.4}
+.br-close-inner{grid-template-columns:1fr;gap:34px}
+.br-close-face{flex-direction:row;align-items:center;text-align:left;gap:18px}
+}
+
+@media(max-width:720px){.br-hero{padding-top:32px}
+.br-hero .eyebrow{font-size:10px;letter-spacing:.05em;margin-bottom:22px}
+.br-hero h1{font-size:clamp(32px,8.6vw,52px);letter-spacing:-.055em;line-height:1.04}
+.br-hero-foot{flex-direction:column;align-items:flex-start;gap:24px}
+.br-hero-actions{gap:14px 22px}
+.br-trust ul{grid-template-columns:1fr;gap:16px}
+.br-trust li{padding-left:16px}
+.br-problem h2,.br-system-head h2,.br-work-head h2{font-size:clamp(30px,7.4vw,46px)}
+.br-problem h2 br{display:none}
+.br-steps{grid-template-columns:1fr;border-radius:16px}
+.br-steps>li{gap:16px;padding:24px 22px}
+.br-gets h2{font-size:clamp(28px,7vw,40px)}
+.br-client-name{font-size:clamp(23px,6.4vw,34px)}
+.br-client-sector{font-size:12px}
+.br-close h2{font-size:clamp(30px,7.8vw,46px)}
+.br-close-face img{width:96px;height:96px}
+}
+
+@media(max-width:380px){.br-hero h1{font-size:30px}
+.br-clients li{flex-direction:column;gap:6px}
+.br-client-sector{text-align:left}
+}

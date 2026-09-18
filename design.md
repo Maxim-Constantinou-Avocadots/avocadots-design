@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.22 · 18 September 2026  
+**Design baseline:** V0.23 · 18 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -724,6 +724,59 @@ Two columns down to 1081px; the promo turns horizontal below 1080; at/below 720p
 becomes a plain list inside the collapsed mobile menu with the promo hidden. Verified 1440px →
 320px: no overflow, panel never off-screen, and the icon hover
 (`#86bd421f` lime → `#e9c334` yellow) fires on both pages.
+
+## 9e. Branding service page — V0.23
+
+The user asked for the branding page rebuilt to match the newer approach used on
+`/web-design`. Both live pages were fetched and compared; the difference is **structural, not
+cosmetic**:
+
+| | New (`/web-design`) | Old (`/logo-branding-design`) |
+| --- | --- | --- |
+| Hero | SEO-forward H1, proof in the subhead | poetic H1, no proof |
+| Trust bar | Wix Partner · Shopify Experts · 150+ · 30-day guarantee | **none** |
+| Framing | problem named hard, then a promise | "Why Branding Matters" + a wall of prose |
+| Body | four benefit pillars | five long numbered steps |
+| CTA | names a human — "Book a Call With Andreas" | generic, plus a 6-field form |
+| FAQ | framed: "Web design, explained clearly" | unframed |
+
+### The copy was already there
+
+The branding page's own lines were doing the right job in the wrong place. **"Most businesses
+don't fail because of bad ideas. They fail because people don't understand them."** is an exact
+structural match for the web page's "Most Websites Look Fine. / Most Websites Don't Perform." —
+it was just buried under a *Why Branding Matters* heading. It now leads its own section. Nothing
+on this page is invented copy.
+
+### Trust bar — every claim sourced
+
+| Claim | Source |
+| --- | --- |
+| 50+ brand identities built | the homepage stats (§10) |
+| Full systems, not one-off logos | their own FAQ: "We focus on full brand systems" |
+| 4–6 weeks typical delivery | their own FAQ |
+| Award-winning Cyprus studio | the Cyprus Marketing Achievement Awards |
+
+"Award-winning" is deliberately **not** qualified as a branding award — §8 forbids relabelling
+those marketing awards.
+
+### Work section — a roster, not a gallery
+
+The six branding clients (EvaBakesBread, Aviair, Powersoft, Thesvre, Themeliotechniki,
+Aircontrol) are real, with their real sectors, **but only Aircontrol has an image in
+`dist/assets/`**. Rather than pair the others with unrelated screenshots, the section is a large
+typographic roster. Aircontrol carries the one photograph, in the "what you get" section.
+**Supply the other five project images and this becomes a gallery** — the markup is ready for it.
+
+### A bug on the live site
+
+`/logo-branding-design` ends with: *"Ready to connect your marketing, sales, and data? Tell us
+about your setup and we'll build a GoHighLevel system…"* — **that is CRM copy on the branding
+page.** It is not reproduced here. Worth fixing on the Wix site.
+
+Shares `styles.css` plus `branding.css`, and reuses `services.js`. Branding now points at this
+page from the mega menu and everywhere else it is linked. Measured 1920px → 320px: no overflow,
+no broken images, trust bar 4 → 2 → 1, steps 3 → 2 → 1.
 
 ## 10. Preserve the homepage's content and rhythm
 
