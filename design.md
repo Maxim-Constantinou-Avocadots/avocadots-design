@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.23 · 18 September 2026  
+**Design baseline:** V0.24 · 18 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -725,58 +725,56 @@ becomes a plain list inside the collapsed mobile menu with the promo hidden. Ver
 320px: no overflow, panel never off-screen, and the icon hover
 (`#86bd421f` lime → `#e9c334` yellow) fires on both pages.
 
-## 9e. Branding service page — V0.23
+## 9e. Branding service page — V0.24, matched to the live /web-design template
 
-The user asked for the branding page rebuilt to match the newer approach used on
-`/web-design`. Both live pages were fetched and compared; the difference is **structural, not
-cosmetic**:
+**V0.23 copied the web-design page's structure but not its look**, because only its text had been
+extracted — the page had never been rendered. Loading it in a browser showed a completely
+different visual language from the dark, left-aligned page that had been built.
 
-| | New (`/web-design`) | Old (`/logo-branding-design`) |
-| --- | --- | --- |
-| Hero | SEO-forward H1, proof in the subhead | poetic H1, no proof |
-| Trust bar | Wix Partner · Shopify Experts · 150+ · 30-day guarantee | **none** |
-| Framing | problem named hard, then a promise | "Why Branding Matters" + a wall of prose |
-| Body | four benefit pillars | five long numbered steps |
-| CTA | names a human — "Book a Call With Andreas" | generic, plus a 6-field form |
-| FAQ | framed: "Web design, explained clearly" | unframed |
+### The live template, as measured
 
-### The copy was already there
-
-The branding page's own lines were doing the right job in the wrong place. **"Most businesses
-don't fail because of bad ideas. They fail because people don't understand them."** is an exact
-structural match for the web page's "Most Websites Look Fine. / Most Websites Don't Perform." —
-it was just buried under a *Why Branding Matters* heading. It now leads its own section. Nothing
-on this page is invented copy.
-
-### Trust bar — every claim sourced
-
-| Claim | Source |
+| Device | What the live page does |
 | --- | --- |
-| 50+ brand identities built | the homepage stats (§10) |
-| Full systems, not one-off logos | their own FAQ: "We focus on full brand systems" |
-| 4–6 weeks typical delivery | their own FAQ |
-| Award-winning Cyprus studio | the Cyprus Marketing Achievement Awards |
+| Hero | **light lime → paper vertical gradient**, faint grid, everything **centred** |
+| Headline | forest on lime, title case, centred, no colour split |
+| Trust bar | four **white rounded pill chips with ✓ ticks** |
+| Below hero | grey client logo strip |
+| Problem | paper, **centred**, a decorative curve graphic, **yellow highlighter `<mark>`s** on keywords |
+| Solution | a **full-yellow section**, left-aligned heading |
+| Capabilities | white pill chips **on the yellow** |
+| Work | "Our Work" **right-aligned**, card grid on the yellow |
+| Pillars | white pill cards left + **lime gradient panel** right |
+| Closing CTA | paper, **centred**, grey words inside the headline, **forest pill button** |
+| FAQ | left intro + right accordion with chevrons |
 
-"Award-winning" is deliberately **not** qualified as a branding award — §8 forbids relabelling
-those marketing awards.
+All of that is now reproduced. The page is light, not forest; centred, not left-aligned.
 
-### Work section — a roster, not a gallery
+### Where branding differs from web design, deliberately
 
-The six branding clients (EvaBakesBread, Aviair, Powersoft, Thesvre, Themeliotechniki,
-Aircontrol) are real, with their real sectors, **but only Aircontrol has an image in
-`dist/assets/`**. Rather than pair the others with unrelated screenshots, the section is a large
-typographic roster. Aircontrol carries the one photograph, in the "what you get" section.
-**Supply the other five project images and this becomes a gallery** — the markup is ready for it.
+- The lime panel on the web page holds a ChatGPT → Avocadots → Google diagram (AI visibility).
+  The branding equivalent is a **brand specimen** — the real mark, the five palette swatches,
+  an `Aa` and the Manrope weight range. Honest, and the right artefact for the service.
+- The work grid: only **Aircontrol** has an image in `dist/assets/`. The other five carry a
+  **typographic face** on a lime-to-paper gradient rather than a reserved empty image slot, so
+  the grid stays uniform and nothing reads as a missing asset. Card heights verified identical.
+  Supply the five images and they drop straight into the same slot.
 
-### A bug on the live site
+### The faint grid
 
-`/logo-branding-design` ends with: *"Ready to connect your marketing, sales, and data? Tell us
-about your setup and we'll build a GoHighLevel system…"* — **that is CRM copy on the branding
-page.** It is not reproduced here. Worth fixing on the Wix site.
+The hero and yellow band carry the live page's faint 118px grid. §3 rejects decorative grids
+**on the homepage**; this page follows the live service-page template instead. Do not carry the
+grid back to the homepage.
 
-Shares `styles.css` plus `branding.css`, and reuses `services.js`. Branding now points at this
-page from the mega menu and everywhere else it is linked. Measured 1920px → 320px: no overflow,
-no broken images, trust bar 4 → 2 → 1, steps 3 → 2 → 1.
+### Three cascade bugs, all caught in rendering
+
+1. Markup used `bw-card` while the CSS styled `.bp-card` — cards rendered with no background.
+2. `.bp-card span` (0,1,1), declared later, overrode the card face's display type down to 14px
+   muted. The face rule needs `.bp-card .bp-card-face>span` (0,2,1).
+3. The face's 22px padding was insetting the one real photograph; `.bp-card-shot .bp-card-face`
+   must reset it to 0.
+
+Measured 1920px → 320px: no overflow, no broken images, chips 4 → 2 → 1, work 3 → 2 → 1,
+FAQ 2 → 1, and all six work cards stay exactly the same height.
 
 ## 10. Preserve the homepage's content and rhythm
 
