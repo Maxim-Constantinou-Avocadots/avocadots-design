@@ -819,7 +819,7 @@ Measured 1920px → 320px: no overflow, nothing wider than the viewport, search 
 56px, chips wrap 1 → 4 rows. Search, filter, combined filter+search, empty state and clear all
 verified. Every page's FAQ link now points here; 24 internal links resolve.
 
-## 9g. Our Work page — V0.26
+## 9g. Our Work page — V0.26, hero proof bar V0.27
 
 A redesign of `/projects`, built as `dist/work.html` + `dist/work.css` + `dist/work.js`.
 The live page was rendered first, and every one of the 13 project detail pages was read.
@@ -854,6 +854,41 @@ the three descriptors **Human-Focused / Design-Led / Built to Perform**, and the
   than repeating Branding's, and **GEO** is added so the service grid is two clean rows of three.
 - Shell is shared: `styles.css` header, footer, buttons, `.eyebrow`, `.status-dot`, tokens. The
   forest `.opening` hero → paper grid → forest services band → paper CTA rhythm matches `faq.html`.
+
+### The hero proof bar — V0.27
+
+The first version closed the hero on a page-metadata row (Projects shown 13 · Sectors 5 ·
+Markets Cyprus & international · Built on Wix Studio). It was rejected on both counts:
+
+- **It looked broken.** Four equal columns, but two values were short numerals and two were long
+  strings, so the row read as ragged — a "13" alone in a 380px column next to a wrapping
+  "Cyprus & international". The fix is structural, not cosmetic: **every value is now a short
+  numeral on a shared baseline**, with the meaning carried by the label beneath it, and hairline
+  dividers between columns so the differing label lengths read as deliberate.
+- **It didn't sell anything.** It counted what was on the page. A visitor browsing work is asking
+  "have you done this before, are you any good, how long will it take" — so each stat now answers
+  one of those, and all four are the studio's own published figures:
+
+| Value | Label | Source |
+| --- | --- | --- |
+| **150+** | Businesses grown, in Cyprus and across Europe | homepage hero `.hero-proof` |
+| **100+** | Websites designed, built and launched | homepage `.stats` |
+| **4–12** | Weeks from first brief to launch, on most projects | homepage FAQ |
+| **2** | Cyprus Marketing Awards in 2025 — Gold and Silver | §8 awards section |
+
+**Do not invent a figure for this bar.** Every number must trace to something the studio already
+publishes; if a new stat is wanted, get the number first.
+
+A stat cannot convert anyone without a next step, so the hero now also ends on the offer —
+`.wk-start`: the yellow *Book a free consultation* button (the real Calendly link), a
+*Tell us about your project* link to `contact.html`, and the note "15 minutes. No pitch." The
+free 15-minute consultation is the studio's own published offer (FAQ).
+
+**`<ul>` needs three resets, not one.** `.wk-stats` and `.wk-traits` are lists whose `li`s stay
+`display:list-item`, so the UA marker rendered *and* `padding-inline-start:40px` pushed every
+numeral 40px off the page gutter. `list-style:none` alone does not fix it: set
+`list-style:none;padding:0;margin-bottom:0`. Verified the first numeral, the `h1` and the first
+trait pill all share an x at 1440, 950 and 380.
 
 ### The `.wk-body` collision — read this before naming anything
 
