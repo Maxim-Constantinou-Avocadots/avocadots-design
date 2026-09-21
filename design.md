@@ -819,6 +819,68 @@ Measured 1920px → 320px: no overflow, nothing wider than the viewport, search 
 56px, chips wrap 1 → 4 rows. Search, filter, combined filter+search, empty state and clear all
 verified. Every page's FAQ link now points here; 24 internal links resolve.
 
+## 9g. Our Work page — V0.26
+
+A redesign of `/projects`, built as `dist/work.html` + `dist/work.css` + `dist/work.js`.
+The live page was rendered first, and every one of the 13 project detail pages was read.
+
+### What was wrong with the live page
+
+| Fault | Detail |
+| --- | --- |
+| **The filter is a dead control** | The chips read Web Design / Branding / Digital Marketing / E-Commerce, but all 13 projects are Wix Studio web builds. One chip holds everything; three hold nothing. |
+| **Placeholder tags shipped** | Cards carry the literal strings `Tag One`, `Tag Two`, `Tag Three`. |
+| **Cards say nothing** | A thumbnail and a name. The industry, market, site type and platform already exist on each project page and are thrown away here. |
+| **Limassol Agora's detail page is empty** | The spec rows render; the body is four non-breaking spaces. |
+| **Duplicate service blurb** | The CRM card repeats Branding's line verbatim — "Crafted identities that turn businesses into brands people remember." |
+
+### What this page does
+
+Real copy from the live page is kept: the heading **"Projects that speak for themselves."**, the
+sub **"A showcase of the brands we've helped grow through design, strategy, and technology."**,
+the three descriptors **Human-Focused / Design-Led / Built to Perform**, and the services block
+**"Turning Vision Into Digital Reality"** with its blurb and *View all services*.
+
+- **Every card carries the project's own spec rows** — industry, site type, market, platform —
+  copied from that project's live detail page. Nothing is invented, and no card has a gap.
+- **A sector filter every chip can fill**, derived from the real `Industry` values:
+  All 13 · Property & development 3 · Hospitality & culture 4 · Engineering & logistics 3 ·
+  Technology & SaaS 2 · Healthcare 1. Live count in an `aria-live` region, plus an empty state.
+- **The orphan is handled.** 13 into two columns leaves one card alone, and so does every odd
+  filter result. `work.js` puts `.is-wide` on the last visible card when the count is odd; it
+  spans both columns at a 2.45:1 crop with the spec row moved to the right. Below 720px the grid
+  is one column, so `.is-wide` is neutralised back to the normal 4:3 card.
+- CRM's blurb is taken from the mega menu ("Workflows that automate, capture, and scale.") rather
+  than repeating Branding's, and **GEO** is added so the service grid is two clean rows of three.
+- Shell is shared: `styles.css` header, footer, buttons, `.eyebrow`, `.status-dot`, tokens. The
+  forest `.opening` hero → paper grid → forest services band → paper CTA rhythm matches `faq.html`.
+
+### The `.wk-body` collision — read this before naming anything
+
+The card's inner block was first called `.wk-body`, the same class as the page section
+`<section class="wk-body">`. The section rule sets `padding-block: clamp(34px,3.8vw,54px)
+clamp(64px,7vw,110px)`, and `.wk-card .wk-body` only overrode `padding-top` — so **every card
+inherited up to 110px of dead space below its spec row**, and the grid grew ~700px at 1440px.
+The card block is now `.wk-info`. **Never reuse a section-level class name inside a component**;
+a more specific selector that sets one side of a shorthand does not undo the other side.
+
+Also carried over from §9f: `work.css` opens with `[hidden]{display:none!important}`, because
+`.wk-grid` and `.wk-card` both set `display` and are toggled via the `hidden` property.
+
+### Assets
+
+13 real thumbnails in `dist/assets/work-<slug>.webp`, 2.50 MB total, all valid WebP at 860×645.
+They are prefixed `work-` specifically so they never collide with the `projects-*.webp` files the
+homepage uses — three of those were overwritten once and had to be restored from git.
+Wix ignores the filename you ask for: the transform must carry `enc_webp` explicitly
+(`/v1/fill/w_860,h_645,al_c,q_76,usm_0.66_1.00_0.01,enc_webp/file.webp`) or you get PNG or AVIF
+bytes in a `.webp` file.
+
+Measured 1920 → 320px: no overflow, no horizontal scroll, no console errors, all 13 images
+resolve, and all six filters return their expected counts. Every "Our Work" and "View all
+projects" link across `index.html`, `services.html`, `branding.html`, `contact.html` and
+`faq.html` now points at `work.html`; all internal links resolve.
+
 ## 10. Preserve the homepage's content and rhythm
 
 The user requested an elevated homepage while keeping its existing sections. Preserve this order and its real assets:

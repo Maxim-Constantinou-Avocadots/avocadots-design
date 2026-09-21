@@ -1,0 +1,168 @@
+/* Our Work page — V0.26.
+   The live /projects page shows 13 identical cards with nothing but a name
+   under each, and a "Web Design / Branding / Digital Marketing / E-Commerce"
+   filter where all 13 sit in Web Design and the other three are empty.
+   Here: the real spec rows each project page already publishes (industry,
+   site type, market, platform), and a sector filter that every chip can fill.
+   Shares styles.css for the shell — header, footer, buttons, tokens. */
+
+/* author `display` on .wk-grid / .wk-card outranks the UA [hidden] rule. */
+[hidden]{display:none!important}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---- hero ---------------------------------------------------------------- */
+.wk-hero{padding-top:clamp(36px,4.6vw,64px);padding-bottom:clamp(46px,5.2vw,80px)}
+.wk-hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.09em;color:#cfddd2;margin-bottom:clamp(22px,2.6vw,36px)}
+.wk-hero h1{font-size:clamp(38px,6.4vw,104px);font-weight:600;line-height:.98;letter-spacing:-.07em;color:#eef0ec}
+.wk-hero h1>span{color:var(--lime)}
+.wk-lead{font-size:clamp(16px,1.3vw,19px);line-height:1.65;color:#cfddd2;max-width:560px;margin-top:clamp(22px,2.4vw,32px)}
+
+.wk-traits{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(24px,2.8vw,36px)}
+.wk-traits li{display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:9px 18px;border:1px solid #ffffff2e;border-radius:40px;background:#ffffff0d;color:#e5ece5;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.wk-traits .status-dot{width:7px;height:7px;box-shadow:0 0 0 4px #a5d65b1f}
+
+.wk-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:clamp(38px,4.4vw,62px);padding-top:clamp(26px,2.8vw,36px);border-top:1px solid #ffffff26}
+.wk-facts dt{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:#9cb3a6}
+.wk-facts dd{margin-top:10px;font-size:clamp(19px,1.7vw,25px);font-weight:600;letter-spacing:-.035em;line-height:1.25;color:#eef0ec}
+
+/* ---- filter bar ---------------------------------------------------------- */
+.wk-body{background:var(--paper);padding-block:clamp(34px,3.8vw,54px) clamp(64px,7vw,110px)}
+.wk-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 24px;margin-bottom:clamp(30px,3.4vw,46px)}
+.wk-filters{display:flex;flex-wrap:wrap;gap:10px}
+.wk-chip{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:10px 16px;border:1px solid var(--line);border-radius:40px;background:#fff;color:var(--forest);font-size:14px;font-weight:600;letter-spacing:-.01em;transition:background .2s,border-color .2s,color .2s}
+.wk-chip span{font-size:12px;font-weight:600;color:var(--muted);transition:color .2s}
+.wk-chip:hover{border-color:#1c383052}
+.wk-chip.is-on{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+.wk-chip.is-on span{color:var(--lime)}
+.wk-count{font-size:13px;color:var(--muted);margin:0}
+
+/* ---- grid ---------------------------------------------------------------- */
+.wk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(36px,4vw,64px) clamp(24px,2.6vw,40px)}
+
+.wk-card{display:flex;flex-direction:column;color:var(--forest)}
+.wk-shot{display:block;position:relative;overflow:hidden;border-radius:14px;background:#dfe3dd;aspect-ratio:4/3;isolation:isolate}
+.wk-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.wk-card:hover .wk-shot img,.wk-card:focus-visible .wk-shot img{transform:scale(1.04)}
+.wk-go{position:absolute;right:16px;bottom:16px;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:var(--yellow);color:var(--forest);font-size:23px;line-height:1;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.wk-card:hover .wk-go,.wk-card:focus-visible .wk-go{opacity:1;transform:translateY(0)}
+
+/* the card's inner block is .wk-info, NOT .wk-body: `.wk-body` is the page
+   section, and its padding-block was landing on every card as 110px of dead
+   space under the spec row. Never reuse a section class inside a card. */
+.wk-info{display:flex;flex-direction:column;flex:1;padding-top:19px}
+.wk-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.wk-head h3{font-size:clamp(22px,2vw,30px);font-weight:600;letter-spacing:-.045em;line-height:1.15}
+.wk-num{font-size:12px;font-weight:600;letter-spacing:.09em;color:#9aa89f;flex-shrink:0}
+.wk-industry{display:block;margin-top:9px;font-size:15px;line-height:1.6;color:var(--muted)}
+
+.wk-spec{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:auto;padding-top:15px;border-top:1px solid var(--line)}
+.wk-industry{margin-bottom:16px}
+
+/* 13 projects into two columns leaves an orphan, and so does every odd filter
+   result. The script marks the last visible card instead, and it runs wide. */
+.wk-card.is-wide{grid-column:1/-1}
+.wk-card.is-wide .wk-shot{aspect-ratio:2.45/1}
+.wk-card.is-wide .wk-info{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:10px 40px}
+.wk-card.is-wide .wk-head{grid-column:1;align-items:baseline;justify-content:flex-start;gap:16px}
+.wk-card.is-wide .wk-industry{grid-column:1;margin-bottom:0}
+.wk-card.is-wide .wk-spec{grid-column:2;grid-row:1/3;margin-top:0;padding-top:0;border-top:0;justify-content:flex-end;align-content:end}
+.wk-card.is-wide .wk-head h3{font-size:clamp(26px,2.6vw,40px)}
+.wk-spec>span{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:30px;background:#1c38300d;font-size:12.5px;font-weight:600;letter-spacing:-.005em;color:var(--forest)}
+.wk-spec em{font-style:normal;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#8b9b91}
+
+/* ---- empty state --------------------------------------------------------- */
+.wk-empty{padding:clamp(44px,5vw,72px) clamp(24px,3vw,48px);border:1px dashed #1c383040;border-radius:16px;text-align:center}
+.wk-empty-title{font-size:clamp(22px,2.2vw,30px);font-weight:600;letter-spacing:-.04em}
+.wk-empty>p+p{margin-top:12px;font-size:16px;line-height:1.7;color:var(--muted);max-width:440px;margin-inline:auto}
+.wk-empty .button{margin-top:26px;background:var(--yellow);color:var(--forest)}
+
+/* ---- services strip ------------------------------------------------------ */
+.wk-services{background:var(--forest);color:var(--paper);padding-block:clamp(72px,8vw,124px)}
+.wk-services .eyebrow{color:#9cb3a6;margin-bottom:20px}
+.wk-svc-head{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(28px,4vw,70px);flex-wrap:wrap;margin-bottom:clamp(40px,4.6vw,66px)}
+.wk-svc-head h2{font-size:clamp(34px,4.6vw,70px);font-weight:600;line-height:1;letter-spacing:-.06em}
+.wk-svc-head h2>span{color:var(--lime)}
+.wk-svc-aside{max-width:430px}
+.wk-svc-aside p{font-size:16px;line-height:1.7;color:#cfddd2}
+.wk-svc-aside .text-link{margin-top:18px;color:var(--yellow);border-bottom-color:#e9c33459}
+
+.wk-svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wk-svc{display:flex;flex-direction:column;padding:28px;border:1px solid #ffffff21;border-radius:16px;background:#ffffff0a;color:var(--paper);transition:background .25s,border-color .25s,transform .25s}
+.wk-svc:hover{background:#ffffff14;border-color:#ffffff3d;transform:translateY(-3px)}
+.wk-svc h3{font-size:clamp(21px,1.8vw,26px);font-weight:600;letter-spacing:-.04em}
+.wk-svc p{margin-top:12px;font-size:15px;line-height:1.65;color:#c3d3c8;flex:1}
+.wk-svc-go{margin-top:24px;display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--lime)}
+.wk-svc-go em{font-style:normal;font-size:15px}
+
+/* ---- closing CTA --------------------------------------------------------- */
+.wk-cta{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7vw,110px);border-top:1px solid var(--line)}
+.wk-cta-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(30px,4vw,70px);flex-wrap:wrap}
+.wk-cta .eyebrow{color:var(--muted);margin-bottom:18px}
+.wk-cta h2{font-size:clamp(34px,4.4vw,66px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.wk-cta-inner>div:first-child>p:last-child{margin-top:18px;font-size:16px;line-height:1.7;color:var(--muted);max-width:430px}
+.wk-cta-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.wk-cta-actions .button{background:var(--yellow);color:var(--forest)}
+.wk-cta-actions .text-link{color:var(--forest);border-bottom-color:var(--line)}
+
+/* ---- breakpoints --------------------------------------------------------- */
+@media(max-width:1180px){
+  .wk-facts{gap:20px}
+  .wk-svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wk-spec>span{font-size:12px;padding:6px 11px}
+}
+
+@media(max-width:950px){
+  .wk-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 24px}
+  .wk-bar{align-items:flex-start;flex-direction:column;gap:14px}
+  .wk-head h3{font-size:clamp(20px,2.6vw,26px)}
+  .wk-card.is-wide .wk-info{grid-template-columns:minmax(0,1fr);gap:10px}
+  .wk-card.is-wide .wk-spec{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+  .wk-card.is-wide .wk-shot{aspect-ratio:2/1}
+  .wk-industry{font-size:14px}
+  .wk-cta-inner,.wk-svc-head{flex-direction:column;align-items:flex-start}
+}
+
+@media(max-width:720px){
+  .wk-hero{padding-top:30px;padding-bottom:44px}
+  .wk-hero h1{font-size:clamp(34px,8.6vw,56px);letter-spacing:-.062em;line-height:1.04}
+  .wk-lead{font-size:16px;margin-top:20px}
+  .wk-traits{gap:8px;margin-top:24px}
+  .wk-traits li{min-height:38px;padding:8px 14px;font-size:13px}
+  .wk-facts{margin-top:34px;padding-top:24px;gap:22px 20px}
+  .wk-facts dt{font-size:10.5px;letter-spacing:.07em}
+  .wk-facts dd{margin-top:8px;font-size:18px}
+  .wk-body{padding-block:30px 66px}
+  .wk-chip{min-height:38px;padding:9px 14px;font-size:13px}
+  .wk-grid{grid-template-columns:1fr;gap:34px}
+  /* single column: nothing is orphaned, so the wide card returns to normal */
+  .wk-card.is-wide .wk-shot{aspect-ratio:4/3}
+  .wk-card.is-wide .wk-info{display:flex;flex-direction:column;gap:0}
+  .wk-card.is-wide .wk-industry{margin-bottom:16px}
+  .wk-card.is-wide .wk-spec{margin-top:auto;padding-top:13px;border-top:1px solid var(--line);justify-content:flex-start}
+  .wk-card.is-wide .wk-head h3{font-size:23px}
+  .wk-shot{border-radius:12px}
+  .wk-go{opacity:1;transform:none;width:40px;height:40px;font-size:20px;right:13px;bottom:13px}
+  .wk-info{padding-top:16px}
+  .wk-head h3{font-size:23px}
+  .wk-spec{margin-top:14px;padding-top:13px}
+  .wk-services{padding-block:68px}
+  .wk-svc-grid{grid-template-columns:1fr;gap:14px}
+  .wk-svc{padding:24px}
+  .wk-cta{padding-block:62px}
+  .wk-cta-actions{gap:14px 22px}
+}
+
+@media(max-width:540px){
+  .wk-facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  .wk-spec>span{font-size:11.5px;gap:6px;padding:6px 10px}
+  .wk-spec em{font-size:10px}
+}
+
+@media(max-width:380px){
+  .wk-hero h1{font-size:clamp(26px,8.6vw,38px)}
+  .wk-traits li{padding:7px 12px;font-size:12px;gap:8px}
+  .wk-facts dd{font-size:16px}
+  .wk-head h3{font-size:21px}
+  .wk-chip{font-size:12px;padding:8px 12px;gap:6px}
+}

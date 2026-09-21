@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.25**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.26**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
@@ -19,6 +19,9 @@ dist/
   services.html   services page (shares styles.css, adds services.css)
   branding.html   branding service page (shares styles.css, adds branding.css)
   faq.html        FAQ with search + category filter (faq.css, faq.js)
+  work.html       Our Work — 13 projects, sector filter (work.css, work.js)
+  work.css        Our Work page composition
+  work.js         nav + sector filter; widens the last card when the count is odd
   branding.css    branding page composition
   services.css    services page composition
   services.js     nav, FAQ and reveals for the services page
@@ -45,3 +48,5 @@ their original 1:1 ratio — do not redraw, recolour or flatten them. See `desig
 - Manrope loads from Google Fonts; `Arial, sans-serif` is the fallback.
 - The certificate modal degrades to a direct image link without JavaScript.
 - This is a review prototype, not the production Wix site.
+- Project thumbnails are prefixed `work-` so they never collide with the homepage's
+  `projects-*.webp` files. See `design.md` §9g.
