@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.24**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.25**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
@@ -18,6 +18,7 @@ dist/
   index.html      homepage — markup for every section
   services.html   services page (shares styles.css, adds services.css)
   branding.html   branding service page (shares styles.css, adds branding.css)
+  faq.html        FAQ with search + category filter (faq.css, faq.js)
   branding.css    branding page composition
   services.css    services page composition
   services.js     nav, FAQ and reveals for the services page

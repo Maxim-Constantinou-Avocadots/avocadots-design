@@ -1,6 +1,6 @@
 # Avocadots — Design Continuation Guide
 
-**Design baseline:** V0.24 · 18 September 2026  
+**Design baseline:** V0.25 · 21 September 2026  
 **Purpose:** Continue the same Avocadots design concept in another LLM, design tool, or codebase. This is a design contract and implementation reference, not a request to redesign the brand.
 
 ## 1. Start here
@@ -775,6 +775,49 @@ grid back to the homepage.
 
 Measured 1920px → 320px: no overflow, no broken images, chips 4 → 2 → 1, work 3 → 2 → 1,
 FAQ 2 → 1, and all six work cards stay exactly the same height.
+
+## 9f. FAQ page — V0.25
+
+A redesign of `/faq`. The live page was rendered and audited first.
+
+### What was wrong with the live page
+
+| Fault | Detail |
+| --- | --- |
+| **The category rail reads as disabled** | Only `General` is dark; Web Design, Branding, Digital Marketing, E-Commerce and CRM render greyed-out, so five of six categories look dead. |
+| **No search** | 33 questions with no way to find one. |
+| **"More FAQs" is a dump** | ~25 SEO questions in one undifferentiated wall. |
+| **No brand presence** | Grey on grey; the only colour is the Contact button. |
+| **Tiny headline** | ~30px on a 1440 page. |
+
+Two content bugs on the live page, not reproduced here:
+- **"What is the best digital agency in Cyprus?" appears twice.**
+- **"Which advertising services offer the best ROI for small businesses?" has no answer** — the
+  text that follows it belongs to the next question.
+
+### What this page does
+
+- **Search** is the primary affordance: a 62px white field in the forest hero, matching against
+  question *and* answer text, with live `<mark>` highlighting on the question.
+- **Working category chips** with real counts — All 33 · General 8 · Web Design 4 · Branding 3 ·
+  E-Commerce 4 · Marketing 10 · CRM 2 · About Avocadots 2. Selected state is forest, not grey.
+- **A live result count** in an `aria-live` region, plus an **empty state** that routes to contact.
+- One accordion, white cards, plus/minus icon that turns yellow when open, category tag in the
+  answer. Native `<details>`, so keyboard and find-in-page still work.
+- All 33 questions re-sorted into those seven categories; the "More FAQs" dump is gone.
+
+### The `[hidden]` trap
+
+`.fq-clear` and `.fq-list` set `display:grid`, and an author `display` **outranks the UA
+`[hidden]{display:none}` rule**. The clear button therefore sat visible over an empty field and
+the list stayed laid out behind the empty state. `faq.css` now opens with
+`[hidden]{display:none!important}`. **Any new element that both sets `display` and is toggled
+via the `hidden` property needs this.** The list bug was masked in testing because its children
+were individually hidden, so it measured as zero-size.
+
+Measured 1920px → 320px: no overflow, nothing wider than the viewport, search field never below
+56px, chips wrap 1 → 4 rows. Search, filter, combined filter+search, empty state and clear all
+verified. Every page's FAQ link now points here; 24 internal links resolve.
 
 ## 10. Preserve the homepage's content and rhythm
 
