@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.27**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.28**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
@@ -20,6 +20,10 @@ dist/
   branding.html   branding service page (shares styles.css, adds branding.css)
   faq.html        FAQ with search + category filter (faq.css, faq.js)
   work.html       Our Work — 13 projects, sector filter (work.css, work.js)
+  careers.html    Careers — values, life here, hiring steps, open roles
+  role-*.html     one page per open role: full description + application form
+  careers.css     careers + role page composition (shared by both)
+  careers.js      nav, file-input faces, and the application form's validation
   work.css        Our Work page composition
   work.js         nav + sector filter; widens the last card when the count is odd
   branding.css    branding page composition
@@ -50,3 +54,5 @@ their original 1:1 ratio — do not redraw, recolour or flatten them. See `desig
 - This is a review prototype, not the production Wix site.
 - Project thumbnails are prefixed `work-` so they never collide with the homepage's
   `projects-*.webp` files. See `design.md` §9g.
+- Role pages are generated from a `ROLES` list; adding an entry emits its card and its page.
+  The application form is client-side only and says so on submit. See `design.md` §9h.

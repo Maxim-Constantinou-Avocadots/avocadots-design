@@ -1,0 +1,316 @@
+/* Careers + role pages — V0.28.
+   The live /careers page is a heading, one paragraph and one white role card:
+   no values, no team, no sense of the place, and an "Apply Now" whose target
+   renders its sections in the wrong order (responsibilities appear above the
+   job title). This adds the missing story and a role page built to be read.
+   Shares styles.css for the shell — header, footer, buttons, tokens. */
+
+/* author `display` on toggled elements outranks the UA [hidden] rule. */
+[hidden]{display:none!important}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ===== shared section furniture ========================================== */
+.cr-head{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(28px,4vw,70px);flex-wrap:wrap;margin-bottom:clamp(38px,4.4vw,64px)}
+.cr-head h2{font-size:clamp(34px,4.4vw,66px);font-weight:600;line-height:1;letter-spacing:-.06em}
+.cr-head-aside{max-width:440px;font-size:16px;line-height:1.7}
+
+/* ===== careers hero ====================================================== */
+.cr-hero{padding-top:clamp(36px,4.6vw,64px);padding-bottom:clamp(46px,5.2vw,80px)}
+.cr-hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.09em;color:#cfddd2;margin-bottom:clamp(22px,2.6vw,36px)}
+.cr-hero h1{font-size:clamp(38px,6.2vw,100px);font-weight:600;line-height:.98;letter-spacing:-.07em;color:#eef0ec}
+.cr-hero h1>span{color:var(--lime)}
+.cr-lead{font-size:clamp(16px,1.3vw,19px);line-height:1.65;color:#cfddd2;max-width:640px;margin-top:clamp(22px,2.4vw,32px)}
+
+.cr-start{display:flex;align-items:center;flex-wrap:wrap;gap:16px 30px;margin-top:clamp(28px,3.2vw,42px)}
+.cr-start .button{background:var(--yellow);color:var(--forest)}
+.cr-start .button:hover{transform:translateY(-2px)}
+.cr-start-link{display:inline-flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:#e5ece5;padding-block:6px;border-bottom:1px solid #ffffff3d}
+.cr-start-link:hover{color:var(--yellow);border-bottom-color:#e9c33459}
+
+/* same proof-bar contract as the work page: every value a short token on a
+   shared baseline, hairline dividers, and the <ul> resets that the UA needs. */
+.cr-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(40px,4.6vw,66px);border-top:1px solid #ffffff26;list-style:none;padding:0;margin-bottom:0}
+.cr-facts>li{padding:clamp(26px,2.8vw,38px) clamp(18px,2vw,34px) 0;border-left:1px solid #ffffff1f}
+.cr-facts>li:first-child{padding-left:0;border-left:0}
+.cr-facts strong{display:block;font-size:clamp(34px,3.7vw,56px);font-weight:600;letter-spacing:-.06em;line-height:1;color:#eef0ec;font-variant-numeric:tabular-nums}
+.cr-plus{color:var(--lime)}
+.cr-facts>li>span{display:block;margin-top:15px;font-size:14px;line-height:1.55;color:#a9bdb0;max-width:17em}
+
+/* ===== core belief ======================================================= */
+.cr-belief{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7.6vw,120px);text-align:center}
+.cr-belief .eyebrow{color:var(--muted);margin-bottom:26px}
+.cr-belief blockquote{margin:0}
+.cr-belief blockquote p{font-size:clamp(36px,6vw,92px);font-weight:600;line-height:1.02;letter-spacing:-.07em}
+.cr-belief-sub{margin:clamp(26px,3vw,40px) auto 0;max-width:660px;font-size:clamp(16px,1.3vw,18px);line-height:1.7;color:var(--muted)}
+.cr-belief-sub em{font-style:italic;color:var(--forest)}
+
+/* ===== values ============================================================ */
+.cr-values{background:var(--forest);color:var(--paper);padding-block:clamp(72px,8vw,124px)}
+.cr-values .eyebrow{color:#9cb3a6;margin-bottom:20px}
+.cr-values .cr-head h2>span{color:var(--lime)}
+.cr-values .cr-head-aside{color:#cfddd2}
+
+.cr-value-list{display:grid;gap:0;list-style:none;padding:0;margin:0;border-top:1px solid #ffffff1f}
+.cr-value{display:grid;grid-template-columns:72px minmax(0,1fr);gap:clamp(20px,3vw,48px);padding-block:clamp(28px,3vw,42px);border-bottom:1px solid #ffffff1f}
+.cr-value-n{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--lime);padding-top:10px}
+.cr-value h3{font-size:clamp(23px,2.4vw,36px);font-weight:600;letter-spacing:-.045em;line-height:1.15}
+.cr-value-rule{margin-top:12px;font-size:16px;line-height:1.7;color:#cfddd2;max-width:56ch}
+/* the second line is the careers translation, so it is visibly separated */
+.cr-value-you{margin-top:16px;padding-left:18px;border-left:2px solid #a5d65b5c;font-size:15px;line-height:1.65;color:#a9bdb0;max-width:56ch}
+.cr-value-you>span{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:7px}
+
+/* ===== life here ========================================================= */
+.cr-life{background:var(--paper);color:var(--forest);padding-block:clamp(72px,8vw,124px)}
+.cr-life .eyebrow{color:var(--muted);margin-bottom:20px}
+.cr-life .cr-head h2>span{color:var(--muted)}
+.cr-life .cr-head-aside{color:var(--muted)}
+
+.cr-perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0}
+.cr-perk{padding:26px;border:1px solid var(--line);border-radius:16px;background:#fff;transition:border-color .25s,transform .25s,box-shadow .25s}
+.cr-perk:hover{border-color:#1c383052;transform:translateY(-3px);box-shadow:0 12px 30px #04100b0f}
+.cr-perk-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;background:#1c38300d;color:var(--forest);margin-bottom:18px}
+.cr-perk-icon svg{width:22px;height:22px}
+.cr-perk h3{font-size:18px;font-weight:600;letter-spacing:-.03em;line-height:1.25}
+.cr-perk p{margin-top:9px;font-size:14px;line-height:1.6;color:var(--muted)}
+
+.cr-photo{margin:clamp(36px,4vw,56px) 0 0;position:relative;border-radius:18px;overflow:hidden;background:#dfe3dd}
+.cr-photo img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:2.4/1}
+.cr-photo figcaption{position:absolute;inset:auto 0 0;padding:clamp(26px,3vw,44px);background:linear-gradient(to top,#0c2419e6,#0c241900);color:#eef0ec}
+.cr-photo figcaption strong{display:block;font-size:clamp(17px,1.8vw,25px);font-weight:600;letter-spacing:-.035em;line-height:1.3;max-width:24ch}
+.cr-photo figcaption span{display:block;margin-top:10px;font-size:14px;line-height:1.6;color:#c3d3c8;max-width:52ch}
+
+/* ===== hiring steps ====================================================== */
+.cr-process{background:var(--forest);color:var(--paper);padding-block:clamp(72px,8vw,120px)}
+.cr-process .eyebrow{color:#9cb3a6;margin-bottom:20px}
+.cr-process .cr-head h2>span{color:var(--lime)}
+.cr-process .cr-head-aside{color:#cfddd2}
+
+.cr-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0;counter-reset:step}
+.cr-step{position:relative;padding:28px;border:1px solid #ffffff21;border-radius:16px;background:#ffffff0a}
+.cr-step-n{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--lime);color:var(--forest);font-size:15px;font-weight:700;margin-bottom:20px}
+.cr-step h3{font-size:19px;font-weight:600;letter-spacing:-.03em}
+.cr-step p{margin-top:10px;font-size:14.5px;line-height:1.65;color:#c3d3c8}
+
+/* ===== open roles ======================================================== */
+.cr-roles{background:var(--paper);color:var(--forest);padding-block:clamp(72px,8vw,124px)}
+.cr-roles .eyebrow{color:var(--muted);margin-bottom:20px}
+.cr-roles .cr-head h2>span{color:var(--muted)}
+.cr-roles .cr-head-aside{color:var(--muted)}
+
+.cr-role-list{display:grid;gap:16px}
+.cr-role{position:relative;display:flex;align-items:center;justify-content:space-between;gap:clamp(22px,3vw,48px);padding:clamp(26px,2.8vw,38px);border:1px solid var(--line);border-radius:18px;background:#fff;transition:border-color .25s,box-shadow .25s,transform .25s}
+.cr-role:hover{border-color:#1c383052;box-shadow:0 14px 36px #04100b12;transform:translateY(-2px)}
+.cr-role-team{display:inline-flex;align-items:center;min-height:28px;padding:5px 12px;border-radius:30px;background:#1c38300d;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.cr-role h3{margin-top:14px;font-size:clamp(24px,2.6vw,38px);font-weight:600;letter-spacing:-.05em;line-height:1.1}
+.cr-role h3 a{color:inherit}
+.cr-role h3 a:hover{color:var(--brand-lime)}
+/* An absolutely-positioned overlay would make the whole card clickable, but it
+   swallows pointer events over the summary text and turns the CTA into a fake
+   <span> button. Two real links to the same page instead. */
+.cr-role-card{margin-top:12px;font-size:15.5px;line-height:1.65;color:var(--muted);max-width:62ch}
+.cr-role-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;list-style:none;padding:0}
+.cr-role-meta li{display:inline-flex;align-items:center;min-height:32px;padding:6px 13px;border-radius:30px;border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--forest)}
+.cr-role-go{flex-shrink:0;background:var(--yellow);color:var(--forest)}
+.cr-role:hover .cr-role-go,.cr-role-go:hover{transform:translateY(-2px)}
+
+.cr-open{display:flex;align-items:center;justify-content:space-between;gap:clamp(22px,3vw,48px);flex-wrap:wrap;margin-top:clamp(28px,3vw,44px);padding:clamp(26px,2.8vw,40px);border:1px dashed #1c383040;border-radius:18px;scroll-margin-top:90px}
+.cr-open h3{font-size:clamp(21px,2.2vw,30px);font-weight:600;letter-spacing:-.04em}
+.cr-open p{margin-top:11px;font-size:15.5px;line-height:1.65;color:var(--muted);max-width:56ch}
+.cr-open .button{flex-shrink:0;background:var(--forest);color:var(--paper)}
+.cr-open .button:hover{transform:translateY(-2px)}
+
+/* ===== closing CTA (shared by both pages) ================================ */
+.cr-cta{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7vw,110px);border-top:1px solid var(--line)}
+.cr-cta-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(30px,4vw,70px);flex-wrap:wrap}
+.cr-cta .eyebrow{color:var(--muted);margin-bottom:18px}
+.cr-cta h2{font-size:clamp(34px,4.4vw,62px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.cr-cta-inner>div:first-child>p:last-child{margin-top:18px;font-size:16px;line-height:1.7;color:var(--muted);max-width:430px}
+.cr-cta-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.cr-cta-actions .button{background:var(--yellow);color:var(--forest)}
+.cr-cta-link{display:inline-flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:var(--forest);padding-block:8px;border-bottom:1px solid var(--line)}
+.cr-cta-link:hover{border-bottom-color:#1c383070}
+
+/* ===== role page: hero =================================================== */
+.rl-hero{padding-top:clamp(24px,3vw,40px);padding-bottom:clamp(44px,5vw,76px)}
+.rl-back{margin-bottom:clamp(26px,3vw,40px)}
+.rl-back a{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#a9bdb0;padding-block:6px}
+.rl-back a:hover{color:var(--lime)}
+.rl-hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.09em;color:#cfddd2;margin-bottom:22px}
+.rl-hero h1{font-size:clamp(34px,5.2vw,82px);font-weight:600;line-height:1;letter-spacing:-.065em;color:#eef0ec;max-width:16ch}
+.rl-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(24px,2.8vw,34px);list-style:none;padding:0}
+.rl-chips li{display:inline-flex;align-items:center;min-height:40px;padding:9px 17px;border:1px solid #ffffff2e;border-radius:40px;background:#ffffff0d;color:#e5ece5;font-size:14px;font-weight:600}
+.rl-hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px 26px;margin-top:clamp(26px,3vw,38px)}
+.rl-hero-actions .button{background:var(--yellow);color:var(--forest)}
+.rl-hero-actions .button:hover{transform:translateY(-2px)}
+.rl-hero-note{font-size:13px;color:#9cb3a6}
+
+/* ===== role page: body =================================================== */
+.rl-body{background:var(--paper);color:var(--forest);padding-block:clamp(52px,6vw,96px)}
+.rl-grid{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:clamp(32px,4vw,72px);align-items:start}
+
+.rl-block{padding-bottom:clamp(34px,3.6vw,52px);margin-bottom:clamp(34px,3.6vw,52px);border-bottom:1px solid var(--line)}
+.rl-block h2{font-size:clamp(25px,2.7vw,40px);font-weight:600;letter-spacing:-.05em;line-height:1.1;margin-bottom:22px}
+.rl-block p{font-size:16.5px;line-height:1.75;color:var(--muted);max-width:68ch}
+.rl-block p+p{margin-top:15px}
+.rl-sub{margin-top:22px!important;font-weight:600;color:var(--forest)!important}
+.rl-note{margin-top:20px!important;padding:14px 18px;border-radius:12px;background:#1c38300d;font-size:15px!important;color:var(--forest)!important}
+
+.rl-list{margin-top:20px;list-style:none;padding:0;display:grid;gap:12px}
+.rl-list li{position:relative;padding-left:32px;font-size:16px;line-height:1.65;color:var(--muted);max-width:68ch}
+.rl-list li::before{content:"";position:absolute;left:6px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--brand-lime)}
+/* the benefits list reads as ticks rather than bullets */
+.rl-list-plus li::before{content:"";left:3px;top:.36em;width:13px;height:7px;border-radius:0;background:none;border-left:2px solid var(--brand-lime);border-bottom:2px solid var(--brand-lime);transform:rotate(-45deg)}
+
+/* ===== role page: sticky summary ========================================= */
+.rl-side{position:sticky;top:26px}
+.rl-card{padding:clamp(24px,2.4vw,32px);border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 12px 34px #04100b0f}
+.rl-card h2{font-size:14px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.rl-card dl{margin:20px 0 0;display:grid;gap:0}
+.rl-card dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-block:13px;border-top:1px solid var(--line)}
+.rl-card dt{font-size:13.5px;color:var(--muted);flex-shrink:0}
+.rl-card dd{margin:0;font-size:14.5px;font-weight:600;letter-spacing:-.01em;text-align:right}
+.rl-card-cta{width:100%;margin-top:24px;background:var(--yellow);color:var(--forest)}
+.rl-card-cta:hover{transform:translateY(-2px)}
+.rl-card-note{margin-top:16px;font-size:13px;line-height:1.6;color:var(--muted)}
+
+/* ===== role page: the form =============================================== */
+.rl-apply{scroll-margin-top:24px;padding:clamp(28px,3.2vw,48px);border-radius:20px;background:var(--forest);color:var(--paper)}
+.rl-apply .eyebrow{color:#9cb3a6;margin-bottom:16px}
+.rl-apply h2{font-size:clamp(27px,3vw,46px);font-weight:600;letter-spacing:-.055em;line-height:1.05}
+.rl-apply-lead{margin-top:16px;font-size:16px;line-height:1.7;color:#cfddd2;max-width:56ch}
+#rl-form{margin-top:clamp(26px,3vw,38px)}
+
+.cr-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.cr-field{margin:0 0 16px}
+.cr-field-grid .cr-field{margin-bottom:0}
+.cr-field label,.cr-file label{display:block;font-size:13.5px;font-weight:600;color:#cfddd2;margin-bottom:9px}
+.cr-field label span,.cr-file label span{color:var(--yellow);margin-left:3px}
+.cr-field input,.cr-field textarea{width:100%;padding:15px 17px;border:1px solid #ffffff2e;border-radius:11px;background:#ffffff0f;color:#eef0ec;font:500 15.5px/1.5 var(--font);transition:border-color .2s,background .2s,box-shadow .2s}
+.cr-field input{min-height:54px}
+.cr-field textarea{resize:vertical;min-height:130px}
+.cr-field input::placeholder,.cr-field textarea::placeholder{color:#8fa497}
+.cr-field input:focus,.cr-field textarea:focus{outline:none;border-color:var(--yellow);background:#ffffff17;box-shadow:0 0 0 3px #e9c33438}
+.cr-field-grid+.cr-field{margin-top:16px}
+
+/* file inputs: the real control stays focusable, the face is the visual */
+.cr-file{position:relative}
+.cr-file input[type=file]{position:absolute;inset:auto 0 0;width:100%;height:calc(100% - 30px);opacity:0;cursor:pointer}
+.cr-file-face{display:flex;align-items:center;gap:14px;min-height:54px;padding:12px 16px;border:1px dashed #ffffff3d;border-radius:11px;background:#ffffff0a;transition:border-color .2s,background .2s,box-shadow .2s}
+.cr-file input[type=file]:hover+.cr-file-face{border-color:#ffffff66;background:#ffffff14}
+.cr-file input[type=file]:focus-visible+.cr-file-face{outline:none;border-color:var(--yellow);border-style:solid;box-shadow:0 0 0 3px #e9c33438}
+.cr-file-cta{flex-shrink:0;padding:7px 13px;border-radius:8px;background:var(--lime);color:var(--forest);font-size:13px;font-weight:700}
+.cr-file-name{font-size:13.5px;color:#9cb3a6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cr-file.has-file .cr-file-face{border-style:solid;border-color:#a5d65b6b;background:#a5d65b14}
+.cr-file.has-file .cr-file-name{color:#eef0ec;font-weight:600}
+
+/* inline validation, announced rather than only coloured */
+.cr-error{display:block;margin-top:8px;font-size:13px;font-weight:600;color:#ffcf6b}
+.cr-field.is-bad input,.cr-field.is-bad textarea{border-color:#ffcf6b;background:#ffcf6b12}
+.cr-file.is-bad .cr-file-face{border-color:#ffcf6b;border-style:solid;background:#ffcf6b12}
+
+.rl-submit{margin-top:24px;background:var(--yellow);color:var(--forest)}
+.rl-submit:hover{transform:translateY(-2px)}
+.rl-privacy{margin-top:16px;font-size:13px;line-height:1.6;color:#9cb3a6;max-width:52ch}
+.rl-privacy a{color:var(--lime);text-decoration:underline;text-underline-offset:3px}
+
+.rl-result{margin-top:24px;padding:22px 24px;border-radius:14px;border:1px solid #a5d65b5c;background:#a5d65b14}
+.rl-result strong{display:block;font-size:18px;font-weight:600;letter-spacing:-.03em;color:#eef0ec}
+.rl-result p{margin-top:9px;font-size:14.5px;line-height:1.65;color:#c3d3c8}
+
+/* ===== breakpoints ======================================================= */
+@media(max-width:1180px){
+  .rl-grid{grid-template-columns:minmax(0,1fr) 320px}
+  .cr-perks,.cr-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cr-facts>li>span{font-size:13px}
+}
+
+@media(max-width:950px){
+  .cr-head,.cr-cta-inner{flex-direction:column;align-items:flex-start}
+  /* two columns: reset dividers for the new first column, rule off row 2 */
+  .cr-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cr-facts>li{padding-inline:clamp(18px,3vw,30px)}
+  .cr-facts>li:nth-child(odd){padding-left:0;border-left:0}
+  .cr-facts>li:nth-child(n+3){margin-top:clamp(26px,3vw,36px);border-top:1px solid #ffffff1f}
+  /* the sticky summary would fight the form on a narrow screen */
+  .rl-grid{grid-template-columns:minmax(0,1fr)}
+  .rl-side{position:static;order:-1;margin-bottom:8px}
+  .rl-card{box-shadow:none}
+  .cr-role{flex-direction:column;align-items:flex-start;gap:24px}
+  .cr-role-go{width:100%;justify-content:space-between}
+  .cr-photo img{aspect-ratio:16/9}
+}
+
+@media(max-width:720px){
+  .cr-hero{padding-top:30px;padding-bottom:44px}
+  .cr-hero h1{font-size:clamp(34px,8.6vw,56px);letter-spacing:-.062em;line-height:1.04}
+  .cr-lead{font-size:16px;margin-top:20px}
+  .cr-start{margin-top:26px;gap:14px 22px}
+  .cr-facts{margin-top:34px}
+  .cr-facts>li{padding-top:26px;padding-inline:20px}
+  .cr-facts>li:nth-child(n+3){margin-top:26px}
+  .cr-facts strong{font-size:clamp(28px,7.4vw,38px)}
+  .cr-facts>li>span{margin-top:11px;font-size:12.5px;line-height:1.5}
+
+  .cr-belief{padding-block:60px;text-align:left}
+  .cr-belief blockquote p{font-size:clamp(32px,8.8vw,46px);letter-spacing:-.06em}
+  .cr-belief-sub{margin-inline:0;font-size:15.5px}
+
+  .cr-values,.cr-life,.cr-process,.cr-roles{padding-block:66px}
+  .cr-value{grid-template-columns:minmax(0,1fr);gap:0;padding-block:26px}
+  .cr-value-n{padding-top:0;margin-bottom:10px}
+  .cr-value h3{font-size:24px}
+  .cr-value-rule{font-size:15px;margin-top:10px}
+  .cr-value-you{font-size:14.5px;padding-left:14px}
+
+  .cr-perks,.cr-steps{grid-template-columns:1fr;gap:12px}
+  .cr-perk,.cr-step{padding:22px}
+  .cr-perk-icon{margin-bottom:14px}
+  .cr-photo{border-radius:14px}
+  .cr-photo img{aspect-ratio:4/3}
+  .cr-photo figcaption{padding:22px 20px}
+
+  .cr-role{padding:24px;border-radius:14px}
+  .cr-role h3{font-size:25px}
+  .cr-role-card{font-size:15px}
+  .cr-open{padding:24px;border-radius:14px}
+  .cr-open .button{width:100%;justify-content:space-between}
+
+  .rl-hero{padding-top:22px;padding-bottom:40px}
+  .rl-hero h1{font-size:clamp(30px,8.4vw,46px);letter-spacing:-.055em;max-width:none}
+  .rl-chips li{min-height:36px;padding:8px 14px;font-size:13px}
+  .rl-body{padding-block:44px 60px}
+  .rl-block h2{font-size:25px;margin-bottom:16px}
+  .rl-block p{font-size:15.5px}
+  .rl-list li{padding-left:27px;font-size:15.5px}
+  .rl-apply{padding:24px 20px;border-radius:16px}
+  .rl-apply h2{font-size:28px}
+  .cr-field-grid{grid-template-columns:1fr}
+  .rl-submit{width:100%;justify-content:space-between}
+  .cr-cta{padding-block:60px}
+  .cr-cta-actions{gap:14px 22px}
+  .cr-cta-actions .button{width:100%;justify-content:space-between}
+}
+
+@media(max-width:540px){
+  .cr-facts>li{padding-inline:16px}
+  .cr-start .button{width:100%;justify-content:space-between}
+  .cr-file-name{font-size:12.5px}
+}
+
+@media(max-width:380px){
+  .cr-hero h1{font-size:clamp(26px,8.6vw,38px)}
+  .cr-facts strong{font-size:26px}
+  .cr-facts>li{padding-inline:13px}
+  .cr-facts>li>span{font-size:12px}
+  .cr-belief blockquote p{font-size:30px}
+  .cr-role h3{font-size:22px}
+  .rl-hero h1{font-size:28px}
+  .cr-file-face{gap:10px;padding:11px 12px}
+  .cr-file-cta{padding:6px 10px;font-size:12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .cr-perk,.cr-role,.cr-open .button,.cr-start .button,.rl-submit,.rl-card-cta{transition:none}
+  .cr-perk:hover,.cr-role:hover,.cr-role:hover .cr-role-go,.cr-role-go:hover{transform:none}
+}

@@ -916,6 +916,79 @@ resolve, and all six filters return their expected counts. Every "Our Work" and 
 projects" link across `index.html`, `services.html`, `branding.html`, `contact.html` and
 `faq.html` now points at `work.html`; all internal links resolve.
 
+## 9h. Careers + role pages — V0.28
+
+`dist/careers.html`, `dist/careers.css`, `dist/careers.js`, and one role page per entry in the
+generator's `ROLES` list (currently `role-digital-marketing-account-executive.html`).
+
+### What the live pages are
+
+`/careers` is a heading, one paragraph and one white card. No values, no team, no sense of the
+place, no hiring process. Its "Apply Now" goes to `/digital-marketing-and-account-executive`,
+which **renders its sections in the wrong order**: "What You'll Be Doing" and "What We're Looking
+For" appear *above* the job title and intro, so the page opens on a bullet list with no context.
+
+### Where every word came from
+
+| Block | Source |
+| --- | --- |
+| Hero heading, lead | `/careers` verbatim, plus "Come grow with the avocadots crew" from the live role page |
+| Core belief | `/avocadots-mission` — "Creativity Is Not Art Without Impact" |
+| Five values | `/avocadots-mission` "Our Values" — names and principle lines verbatim |
+| "What that means for you" | **Interpretation.** The values are written for clients; these lines translate each one for a candidate. |
+| What it's like here (8 cards) | The live role page's "What You'll Get", verbatim |
+| Photo caption | `/about-avocadots-design-studio` — the 2020 origin line and the offices line |
+| Role content | The live role page: intro, 13 responsibilities, 11 requirements, 8 benefits, all verbatim |
+| Form fields | The live Wix form's exact fields — first, last, phone, email, why, CV, cover letter |
+| **Hiring steps (4)** | **Invented placeholder — not on the live site. The studio must confirm or replace it.** |
+| `2020`, `9`, `150+`, `Hybrid` | Founded date and team count from `/about…` (9 people are listed); 150+ from the homepage hero; hybrid from the role page |
+
+**Do not add a role, a benefit or a requirement that isn't published.** Roles live in the
+generator's `ROLES` list; adding one there emits its card and its page together.
+
+### The stretched-link trap
+
+The role card first used the standard "stretched link" pattern — a `position:absolute;inset:0`
+span inside the title anchor, making the whole card clickable, with the CTA as a
+`<span class="button">`. Three things were wrong with it:
+
+- The overlay **swallowed pointer events over the card body**, so the summary text could not be
+  drag-selected and the card could not be right-clicked.
+- The CTA was not a control. The brief asked for a button that navigates; a `<span>` is not one.
+- Any harness or assistive tool targeting the CTA hit the overlay instead.
+
+It is now **two real links to the same page** — the title, and an `<a class="button">` CTA whose
+accessible name carries the role ("View role & apply — Digital Marketing & Account Executive"
+via an `.sr-only` span, so a screen-reader user hears which role a list of identical CTAs refers
+to). Verified: mouse, keyboard and the title link all navigate, and the summary is selectable.
+
+### The application form
+
+Client-side only, and it says so — the success panel uses the same wording as the contact page
+("Nothing has been sent. In the live website, this step would submit…"). It is **not** wired to
+an ATS or an inbox.
+
+- `novalidate`, so the messages are ours and consistent, not the browser's.
+- One message per field, written for the field ("Please attach your CV.", not "Required").
+- On submit: every invalid field is marked, `aria-invalid` is set, the message is linked with
+  `aria-describedby`, and **the first invalid field is scrolled into view and focused**.
+- File inputs are transparent and sit *over* a styled face, so the real control keeps focus and
+  keyboard activation. On change the face shows the filename and the CTA flips to "Replace".
+- An error clears as soon as the person edits that field.
+- Errors scroll the **field shell**, not the hidden file input, or the message lands off-screen.
+
+### Layout
+
+Two columns on the role page: content left, a sticky `At a glance` card right (role, contract,
+model, location, team, languages, an Apply button, and the "not sure you tick every box" line
+lifted from the live copy). Below 950px the sidebar **un-sticks and moves above the content**
+(`position:static;order:-1`) so it acts as a summary rather than fighting the form for space.
+
+Measured 1920 → 320px on both pages: no overflow, no horizontal scroll, no console errors. Form
+verified for empty submit (7 messages, focus on the first), invalid email, file selection, and a
+valid submit. Every "Careers" link across the site now points at `careers.html`;
+`hero-concepts.html` still points at the live URL because it publishes as a separate artifact.
+
 ## 10. Preserve the homepage's content and rhythm
 
 The user requested an elevated homepage while keeping its existing sections. Preserve this order and its real assets:
