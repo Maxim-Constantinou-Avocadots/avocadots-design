@@ -69,14 +69,40 @@
 /* ===== availability ====================================================== */
 .ca-available{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7.4vw,112px)}
 .ca-available .eyebrow{color:var(--muted);margin-bottom:18px}
-.ca-available-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr);gap:clamp(30px,4vw,80px);align-items:start}
+.ca-available-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.18fr);gap:clamp(30px,4vw,76px);align-items:start}
 .ca-available h2{font-size:clamp(30px,3.8vw,56px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
 .ca-available h2>span{color:var(--brand-lime)}
-.ca-available-copy p{font-size:clamp(16px,1.25vw,18px);line-height:1.75;color:var(--muted);max-width:62ch}
-.ca-available-copy p+p{margin-top:18px}
-.ca-available-copy strong{color:var(--forest);font-weight:600}
-.ca-available-copy a{color:var(--forest);font-weight:600;text-decoration:underline;text-decoration-color:#86bd4285;text-underline-offset:4px;text-decoration-thickness:2px}
-.ca-available-copy a:hover{color:var(--brand-lime);text-decoration-color:currentColor}
+
+/* the announcement is a status change, so it is shown as one. Every row below
+   is this section's own copy: self-service access, no waitlist, the €15
+   minimum. Do not add a row the page does not already state. */
+.ca-status{margin-top:clamp(28px,3.2vw,44px);padding:clamp(22px,2.2vw,28px);border-radius:18px;background:var(--forest);color:var(--paper);
+  background-image:linear-gradient(#ffffff0f 1px,transparent 1px),linear-gradient(90deg,#ffffff0f 1px,transparent 1px);
+  background-size:56px 56px;box-shadow:0 18px 44px #04100b1f}
+.ca-status-head{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0;font-size:14.5px;font-weight:600;letter-spacing:-.02em}
+.ca-status-head em{font-style:normal;padding:3px 10px;border-radius:30px;background:#ffffff14;font-size:12px;font-weight:600;color:#c3d3c8}
+.ca-status-dot{width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px #a5d65b24}
+.ca-status dl{margin:clamp(16px,1.8vw,22px) 0 0;display:grid;gap:0}
+.ca-status dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-block:13px;border-top:1px solid #ffffff1f}
+.ca-status dt{font-size:14px;color:#9cb3a6}
+.ca-status dd{margin:0;font-size:15px;font-weight:600;letter-spacing:-.02em;color:#eef0ec;text-align:right}
+.ca-status dd.is-live{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:30px;background:#a5d65b1f;color:var(--lime);font-size:13px;text-transform:uppercase;letter-spacing:.07em}
+
+/* the news itself, at reading size rather than caption grey */
+.ca-available-lead{font-size:clamp(17px,1.5vw,21px);line-height:1.65;letter-spacing:-.015em;color:var(--forest);max-width:52ch}
+.ca-available-lead strong{font-weight:600;box-shadow:inset 0 -.42em 0 #86bd4247}
+
+/* the two posts were inline underlines buried in body copy; on a lead-gen
+   page a link worth following is a destination, so each is a card */
+.ca-reads-label{margin-top:clamp(30px,3.4vw,46px);padding-top:clamp(24px,2.6vw,32px);border-top:1px solid var(--line);font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--muted)}
+.ca-reads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.ca-read{position:relative;display:flex;flex-direction:column;padding:clamp(20px,2vw,26px);padding-right:clamp(40px,4vw,52px);border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--forest);transition:border-color .25s,box-shadow .25s,transform .25s}
+.ca-read:hover{border-color:#1c383052;box-shadow:0 14px 34px #04100b12;transform:translateY(-3px)}
+.ca-read-tag{align-self:flex-start;display:inline-flex;align-items:center;min-height:24px;padding:3px 10px;border-radius:30px;background:#86bd421f;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#3f6b18}
+.ca-read-title{margin-top:13px;font-size:clamp(16px,1.35vw,19px);font-weight:600;letter-spacing:-.035em;line-height:1.25}
+.ca-read-sub{margin-top:10px;font-size:14px;line-height:1.6;color:var(--muted)}
+.ca-read-go{position:absolute;top:clamp(20px,2vw,26px);right:clamp(18px,1.8vw,24px);font-size:19px;line-height:1;color:var(--brand-lime);transition:transform .25s}
+.ca-read:hover .ca-read-go{transform:translate(2px,-2px)}
 
 /* ===== how it works ====================================================== */
 .ca-how{background:var(--forest);color:var(--paper);padding-block:clamp(66px,7.4vw,112px)}
@@ -194,6 +220,7 @@
   .ca-facts>li:nth-child(odd){padding-left:0;border-left:0}
   .ca-facts>li:nth-child(n+3){margin-top:clamp(22px,2.6vw,30px);border-top:1px solid #ffffff1f}
   .ca-head,.ca-available-grid,.ca-close-grid,.ca-faq-grid{grid-template-columns:minmax(0,1fr)}
+  .ca-available-lead{max-width:none}
   .ca-head{flex-direction:column;align-items:flex-start}
   .ca-available-grid,.ca-close-grid,.ca-faq-grid{gap:30px}
   .ca-how-grid{grid-template-columns:1fr}
@@ -218,7 +245,11 @@
 
   .ca-available,.ca-how,.ca-why,.ca-close,.ca-faq{padding-block:58px}
   .ca-available h2,.ca-close h2,.ca-head h2{font-size:clamp(26px,7vw,36px)}
-  .ca-available-copy p{font-size:15.5px}
+  .ca-available-lead{font-size:16.5px}
+  .ca-status{padding:20px 18px;border-radius:14px}
+  .ca-status dl>div{padding-block:11px}
+  .ca-reads{grid-template-columns:1fr;gap:12px}
+  .ca-read{padding:18px;padding-right:44px;border-radius:14px}
   .ca-how-card{padding:22px}
   .ca-how-icon{margin-bottom:16px}
   .ca-reason{padding:22px 20px;border-radius:14px}
@@ -259,6 +290,6 @@
 }
 
 @media(prefers-reduced-motion:reduce){
-  .ca-submit,.ca-how-card,.ca-reason,.ca-faq-icon,.ca-faq-intro .button{transition:none}
-  .ca-submit:hover,.ca-reason:hover,.ca-faq-intro .button:hover{transform:none}
+  .ca-submit,.ca-how-card,.ca-reason,.ca-read,.ca-read-go,.ca-faq-icon,.ca-faq-intro .button{transition:none}
+  .ca-submit:hover,.ca-reason:hover,.ca-read:hover,.ca-read:hover .ca-read-go,.ca-faq-intro .button:hover{transform:none}
 }

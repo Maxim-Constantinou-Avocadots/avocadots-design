@@ -1161,7 +1161,7 @@ heading-to-first-line gap is 14px, not 52px, and the page is ~620px shorter.
 Measured 1920 → 320px (plus 1024, the engine's documented floor): no overflow, no horizontal
 scroll, no console errors. Every "Our Mission" link across the site now points at `mission.html`.
 
-## 9l. ChatGPT Ads Cyprus landing page — V0.32, "why now" V0.33
+## 9l. ChatGPT Ads Cyprus landing page — V0.32, "why now" V0.33, "the news" V0.34
 
 `dist/chatgpt-ads.html`, `dist/chatgpt-ads.css`, `dist/chatgpt-ads.js`. Built from a supplied
 copy document (`ChatGPT-Ads-Cyprus-Landing-Page.docx`) for the existing `/chatgpt-ads` URL.
@@ -1219,6 +1219,26 @@ Both internal links in the doc were verified to resolve before shipping:
 `/post/chatgpt-ads-everything-you-need-to-know-2026` (the explainer — note it is **not** in the
 20 posts `blog.html` lists). The hero image is the studio's own illustration from the first post,
 with the doc's specified alt text, `chatgpt ads cyprus`.
+
+### "Officially available in Cyprus" — rebuilt V0.34
+
+The announcement shipped as a heading beside three grey body paragraphs, with both blog links
+buried inside them as inline underlines. On a lead-gen page that wastes the one moment the page
+has actual news, and hides its two outbound destinations.
+
+Three changes:
+
+- **A status panel** under the heading, forest with the grid texture, carrying a lime status dot
+  and three rows: *Self-service access — Live*, *Waitlist — Not required*, *Minimum daily budget
+  — €15*. The announcement is a status change, so it is shown as one. **Every row is this
+  section's own copy.** Do not add a row the page does not already state.
+- **The news is at reading size**, not caption grey: `clamp(17px,1.5vw,21px)` in forest, with a
+  lime highlighter behind "no waitlist required."
+- **The two posts are destination cards**, not inline underlines — tag, title, what is in it,
+  and a lime arrow that shifts on hover. Their summaries are the doc's own descriptions of each
+  post, moved out of the sentence that linked them.
+
+The section still contains every sentence from the doc; only the arrangement changed.
 
 ### "Why acting now matters" — rebuilt V0.33
 
