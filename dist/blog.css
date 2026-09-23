@@ -1,0 +1,149 @@
+/* Blog index — V0.29.
+   The live /blog is a bare Wix grid: no lead post, no search, no result count,
+   and its four category tabs (Web Design / Digital Marketing / Branding /
+   Business) include Branding, which no published post falls under.
+   Here: search, chips that all return posts, a live count, and the newest post
+   running wide. Shares styles.css for the shell — header, footer, tokens. */
+
+/* author `display` on .bg-grid / .bg-card outranks the UA [hidden] rule. */
+[hidden]{display:none!important}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ===== hero ============================================================== */
+.bg-hero{padding-top:clamp(36px,4.6vw,64px);padding-bottom:clamp(46px,5.2vw,80px)}
+.bg-hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.09em;color:#cfddd2;margin-bottom:clamp(22px,2.6vw,36px)}
+.bg-hero h1{font-size:clamp(38px,6.2vw,100px);font-weight:600;line-height:.98;letter-spacing:-.07em;color:#eef0ec}
+.bg-hero h1>span{color:var(--lime)}
+.bg-lead{font-size:clamp(16px,1.3vw,19px);line-height:1.65;color:#cfddd2;max-width:640px;margin-top:clamp(22px,2.4vw,32px)}
+
+/* the search is the main affordance on a 20-post index, as on the FAQ page */
+.bg-search{position:relative;display:flex;align-items:center;max-width:620px;margin-top:clamp(26px,3vw,40px)}
+.bg-search-icon{position:absolute;left:20px;width:21px;height:21px;color:var(--muted);pointer-events:none}
+.bg-search input{width:100%;min-height:62px;padding:18px 54px 18px 53px;border:1px solid transparent;border-radius:12px;background:#fff;color:var(--forest);font:500 16px/1.4 var(--font);box-shadow:0 10px 30px #04100b26}
+.bg-search input::placeholder{color:#8a9b90;font-weight:400}
+.bg-search input:focus{outline:none;border-color:var(--yellow);box-shadow:0 0 0 4px #e9c33440,0 10px 30px #04100b26}
+.bg-search input::-webkit-search-cancel-button{display:none}
+.bg-clear{position:absolute;right:14px;width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:50%;background:#1c38300f;color:var(--forest);font-size:20px;line-height:1}
+.bg-clear:hover{background:#1c38301f}
+
+/* ===== filter bar ======================================================== */
+.bg-body-section{background:var(--paper);color:var(--forest);padding-block:clamp(34px,3.8vw,54px) clamp(64px,7vw,110px)}
+.bg-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 24px;margin-bottom:clamp(30px,3.4vw,46px)}
+.bg-filters{display:flex;flex-wrap:wrap;gap:10px}
+.bg-chip{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:10px 16px;border:1px solid var(--line);border-radius:40px;background:#fff;color:var(--forest);font-size:14px;font-weight:600;letter-spacing:-.01em;transition:background .2s,border-color .2s,color .2s}
+.bg-chip span{font-size:12px;font-weight:600;color:var(--muted);transition:color .2s}
+.bg-chip:hover{border-color:#1c383052}
+.bg-chip.is-on{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+.bg-chip.is-on span{color:var(--lime)}
+.bg-count{font-size:13px;color:var(--muted);margin:0}
+
+/* ===== grid ============================================================== */
+.bg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(34px,3.6vw,54px) clamp(22px,2.4vw,36px)}
+
+.bg-card{display:flex;flex-direction:column;min-width:0}
+.bg-shot{display:block;position:relative;overflow:hidden;border-radius:14px;background:#dfe3dd;aspect-ratio:4/3}
+.bg-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.bg-card:hover .bg-shot img{transform:scale(1.04)}
+
+.bg-body{display:flex;flex-direction:column;flex:1;padding-top:18px}
+.bg-cat{align-self:flex-start;display:inline-flex;align-items:center;min-height:26px;padding:4px 11px;border-radius:30px;background:#1c38300d;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.bg-card h3{margin-top:13px;font-size:clamp(18px,1.45vw,21px);font-weight:600;letter-spacing:-.035em;line-height:1.27}
+.bg-card h3 a{color:inherit}
+.bg-card h3 a:hover{color:var(--brand-lime)}
+.bg-excerpt{margin-top:11px;font-size:14.5px;line-height:1.65;color:var(--muted);
+  /* three lines keeps the cards in a row on a common baseline */
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+.bg-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:auto;padding-top:16px;font-size:12.5px;color:var(--muted)}
+.bg-meta>*+*::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:#1c383052;margin-right:10px;vertical-align:middle}
+.bg-author{font-weight:600;color:var(--forest)}
+.bg-read{white-space:nowrap}
+
+/* the newest post runs wide, but only while the full list is showing —
+   the script drops .is-lead as soon as a filter or a search narrows it. */
+.bg-card.is-lead{grid-column:1/-1;flex-direction:row;align-items:center;gap:clamp(26px,3vw,52px);padding-bottom:clamp(30px,3.2vw,46px);border-bottom:1px solid var(--line)}
+.bg-card.is-lead .bg-shot{flex:0 0 46%;aspect-ratio:4/3;border-radius:16px}
+.bg-card.is-lead .bg-body{padding-top:0;flex:1;min-width:0}
+.bg-card.is-lead h3{margin-top:15px;font-size:clamp(26px,2.9vw,44px);letter-spacing:-.05em;line-height:1.08}
+.bg-card.is-lead .bg-excerpt{margin-top:15px;font-size:16.5px;line-height:1.7;-webkit-line-clamp:4;max-width:58ch}
+.bg-card.is-lead .bg-meta{margin-top:22px;padding-top:0;font-size:13.5px}
+.bg-card.is-lead .bg-cat{background:var(--yellow);color:var(--forest)}
+
+/* ===== empty state ======================================================= */
+.bg-empty{padding:clamp(44px,5vw,72px) clamp(24px,3vw,48px);border:1px dashed #1c383040;border-radius:16px;text-align:center}
+.bg-empty-title{font-size:clamp(22px,2.2vw,30px);font-weight:600;letter-spacing:-.04em}
+.bg-empty>p+p{margin-top:12px;font-size:16px;line-height:1.7;color:var(--muted);max-width:460px;margin-inline:auto}
+.bg-empty .button{margin-top:26px;background:var(--yellow);color:var(--forest)}
+
+/* search hits, highlighted on the title */
+.bg-card mark{background:#e9c3345c;color:inherit;border-radius:3px;padding:0 2px}
+
+/* ===== closing CTA ======================================================= */
+.bg-cta{background:var(--forest);color:var(--paper);padding-block:clamp(66px,7vw,110px)}
+.bg-cta-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(30px,4vw,70px);flex-wrap:wrap}
+.bg-cta .eyebrow{color:#9cb3a6;margin-bottom:18px;max-width:46ch}
+.bg-cta h2{font-size:clamp(34px,4.4vw,62px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.bg-cta-inner>div:first-child>p:last-child{margin-top:18px;font-size:16px;line-height:1.7;color:#cfddd2;max-width:440px}
+.bg-cta-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.bg-cta-actions .button{background:var(--yellow);color:var(--forest)}
+.bg-cta-actions .button:hover{transform:translateY(-2px)}
+.bg-cta-link{display:inline-flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:#e5ece5;padding-block:8px;border-bottom:1px solid #ffffff3d}
+.bg-cta-link:hover{color:var(--yellow);border-bottom-color:#e9c33459}
+
+/* ===== breakpoints ======================================================= */
+@media(max-width:1180px){
+  .bg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bg-card.is-lead .bg-shot{flex-basis:44%}
+}
+
+@media(max-width:950px){
+  .bg-bar{align-items:flex-start;flex-direction:column;gap:14px}
+  .bg-cta-inner{flex-direction:column;align-items:flex-start}
+  /* the lead card stacks rather than squeezing the copy into a narrow column */
+  .bg-card.is-lead{flex-direction:column;align-items:stretch;gap:0}
+  .bg-card.is-lead .bg-shot{flex-basis:auto;aspect-ratio:4/3}
+  .bg-card.is-lead .bg-body{padding-top:18px}
+  .bg-card.is-lead h3{font-size:clamp(24px,3.4vw,32px)}
+  .bg-card.is-lead .bg-excerpt{font-size:15.5px;-webkit-line-clamp:3}
+}
+
+@media(max-width:720px){
+  .bg-hero{padding-top:30px;padding-bottom:44px}
+  .bg-hero h1{font-size:clamp(34px,8.6vw,56px);letter-spacing:-.062em;line-height:1.04}
+  .bg-lead{font-size:16px;margin-top:20px}
+  .bg-search{margin-top:24px}
+  .bg-search input{min-height:56px;font-size:15px;padding:16px 50px 16px 48px}
+  .bg-search-icon{left:17px;width:19px;height:19px}
+  .bg-body-section{padding-block:30px 66px}
+  .bg-chip{min-height:38px;padding:9px 14px;font-size:13px}
+  .bg-grid{grid-template-columns:1fr;gap:34px}
+  .bg-shot{border-radius:12px}
+  .bg-card h3{font-size:20px}
+  .bg-excerpt{font-size:14.5px;-webkit-line-clamp:3}
+  .bg-card.is-lead{padding-bottom:30px}
+  .bg-card.is-lead .bg-shot{aspect-ratio:4/3;border-radius:12px}
+  .bg-card.is-lead h3{font-size:24px}
+  .bg-card.is-lead .bg-excerpt{font-size:15px}
+  .bg-card.is-lead .bg-meta{margin-top:16px}
+  .bg-cta{padding-block:62px}
+  .bg-cta-actions{gap:14px 22px}
+  .bg-cta-actions .button{width:100%;justify-content:space-between}
+}
+
+@media(max-width:540px){
+  .bg-meta{font-size:12px;gap:5px 8px}
+  .bg-meta>*+*::before{margin-right:8px}
+}
+
+@media(max-width:380px){
+  .bg-hero h1{font-size:clamp(26px,8.6vw,38px)}
+  .bg-chip{font-size:12px;padding:8px 12px;gap:6px}
+  .bg-card h3{font-size:19px}
+  .bg-card.is-lead h3{font-size:22px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .bg-shot img,.bg-cta-actions .button{transition:none}
+  .bg-card:hover .bg-shot img{transform:none}
+}

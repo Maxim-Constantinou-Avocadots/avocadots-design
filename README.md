@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.28**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.29**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
@@ -20,6 +20,7 @@ dist/
   branding.html   branding service page (shares styles.css, adds branding.css)
   faq.html        FAQ with search + category filter (faq.css, faq.js)
   work.html       Our Work — 13 projects, sector filter (work.css, work.js)
+  blog.html       Blog index — 20 posts, search + category filter (blog.css, blog.js)
   careers.html    Careers — values, life here, hiring steps, open roles
   role-*.html     one page per open role: full description + application form
   careers.css     careers + role page composition (shared by both)
@@ -56,3 +57,5 @@ their original 1:1 ratio — do not redraw, recolour or flatten them. See `desig
   `projects-*.webp` files. See `design.md` §9g.
 - Role pages are generated from a `ROLES` list; adding an entry emits its card and its page.
   The application form is client-side only and says so on submit. See `design.md` §9h.
+- Blog post categories are an editorial map in the generator, not scraped — the live site does
+  not publish them per post. See `design.md` §9i.

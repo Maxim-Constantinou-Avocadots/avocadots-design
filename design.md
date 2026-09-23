@@ -989,6 +989,69 @@ verified for empty submit (7 messages, focus on the first), invalid email, file 
 valid submit. Every "Careers" link across the site now points at `careers.html`;
 `hero-concepts.html` still points at the live URL because it publishes as a separate artifact.
 
+## 9i. Blog index — V0.29
+
+`dist/blog.html`, `dist/blog.css`, `dist/blog.js`. 20 posts, all real, all linking out to the
+live post on avocadots.com — the same pattern `work.html` uses for project pages.
+
+### Where each field came from
+
+| Field | Source |
+| --- | --- |
+| Title | the post's `<h1>` |
+| Excerpt | the post's `og:description` |
+| Author, publish date, hero image | the post's `BlogPosting` JSON-LD |
+| Read time | the post page's own "N min read" |
+| **Category** | **editorial classification — see below** |
+
+Authors that appear: Alexandros Pelekanos, Andreas Hadjigeorgiou, avocadots Design Studio.
+
+### The category map is a judgement call, not scraped data
+
+The live blog's tabs are Web Design / Digital Marketing / Branding / Business, but **no page
+exposes which category a post belongs to** — every post page renders all four links as site-wide
+navigation, and `/blog/categories/<slug>` returns the same full list for each slug. So the
+`CATEGORY` dict in the generator is a classification by subject, and the studio should correct
+it. It is a single dict; changing a value re-emits the chip counts automatically.
+
+Current split: Digital Marketing 12, Web Design 5, Business 3.
+
+**Branding is not rendered as a chip** — none of the 20 published posts is about brand identity.
+Holding to the rule from §9g, a chip that returns nothing does not ship. If a post should sit
+under Branding, move it in the dict and the chip appears.
+
+### The lead card
+
+The newest post spans the full grid width with its image beside the copy. `blog.js` adds
+`.is-lead` to the first card **only while the full list is showing**, and removes it the moment a
+chip or the search narrows the list — a feature treatment makes no sense on a filtered result.
+Same mechanism as `work.html`'s `.is-wide`, different trigger.
+
+### Image ratios
+
+Every downloaded image is 860×645 (4:3), and most are screenshots or graphics with text in them.
+The lead card first used a 16:10 crop and cut the top and bottom off the content. **Any ratio
+other than 4:3 crops these sources**, so the lead card, the grid cards and the stacked mobile
+lead all use `aspect-ratio:4/3`. Verified by comparing the rendered box ratio against
+`naturalWidth/naturalHeight`.
+
+Assets are `dist/assets/blog-<slug>.webp`, 20 files, 1.3 MB, all valid WebP. Same Wix rule as
+§9g: `enc_webp` must be explicit in the transform or the bytes come back PNG or AVIF.
+
+### The stale-highlight trap
+
+`render()` first skipped hidden cards with `if (!on) return;` before rewriting the title, so a
+card filtered out mid-search kept its `<mark>` markup in the DOM. The rewrite now runs for
+**every** card and the highlight is conditional on `on && low`. Verified: after a no-match
+search, and after clearing a search while a category filter is active, zero `<mark>` elements
+remain anywhere in the grid.
+
+Measured 1920 → 320px: no overflow, no horizontal scroll, no console errors, all 20 images
+resolve. Filter, search, combined filter+search, empty state, clear button and Escape-to-clear
+all verified. Every "Blog"/"Blogs" link across the site now points at `blog.html`; the footer's
+**Topics** links still point at the live category archives, since this page has no per-category
+URL.
+
 ## 10. Preserve the homepage's content and rhythm
 
 The user requested an elevated homepage while keeping its existing sections. Preserve this order and its real assets:
