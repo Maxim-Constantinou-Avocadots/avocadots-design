@@ -1,0 +1,206 @@
+/* Mission page — V0.31.
+   The live /avocadots-mission is unbranded body copy: 13px paragraphs, plain
+   bullet lists, grey cards, a stray yellow highlighter, and a gradient panel
+   with four floating labels. Its fifth value has also lost its number — 1–4
+   are numbered, "Partnership Over Vendor Work" is not.
+   Same words, given the brand's rhythm. The Growth Engine section is the
+   canonical component from styles.css (design.md §7), reused as-is because
+   the mission statement is literally about that engine.
+   Shares styles.css for the shell — header, footer, buttons, tokens. */
+
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ===== hero ============================================================== */
+.ms-hero{padding-top:clamp(36px,4.6vw,64px);padding-bottom:clamp(46px,5.2vw,80px)}
+.ms-hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.09em;color:#cfddd2;margin-bottom:clamp(22px,2.6vw,36px)}
+.ms-hero h1{font-size:clamp(38px,6.2vw,100px);font-weight:600;line-height:.98;letter-spacing:-.07em;color:#eef0ec}
+.ms-hero h1>span{color:var(--lime)}
+.ms-lead{font-size:clamp(16px,1.35vw,20px);line-height:1.65;color:#cfddd2;max-width:680px;margin-top:clamp(22px,2.4vw,32px)}
+.ms-lead strong{color:#eef0ec;font-weight:600}
+
+.ms-start{display:flex;align-items:center;flex-wrap:wrap;gap:16px 30px;margin-top:clamp(28px,3.2vw,42px)}
+.ms-start .button{background:var(--yellow);color:var(--forest)}
+.ms-start .button:hover{transform:translateY(-2px)}
+.ms-start-link{display:inline-flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:#e5ece5;padding-block:6px;border-bottom:1px solid #ffffff3d}
+.ms-start-link:hover{color:var(--yellow);border-bottom-color:#e9c33459}
+
+/* the three "move from → to" pairs, as the hero's closing bar — same
+   hairline-divider geometry as the work / careers / about bars */
+.ms-moves{margin-top:clamp(40px,4.6vw,66px);border-top:1px solid #ffffff26;padding-top:clamp(24px,2.6vw,34px)}
+.ms-moves-label{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#9cb3a6;margin:0}
+.ms-moves ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:clamp(18px,2vw,26px) 0 0;padding:0;list-style:none}
+.ms-moves li{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:clamp(16px,1.6vw,22px) clamp(18px,1.8vw,24px);border:1px solid #ffffff21;border-radius:14px;background:#ffffff0a}
+.ms-from{font-size:clamp(14px,1.1vw,16px);color:#9cb3a6;text-decoration:line-through;text-decoration-color:#9cb3a670}
+.ms-to{font-size:clamp(15px,1.2vw,17px);font-weight:600;letter-spacing:-.02em;color:#eef0ec}
+.ms-moves svg{flex-shrink:0;width:19px;height:19px;color:var(--lime)}
+
+/* ===== statement band ==================================================== */
+.ms-statement{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7.6vw,118px);text-align:center}
+.ms-statement h2{font-size:clamp(34px,5.4vw,84px);font-weight:600;line-height:1.02;letter-spacing:-.07em}
+.ms-statement>div>p{margin:clamp(26px,3vw,40px) auto 0;max-width:640px;font-size:clamp(16px,1.3vw,18px);line-height:1.7;color:var(--muted)}
+
+/* ===== canonical engine, on this page ==================================== */
+/* §7 owns the geometry; this only sets the band's own spacing here */
+.ms-engine{padding-block:clamp(72px,8vw,124px)}
+
+/* ===== core belief ======================================================= */
+.ms-belief{background:var(--paper);color:var(--forest);padding-block:clamp(72px,8vw,124px)}
+.ms-belief .eyebrow{color:var(--muted);margin-bottom:20px}
+.ms-belief-head{max-width:820px}
+.ms-belief-head h2{font-size:clamp(34px,4.6vw,70px);font-weight:600;line-height:1.02;letter-spacing:-.065em}
+.ms-belief-head h2>span{color:var(--muted)}
+.ms-belief-lead{margin-top:20px;font-size:clamp(16px,1.3vw,19px);line-height:1.7;color:var(--muted);max-width:56ch}
+
+/* the three negations carry the argument, so they are the loudest thing here */
+.ms-negations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:clamp(34px,3.8vw,54px) 0 0;padding:0;list-style:none}
+.ms-negations li{padding:clamp(24px,2.4vw,34px);border-radius:16px;background:var(--forest);color:var(--paper);font-size:clamp(19px,1.9vw,27px);font-weight:600;letter-spacing:-.04em;line-height:1.22}
+.ms-negations li:nth-child(2){background:var(--brand-lime);color:var(--forest)}
+.ms-negations li:nth-child(3){background:var(--yellow);color:var(--forest)}
+
+.ms-both{margin-top:clamp(28px,3vw,42px);padding:clamp(24px,2.6vw,36px);border:1px solid var(--line);border-radius:18px;background:#fff}
+.ms-both-label{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0}
+.ms-both ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,40px);margin:clamp(18px,2vw,26px) 0 0;padding:0;list-style:none}
+.ms-both li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;align-items:start}
+.ms-both-n{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#1c38300d;font-size:16px;font-weight:700;color:var(--forest)}
+.ms-both h3{font-size:clamp(18px,1.6vw,23px);font-weight:600;letter-spacing:-.04em;line-height:1.2}
+.ms-both p{margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--muted)}
+
+.ms-belief-close{margin-top:clamp(28px,3vw,40px);font-size:clamp(17px,1.6vw,23px);line-height:1.55;letter-spacing:-.03em;color:var(--muted);max-width:44ch}
+.ms-belief-close strong{color:var(--forest);font-weight:600}
+
+/* ===== values ============================================================ */
+.ms-values{background:var(--forest);color:var(--paper);padding-block:clamp(72px,8vw,124px)}
+.ms-values .eyebrow{color:#9cb3a6;margin-bottom:20px}
+.ms-head{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(28px,4vw,70px);flex-wrap:wrap;margin-bottom:clamp(38px,4.4vw,64px)}
+.ms-head h2{font-size:clamp(34px,4.4vw,66px);font-weight:600;line-height:1;letter-spacing:-.06em}
+.ms-head h2>span{color:var(--lime)}
+.ms-head-aside{max-width:430px;font-size:16px;line-height:1.7;color:#cfddd2}
+
+.ms-value-list{display:grid;gap:0;list-style:none;padding:0;margin:0;border-top:1px solid #ffffff1f}
+.ms-value{display:grid;grid-template-columns:72px minmax(0,1fr);gap:clamp(20px,3vw,48px);padding-block:clamp(30px,3.2vw,46px);border-bottom:1px solid #ffffff1f}
+.ms-value-n{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--lime);padding-top:10px}
+.ms-value-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:0 clamp(20px,3vw,52px);align-items:start}
+.ms-value h3{grid-column:1;font-size:clamp(23px,2.4vw,36px);font-weight:600;letter-spacing:-.045em;line-height:1.15}
+.ms-value-body>p{grid-column:1;margin-top:12px;font-size:16px;line-height:1.7;color:#cfddd2;max-width:48ch}
+.ms-value-body>p+p{margin-top:6px}
+
+/* the three bullets sit in their own column so the value reads as a rule
+   with its evidence beside it, not as a paragraph with a list under it */
+.ms-value-points{grid-column:2;grid-row:1/span 4;margin:0;padding:0;list-style:none;display:grid;gap:10px;align-content:start}
+.ms-value-points li{position:relative;padding:12px 16px 12px 38px;border-radius:12px;background:#ffffff0d;font-size:15px;font-weight:600;letter-spacing:-.01em;color:#eef0ec}
+.ms-value-points li::before{content:"";position:absolute;left:16px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--lime)}
+
+.ms-value-rule{grid-column:1;margin-top:18px;padding-left:18px;border-left:2px solid #a5d65b5c;font-size:15.5px;line-height:1.6;font-weight:600;letter-spacing:-.015em;color:var(--lime)}
+
+/* ===== in practice (yellow) ============================================== */
+.ms-practice{background:var(--yellow);color:var(--forest);padding-block:clamp(66px,7.4vw,112px);
+  background-image:linear-gradient(#1c383014 1px,transparent 1px);background-size:100% 26px}
+.ms-practice .eyebrow{color:#1c3830a8;margin-bottom:18px}
+.ms-practice-head{max-width:640px}
+.ms-practice-head h2{font-size:clamp(32px,4.4vw,64px);font-weight:600;line-height:1.04;letter-spacing:-.06em}
+.ms-practice-head>p{margin-top:18px;font-size:clamp(16px,1.25vw,18px);line-height:1.7;color:#1c3830c4}
+.ms-practice-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:clamp(30px,3.4vw,46px) 0 0;padding:0;list-style:none}
+.ms-practice-list li{display:flex;align-items:center;gap:16px;padding:clamp(20px,2vw,26px);border-radius:14px;background:#fff;font-size:clamp(16px,1.35vw,19px);font-weight:600;letter-spacing:-.03em;line-height:1.35}
+.ms-practice-list span{flex-shrink:0;font-size:12px;font-weight:700;letter-spacing:.08em;color:#1c383099}
+.ms-practice-close{margin-top:clamp(26px,2.8vw,38px);font-size:clamp(20px,2.4vw,34px);font-weight:600;letter-spacing:-.045em;line-height:1.2}
+
+/* ===== the standard ====================================================== */
+.ms-standard{background:var(--paper);color:var(--forest);padding-block:clamp(72px,8vw,124px)}
+.ms-standard .eyebrow{color:var(--muted);margin-bottom:20px}
+.ms-standard h2{font-size:clamp(32px,4.4vw,64px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.ms-standard h2>span{color:var(--muted)}
+.ms-standard-lead{margin-top:20px;font-size:clamp(16px,1.3vw,18px);line-height:1.7;color:var(--muted);max-width:64ch}
+.ms-standard-list{display:grid;gap:0;margin:clamp(34px,3.8vw,52px) 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.ms-standard-list li{padding-block:clamp(18px,2vw,28px);border-bottom:1px solid var(--line);font-size:clamp(26px,3.6vw,54px);font-weight:600;letter-spacing:-.06em;line-height:1.08}
+.ms-standard-list li:nth-child(2){color:var(--brand-lime)}
+.ms-standard-list li:nth-child(3){color:var(--muted)}
+.ms-standard-close{margin-top:clamp(30px,3.2vw,44px);font-size:clamp(19px,2vw,28px);font-weight:600;letter-spacing:-.04em;line-height:1.3;color:var(--muted)}
+.ms-standard-close>span{color:var(--forest)}
+
+/* ===== closing CTA ======================================================= */
+.ms-cta{background:var(--forest);color:var(--paper);padding-block:clamp(66px,7vw,110px)}
+.ms-cta-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(30px,4vw,70px);flex-wrap:wrap}
+.ms-cta .eyebrow{color:#9cb3a6;margin-bottom:18px}
+.ms-cta h2{font-size:clamp(34px,4.4vw,62px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.ms-cta-inner>div:first-child>p:last-child{margin-top:18px;font-size:16px;line-height:1.7;color:#cfddd2;max-width:440px}
+.ms-cta-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.ms-cta-actions .button{background:var(--yellow);color:var(--forest)}
+.ms-cta-actions .button:hover{transform:translateY(-2px)}
+.ms-cta-link{display:inline-flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:#e5ece5;padding-block:8px;border-bottom:1px solid #ffffff3d}
+.ms-cta-link:hover{color:var(--yellow);border-bottom-color:#e9c33459}
+
+/* ===== breakpoints ======================================================= */
+@media(max-width:1180px){
+  .ms-value-body{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:0 28px}
+  .ms-negations li{font-size:clamp(18px,2.2vw,23px)}
+}
+
+@media(max-width:950px){
+  .ms-moves ul{grid-template-columns:1fr}
+  .ms-head,.ms-cta-inner{flex-direction:column;align-items:flex-start}
+  .ms-negations{grid-template-columns:1fr}
+  .ms-both ul{grid-template-columns:1fr;gap:20px}
+  /* the bullets drop under the rule rather than into a squeezed column */
+  .ms-value-body{grid-template-columns:minmax(0,1fr);gap:0}
+  .ms-value h3,.ms-value-body>p,.ms-value-rule,.ms-value-points{grid-column:1}
+  .ms-value-points{grid-row:auto;margin-top:20px}
+  .ms-practice-list{grid-template-columns:1fr}
+}
+
+@media(max-width:720px){
+  .ms-hero{padding-top:30px;padding-bottom:44px}
+  .ms-hero h1{font-size:clamp(34px,8.6vw,56px);letter-spacing:-.062em;line-height:1.04}
+  .ms-lead{font-size:16px;margin-top:20px}
+  .ms-start{margin-top:26px;gap:14px 22px}
+  .ms-start .button{width:100%;justify-content:space-between}
+  .ms-moves{margin-top:32px;padding-top:24px}
+  .ms-moves li{padding:15px 16px;gap:11px}
+  .ms-from{font-size:13.5px}
+  .ms-to{font-size:15px}
+
+  .ms-statement{padding-block:60px;text-align:left}
+  .ms-statement h2{font-size:clamp(30px,8.4vw,44px);letter-spacing:-.06em}
+  .ms-statement>div>p{margin-inline:0;font-size:15.5px}
+
+  .ms-engine{padding-block:66px}
+  .ms-belief,.ms-values,.ms-standard{padding-block:66px}
+  .ms-belief-head h2{font-size:clamp(30px,8vw,42px)}
+  .ms-negations li{padding:22px;font-size:20px;border-radius:14px}
+  .ms-both{padding:22px 20px;border-radius:14px}
+  .ms-both li{grid-template-columns:38px minmax(0,1fr);gap:13px}
+  .ms-both-n{width:38px;height:38px;font-size:15px}
+  .ms-belief-close{font-size:17px}
+
+  .ms-value{grid-template-columns:minmax(0,1fr);gap:0;padding-block:26px}
+  .ms-value-n{padding-top:0;margin-bottom:10px}
+  .ms-value h3{font-size:24px}
+  .ms-value-body>p{font-size:15px;margin-top:10px}
+  .ms-value-points li{padding:11px 14px 11px 34px;font-size:14px}
+  .ms-value-points li::before{left:14px}
+  .ms-value-rule{font-size:14.5px;padding-left:14px}
+
+  .ms-practice{padding-block:60px}
+  .ms-practice-list li{padding:18px;font-size:16px;gap:13px}
+  .ms-practice-close{font-size:20px}
+
+  .ms-standard-list li{font-size:clamp(24px,7vw,34px);padding-block:16px}
+  .ms-standard-close{font-size:19px}
+
+  .ms-cta{padding-block:62px}
+  .ms-cta-actions{gap:14px 22px}
+  .ms-cta-actions .button{width:100%;justify-content:space-between}
+}
+
+@media(max-width:380px){
+  .ms-hero h1{font-size:clamp(26px,8.6vw,38px)}
+  .ms-statement h2{font-size:28px}
+  .ms-negations li{font-size:18px}
+  .ms-standard-list li{font-size:23px}
+  .ms-value h3{font-size:22px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ms-start .button,.ms-cta-actions .button{transition:none;}
+  .ms-start .button:hover,.ms-cta-actions .button:hover{transform:none}
+}

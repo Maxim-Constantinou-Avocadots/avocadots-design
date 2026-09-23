@@ -1107,6 +1107,60 @@ Measured 1920 → 320px: no overflow, no horizontal scroll, no console errors, a
 FAQ accordion opens and closes. Every "About Us" link across the site now points at `about.html`;
 `hero-concepts.html` still points at the live URL because it publishes as a separate artifact.
 
+## 9k. Mission page — V0.31
+
+`dist/mission.html`, `dist/mission.css`, `dist/mission.js`. Every word is the studio's own
+`/avocadots-mission` copy. **Nothing on this page was invented** — the sections below are that
+page's sections, given the brand's rhythm instead of its grey-card treatment.
+
+### What the live page is
+
+13px paragraphs, plain `<ul>` bullets, grey cards, a stray yellow highlighter mid-paragraph, and
+a gradient panel with four floating labels ("Mission", "Values", "Core Belief", "Standards") that
+explain nothing. It reads as a Word document pasted into Wix. **Its fifth value has also lost its
+number** — 1–4 are numbered, "Partnership Over Vendor Work" is not. Numbered here.
+
+### How the copy maps to sections
+
+| Section | Source |
+| --- | --- |
+| Hero | the mission statement, plus the "We help businesses move from" list as the closing bar |
+| Statement band | "Growth shouldn't feel chaotic. It should feel engineered." + the Nicosia line |
+| **Growth Engine** | the canonical §7 component, reused verbatim |
+| Core belief | "Creativity Is Not Art Without Impact", the three negations, the two-at-once pair |
+| Values | all five, with their real sub-bullets and closing rules |
+| In practice | "Because of these values, we:" + its four items + "This is how brands become benchmarks." |
+| The standard | the Nicosia/geography line and the four standard statements |
+| CTA | "Ready to build your growth engine?" |
+
+The three headings that are not verbatim are section labels the live page has no equivalent for
+("What the values actually change", "Same standard, whatever the postcode", and the CTA's
+sub-line). They restate the studio's own copy directly beneath them; **if a future edit changes
+those lines, keep them restating the source rather than adding a new claim.**
+
+### Reusing the canonical engine
+
+The mission statement is literally "to turn branding, web, and marketing into one unified growth
+engine", so the page carries the §7 component from the homepage, unchanged apart from dropping
+its "04 /" section number. **Do not restyle it here** — `styles.css` owns its geometry, and §7's
+contract (viewBox `1200 600`, `aspect-ratio:2/1`, the node percentages, the 1024px stacked floor)
+still applies. `mission.css` sets only the band's own vertical padding. The render check asserts
+no node escapes `.engine-diagram` at any width, 1920 → 320.
+
+**This means the same section appears on two pages.** That is intended: it is the canonical
+component, and the mission is what it illustrates.
+
+### The row-gap trap
+
+`.ms-value-body` is a two-column grid whose left column holds four stacked items (heading, two
+lead lines, closing rule). `gap:clamp(20px,3vw,52px)` set **both** axes, so the left column's
+lines sat up to 52px apart and the value read as four loose fragments. Now `gap:0 clamp(...)` —
+column gap only, with each element's own `margin-top` doing the vertical spacing. Verified: the
+heading-to-first-line gap is 14px, not 52px, and the page is ~620px shorter.
+
+Measured 1920 → 320px (plus 1024, the engine's documented floor): no overflow, no horizontal
+scroll, no console errors. Every "Our Mission" link across the site now points at `mission.html`.
+
 ## 10. Preserve the homepage's content and rhythm
 
 The user requested an elevated homepage while keeping its existing sections. Preserve this order and its real assets:

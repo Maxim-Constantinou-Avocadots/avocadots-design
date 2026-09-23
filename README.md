@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.30**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.31**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
@@ -21,6 +21,7 @@ dist/
   faq.html        FAQ with search + category filter (faq.css, faq.js)
   work.html       Our Work — 13 projects, sector filter (work.css, work.js)
   about.html      About — studio story, team, timeline, FAQ (about.css, about.js)
+  mission.html    Mission — belief, five values, the growth engine (mission.css, mission.js)
   blog.html       Blog index — 20 posts, search + category filter (blog.css, blog.js)
   careers.html    Careers — values, life here, hiring steps, open roles
   role-*.html     one page per open role: full description + application form
@@ -62,3 +63,5 @@ their original 1:1 ratio — do not redraw, recolour or flatten them. See `desig
   not publish them per post. See `design.md` §9i.
 - The About page keeps the redesign section for section; only its hero was replaced, so the page
   opens on the same forest hero as the rest. See `design.md` §9j.
+- The Mission page reuses the canonical Growth Engine component from `styles.css` — do not
+  restyle it there; `design.md` §7 owns its geometry. See §9k.
