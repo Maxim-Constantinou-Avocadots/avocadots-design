@@ -1,0 +1,226 @@
+/* ChatGPT Ads Cyprus landing page — V0.32.
+   Built from the supplied copy doc. It is a lead-gen page, so the form is the
+   layout: visible in the hero without scrolling, repeated at the close, two
+   fields in both, and a sticky bar on small screens between the two.
+   The live /chatgpt-ads is still the "coming soon" version, and numbers its
+   three reasons 1, 2, 2. Shares styles.css for the shell. */
+
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ===== hero ============================================================== */
+.ca-hero{padding-top:clamp(30px,3.6vw,52px);padding-bottom:clamp(44px,5vw,76px)}
+.ca-hero .eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.09em;color:#cfddd2;margin-bottom:clamp(20px,2.4vw,32px)}
+.ca-hero h1{font-size:clamp(32px,4.4vw,70px);font-weight:600;line-height:1.02;letter-spacing:-.06em;color:#eef0ec;max-width:17ch}
+.ca-hero h1>span{color:var(--lime)}
+.ca-tagline{margin-top:clamp(18px,2vw,26px);font-size:clamp(16px,1.35vw,20px);font-weight:600;letter-spacing:-.025em;line-height:1.45;color:var(--yellow);max-width:34ch}
+.ca-lead{margin-top:14px;font-size:clamp(15px,1.2vw,17px);line-height:1.7;color:#cfddd2;max-width:58ch}
+
+/* copy left, form right — the form must be reachable without scrolling, so it
+   sits beside the headline rather than under the whole copy block */
+.ca-hero-top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(26px,3.4vw,64px);align-items:start}
+.ca-hero-copy{min-width:0;grid-column:1;grid-row:1}
+.ca-hero-top>.ca-form-card{grid-column:2;grid-row:1}
+/* the photo is a third grid child, not part of the copy block, so that when
+   the hero stacks it lands after the form instead of pushing it down */
+.ca-hero-shot{grid-column:1;grid-row:2}
+
+.ca-form-card{padding:clamp(24px,2.4vw,32px);border-radius:18px;background:#fff;color:var(--forest);box-shadow:0 18px 44px #04100b2e}
+.ca-form-title{font-size:clamp(19px,1.7vw,24px);font-weight:600;letter-spacing:-.04em;line-height:1.2}
+.ca-form-sub{margin-top:7px;font-size:14px;line-height:1.5;color:var(--muted)}
+.ca-form{margin-top:clamp(18px,2vw,24px)}
+
+.ca-fields{display:grid;gap:14px}
+.ca-field{margin:0}
+.ca-field label{display:block;font-size:13px;font-weight:600;color:var(--forest);margin-bottom:8px}
+.ca-field label span{color:#c9a418;margin-left:3px}
+.ca-field input{width:100%;min-height:54px;padding:15px 17px;border:1px solid var(--line);border-radius:11px;background:#fbfcfb;color:var(--forest);font:500 15.5px/1.4 var(--font);transition:border-color .2s,background .2s,box-shadow .2s}
+.ca-field input::placeholder{color:#93a399;font-weight:400}
+.ca-field input:focus{outline:none;border-color:var(--yellow);background:#fff;box-shadow:0 0 0 3px #e9c33445}
+
+.ca-submit{width:100%;justify-content:space-between;margin-top:18px;background:var(--yellow);color:var(--forest)}
+.ca-submit:hover{transform:translateY(-2px)}
+.ca-note{margin-top:14px;font-size:12.5px;line-height:1.55;color:var(--muted)}
+
+/* inline validation, announced rather than only coloured */
+.ca-error{display:block;margin-top:7px;font-size:12.5px;font-weight:600;color:#a4211b}
+.ca-field.is-bad input{border-color:#e0362f;background:#e0362f0d}
+.ca-result{margin-top:16px;padding:16px 18px;border-radius:12px;border:1px solid #86bd4257;background:#86bd420f}
+.ca-result strong{display:block;font-size:15.5px;font-weight:600;letter-spacing:-.02em;color:var(--forest)}
+.ca-result p{margin-top:6px;font-size:13.5px;line-height:1.6;color:var(--muted)}
+
+.ca-hero-shot{margin:clamp(22px,2.6vw,34px) 0 0;border-radius:18px;overflow:hidden;background:#dfe3dd;aspect-ratio:16/9;max-width:620px}
+.ca-hero-shot img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* the doc's citable facts, in the hero-bar geometry the other pages use */
+.ca-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(36px,4vw,58px);border-top:1px solid #ffffff26;list-style:none;padding:0;margin-bottom:0}
+.ca-facts>li{padding:clamp(24px,2.6vw,34px) clamp(18px,2vw,32px) 0;border-left:1px solid #ffffff1f}
+.ca-facts>li:first-child{padding-left:0;border-left:0}
+.ca-facts strong{display:block;font-size:clamp(30px,3.4vw,50px);font-weight:600;letter-spacing:-.06em;line-height:1;color:#eef0ec;font-variant-numeric:tabular-nums}
+.ca-facts>li:first-child strong{color:var(--lime)}
+.ca-facts>li>span{display:block;margin-top:13px;font-size:13.5px;line-height:1.55;color:#a9bdb0;max-width:18em}
+
+/* ===== shared section furniture ========================================== */
+.ca-head{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(28px,4vw,70px);flex-wrap:wrap;margin-bottom:clamp(34px,4vw,56px)}
+.ca-head h2{font-size:clamp(32px,4.2vw,60px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.ca-head h2>span{color:var(--muted)}
+.ca-head-aside{max-width:460px;font-size:16px;line-height:1.7;color:var(--muted)}
+
+/* ===== availability ====================================================== */
+.ca-available{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7.4vw,112px)}
+.ca-available .eyebrow{color:var(--muted);margin-bottom:18px}
+.ca-available-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr);gap:clamp(30px,4vw,80px);align-items:start}
+.ca-available h2{font-size:clamp(30px,3.8vw,56px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.ca-available h2>span{color:var(--brand-lime)}
+.ca-available-copy p{font-size:clamp(16px,1.25vw,18px);line-height:1.75;color:var(--muted);max-width:62ch}
+.ca-available-copy p+p{margin-top:18px}
+.ca-available-copy strong{color:var(--forest);font-weight:600}
+.ca-available-copy a{color:var(--forest);font-weight:600;text-decoration:underline;text-decoration-color:#86bd4285;text-underline-offset:4px;text-decoration-thickness:2px}
+.ca-available-copy a:hover{color:var(--brand-lime);text-decoration-color:currentColor}
+
+/* ===== how it works ====================================================== */
+.ca-how{background:var(--forest);color:var(--paper);padding-block:clamp(66px,7.4vw,112px)}
+.ca-how .eyebrow{color:#9cb3a6;margin-bottom:18px}
+.ca-how .ca-head h2>span{color:var(--lime)}
+.ca-how .ca-head-aside{color:#cfddd2}
+.ca-how-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;list-style:none;padding:0;margin:0}
+.ca-how-card{padding:clamp(24px,2.4vw,32px);border:1px solid #ffffff21;border-radius:16px;background:#ffffff0a;transition:background .25s,border-color .25s}
+.ca-how-card:hover{background:#ffffff14;border-color:#ffffff3d}
+.ca-how-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#a5d65b1f;color:var(--lime);margin-bottom:20px}
+.ca-how-icon svg{width:23px;height:23px}
+.ca-how-card h3{font-size:clamp(18px,1.6vw,22px);font-weight:600;letter-spacing:-.035em;line-height:1.2}
+.ca-how-card p{margin-top:11px;font-size:14.5px;line-height:1.65;color:#c3d3c8}
+
+/* ===== why now =========================================================== */
+.ca-why{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7.4vw,112px)}
+.ca-why .eyebrow{color:var(--muted);margin-bottom:18px}
+.ca-reasons{display:grid;gap:0;list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.ca-reason{display:grid;grid-template-columns:72px minmax(0,1fr);gap:clamp(20px,3vw,48px);padding-block:clamp(26px,2.8vw,40px);border-bottom:1px solid var(--line)}
+.ca-reason-n{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--brand-lime);padding-top:9px}
+.ca-reason h3{font-size:clamp(21px,2.2vw,32px);font-weight:600;letter-spacing:-.045em;line-height:1.15}
+.ca-reason p{margin-top:12px;font-size:16px;line-height:1.7;color:var(--muted);max-width:70ch}
+
+/* ===== closing form ====================================================== */
+.ca-close{background:var(--forest);color:var(--paper);padding-block:clamp(66px,7.4vw,112px);scroll-margin-top:24px}
+.ca-close .eyebrow{color:#9cb3a6;margin-bottom:18px}
+.ca-close-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,4vw,72px);align-items:start}
+.ca-close h2{font-size:clamp(32px,4.2vw,60px);font-weight:600;line-height:1.02;letter-spacing:-.06em}
+.ca-close h2>span{color:var(--lime)}
+.ca-close-lead{margin-top:20px;font-size:clamp(16px,1.25vw,18px);line-height:1.7;color:#cfddd2}
+.ca-promises{display:grid;gap:12px;margin:20px 0 0;padding:0;list-style:none}
+.ca-promises li{position:relative;padding-left:34px;font-size:16px;line-height:1.65;color:#eef0ec;max-width:56ch}
+.ca-promises li::before{content:"";position:absolute;left:4px;top:.32em;width:13px;height:7px;border-left:2px solid var(--lime);border-bottom:2px solid var(--lime);transform:rotate(-45deg)}
+.ca-close-links{display:grid;gap:12px;margin-top:clamp(26px,3vw,38px)}
+.ca-close-links a{display:inline-flex;align-items:baseline;gap:10px;justify-self:start;font-size:14.5px;font-weight:600;color:#e5ece5;padding-bottom:5px;border-bottom:1px solid #ffffff3d}
+.ca-close-links a:hover{color:var(--yellow);border-bottom-color:#e9c33459}
+
+/* the second card sits on forest, so it keeps a hairline instead of a shadow */
+.ca-form-card-dark{box-shadow:none;border:1px solid #ffffff1f}
+
+/* ===== FAQ =============================================================== */
+.ca-faq{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7.4vw,112px)}
+.ca-faq-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr);gap:clamp(32px,4vw,80px);align-items:start}
+.ca-faq-intro .eyebrow{color:var(--muted);margin-bottom:18px}
+.ca-faq-intro h2{font-size:clamp(30px,3.4vw,50px);font-weight:600;line-height:1.04;letter-spacing:-.055em}
+.ca-faq-intro>p{margin-top:18px;font-size:16px;line-height:1.7;color:var(--muted);max-width:38ch}
+.ca-faq-intro .button{margin-top:26px;background:var(--yellow);color:var(--forest)}
+.ca-faq-intro .button:hover{transform:translateY(-2px)}
+
+.ca-faq-list{display:grid}
+.ca-faq-item{border-bottom:1px solid var(--line)}
+.ca-faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:clamp(18px,1.9vw,24px);cursor:pointer;list-style:none;font-size:clamp(16px,1.45vw,21px);font-weight:600;letter-spacing:-.035em;line-height:1.3}
+.ca-faq-item summary::-webkit-details-marker{display:none}
+.ca-faq-item summary:hover{color:var(--brand-lime)}
+.ca-faq-icon{position:relative;flex-shrink:0;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);transition:background .2s,border-color .2s,transform .3s}
+.ca-faq-icon::before,.ca-faq-icon::after{content:"";position:absolute;inset:50% 9px auto;height:2px;border-radius:2px;background:currentColor;transform:translateY(-50%)}
+.ca-faq-icon::after{transform:translateY(-50%) rotate(90deg);transition:opacity .2s}
+.ca-faq-item[open] .ca-faq-icon{background:var(--yellow);border-color:var(--yellow);color:var(--forest);transform:rotate(180deg)}
+.ca-faq-item[open] .ca-faq-icon::after{opacity:0}
+.ca-faq-item>p{padding-bottom:clamp(18px,1.9vw,24px);padding-right:58px;font-size:15.5px;line-height:1.75;color:var(--muted);max-width:66ch}
+
+/* ===== sticky CTA (small screens only) =================================== */
+/* shown by the script once the hero form has scrolled away, hidden again
+   whenever either form is on screen, so it never covers what it points at */
+.ca-sticky{display:none;position:fixed;inset:auto 0 0;z-index:40;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px clamp(16px,4vw,24px) calc(12px + env(safe-area-inset-bottom));
+  background:#122c24f2;border-top:1px solid #ffffff21;backdrop-filter:blur(8px)}
+.ca-sticky-copy{min-width:0}
+.ca-sticky-copy strong{display:block;font-size:14px;font-weight:600;letter-spacing:-.02em;color:#eef0ec;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ca-sticky-copy span{display:block;margin-top:2px;font-size:12px;color:#9cb3a6}
+.ca-sticky .button{flex-shrink:0;min-height:46px;padding:11px 16px;gap:12px;font-size:13.5px;background:var(--yellow);color:var(--forest)}
+
+/* ===== breakpoints ======================================================= */
+@media(max-width:1180px){
+  .ca-how-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ca-facts>li>span{font-size:13px}
+}
+
+@media(max-width:950px){
+  .ca-hero h1{max-width:none}
+  /* one column: the form moves above the photo so it stays the first thing
+     after the pitch, and the photo drops entirely on phones */
+  .ca-hero-top{grid-template-columns:minmax(0,1fr);gap:28px}
+  .ca-hero-copy,.ca-hero-top>.ca-form-card,.ca-hero-shot{grid-column:1;grid-row:auto}
+  .ca-hero-shot{max-width:none;margin-top:0}
+  .ca-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ca-facts>li{padding-inline:clamp(18px,3vw,30px)}
+  .ca-facts>li:nth-child(odd){padding-left:0;border-left:0}
+  .ca-facts>li:nth-child(n+3){margin-top:clamp(22px,2.6vw,30px);border-top:1px solid #ffffff1f}
+  .ca-head,.ca-available-grid,.ca-close-grid,.ca-faq-grid{grid-template-columns:minmax(0,1fr)}
+  .ca-head{flex-direction:column;align-items:flex-start}
+  .ca-available-grid,.ca-close-grid,.ca-faq-grid{gap:30px}
+  .ca-how-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:720px){
+  .ca-sticky{display:flex}
+  .ca-hero{padding-top:26px;padding-bottom:40px}
+  .ca-hero h1{font-size:clamp(28px,7.6vw,42px);letter-spacing:-.05em;line-height:1.08}
+  .ca-tagline{font-size:16px;margin-top:16px}
+  .ca-lead{font-size:15px;line-height:1.6}
+  .ca-form-card{padding:22px 20px;border-radius:14px}
+  .ca-hero-shot{display:none}
+  .ca-facts{margin-top:32px}
+  .ca-facts>li{padding-top:22px;padding-inline:18px}
+  .ca-facts>li:nth-child(n+3){margin-top:22px}
+  .ca-facts strong{font-size:clamp(26px,7vw,34px)}
+  .ca-facts>li>span{margin-top:10px;font-size:12.5px}
+
+  .ca-available,.ca-how,.ca-why,.ca-close,.ca-faq{padding-block:58px}
+  .ca-available h2,.ca-close h2,.ca-head h2{font-size:clamp(26px,7vw,36px)}
+  .ca-available-copy p{font-size:15.5px}
+  .ca-how-card{padding:22px}
+  .ca-how-icon{margin-bottom:16px}
+  .ca-reason{grid-template-columns:minmax(0,1fr);gap:0;padding-block:24px}
+  .ca-reason-n{padding-top:0;margin-bottom:9px}
+  .ca-reason h3{font-size:21px}
+  .ca-reason p{font-size:15.5px;margin-top:10px}
+  .ca-promises li{font-size:15.5px}
+  .ca-faq-intro .button{width:100%;justify-content:space-between}
+  .ca-faq-item summary{font-size:16px;gap:16px}
+  .ca-faq-item>p{padding-right:0;font-size:15px}
+  /* the sticky bar must not sit on top of the footer's last row */
+  .footer{padding-bottom:96px}
+}
+
+@media(max-width:540px){
+  .ca-tagline{font-size:15px;margin-top:14px}
+  .ca-lead{font-size:14.5px;margin-top:12px}
+  .ca-hero .eyebrow{margin-bottom:16px}
+  .ca-facts{grid-template-columns:1fr}
+  .ca-facts>li{padding-left:0;border-left:0}
+  .ca-facts>li+li{margin-top:18px;padding-top:18px;border-top:1px solid #ffffff1f}
+  .ca-sticky-copy span{display:none}
+}
+
+@media(max-width:380px){
+  .ca-hero h1{font-size:clamp(24px,7.6vw,32px)}
+  .ca-form-title{font-size:18px}
+  .ca-sticky-copy strong{font-size:13px}
+  .ca-sticky .button{padding:10px 13px;font-size:12.5px;gap:9px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ca-submit,.ca-how-card,.ca-faq-icon,.ca-faq-intro .button{transition:none}
+  .ca-submit:hover,.ca-faq-intro .button:hover{transform:none}
+}

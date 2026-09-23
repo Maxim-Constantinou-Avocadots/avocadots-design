@@ -1161,6 +1161,69 @@ heading-to-first-line gap is 14px, not 52px, and the page is ~620px shorter.
 Measured 1920 → 320px (plus 1024, the engine's documented floor): no overflow, no horizontal
 scroll, no console errors. Every "Our Mission" link across the site now points at `mission.html`.
 
+## 9l. ChatGPT Ads Cyprus landing page — V0.32
+
+`dist/chatgpt-ads.html`, `dist/chatgpt-ads.css`, `dist/chatgpt-ads.js`. Built from a supplied
+copy document (`ChatGPT-Ads-Cyprus-Landing-Page.docx`) for the existing `/chatgpt-ads` URL.
+
+### Scope of the copy
+
+Every line of **page** copy is the document's. The doc's closing **"GEO Notes"** are notes to the
+author explaining the rewrite ("Replaced every 'coming soon' framing…", "Kept the exact page
+structure…"). **They are not page content and must never be rendered.** If a future edit pastes
+the doc in again, strip that block.
+
+The doc keeps the structure the live page already has: hero, **two identical lead-gen forms**
+(top and bottom), a three-reason block and a six-item FAQ. Both forms are here, both work.
+
+### What the live page still says
+
+It is the pre-launch version: "ChatGPT Ads Are Coming to Cyprus", "aren't available just yet",
+"we'll notify you as soon as". Its three reasons are numbered **1, 2, 2** — there is no 3. Its
+six FAQs are generic GEO questions ("What is generative engine optimisation?") with nothing about
+ChatGPT Ads. All of that is what the doc exists to replace.
+
+### The form is the layout
+
+This is a lead-gen page, so the form is not a section — it is the hero's right-hand column,
+**visible without scrolling**. The check asserts this: at 1024–1920 the submit button's bottom
+edge is inside the fold; below 950 the hero stacks and the form card's top sits at 441–507px,
+still on the first screen.
+
+That constraint drove two structural decisions:
+- The hero photo is a **third grid child**, not part of the copy block. Nested in the copy it
+  pushed the form 984px down the moment the hero stacked at 950.
+- A **sticky CTA bar under 720px**, shown only between the two forms. An `IntersectionObserver`
+  watches both `.ca-form-card`s and hides the bar whenever either is on screen, so it never
+  covers the thing it points at. `.footer` gains bottom padding at that width so the bar cannot
+  sit over the last footer row.
+
+### Validation
+
+`novalidate`, one message per field written for that field, `aria-invalid` + `aria-describedby`,
+and focus moved to the first bad field. Email defers to the browser's own `type=email` check so
+it matches what the UA accepts; **phone is digit-counted (≥7), not pattern-matched**, because the
+page takes international numbers. Client-side only, and the success panel says so in the same
+wording the contact and careers forms use.
+
+### FAQ schema
+
+The doc's GEO notes ask for the blog's FAQ schema, so the six Q&As also ship as `FAQPage`
+JSON-LD generated from the same list — one source, no drift between the visible accordion and
+the structured data.
+
+### Links
+
+Both internal links in the doc were verified to resolve before shipping:
+`/post/chatgpt-ads-cyprus` (the first-experience post) and
+`/post/chatgpt-ads-everything-you-need-to-know-2026` (the explainer — note it is **not** in the
+20 posts `blog.html` lists). The hero image is the studio's own illustration from the first post,
+with the doc's specified alt text, `chatgpt ads cyprus`.
+
+Measured 1920 → 320px: no overflow, no horizontal scroll, no console errors. Both forms checked
+for empty submit, malformed email, short phone and a valid submit, and the sticky bar for
+show/hide against both forms.
+
 ## 10. Preserve the homepage's content and rhythm
 
 The user requested an elevated homepage while keeping its existing sections. Preserve this order and its real assets:

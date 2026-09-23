@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.31**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.32**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
@@ -22,6 +22,7 @@ dist/
   work.html       Our Work — 13 projects, sector filter (work.css, work.js)
   about.html      About — studio story, team, timeline, FAQ (about.css, about.js)
   mission.html    Mission — belief, five values, the growth engine (mission.css, mission.js)
+  chatgpt-ads.html  ChatGPT Ads Cyprus landing page (chatgpt-ads.css, chatgpt-ads.js)
   blog.html       Blog index — 20 posts, search + category filter (blog.css, blog.js)
   careers.html    Careers — values, life here, hiring steps, open roles
   role-*.html     one page per open role: full description + application form
@@ -65,3 +66,5 @@ their original 1:1 ratio — do not redraw, recolour or flatten them. See `desig
   opens on the same forest hero as the rest. See `design.md` §9j.
 - The Mission page reuses the canonical Growth Engine component from `styles.css` — do not
   restyle it there; `design.md` §7 owns its geometry. See §9k.
+- The ChatGPT Ads page is a lead-gen layout: the form must stay inside the fold, and the copy
+  doc's closing "GEO Notes" are author's notes, never page content. See §9l.
