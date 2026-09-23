@@ -94,11 +94,38 @@
 /* ===== why now =========================================================== */
 .ca-why{background:var(--paper);color:var(--forest);padding-block:clamp(66px,7.4vw,112px)}
 .ca-why .eyebrow{color:var(--muted);margin-bottom:18px}
-.ca-reasons{display:grid;gap:0;list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-.ca-reason{display:grid;grid-template-columns:72px minmax(0,1fr);gap:clamp(20px,3vw,48px);padding-block:clamp(26px,2.8vw,40px);border-bottom:1px solid var(--line)}
-.ca-reason-n{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--brand-lime);padding-top:9px}
-.ca-reason h3{font-size:clamp(21px,2.2vw,32px);font-weight:600;letter-spacing:-.045em;line-height:1.15}
-.ca-reason p{margin-top:12px;font-size:16px;line-height:1.7;color:var(--muted);max-width:70ch}
+.ca-reasons{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:16px;list-style:none;padding:0;margin:0}
+.ca-reason{display:flex;flex-direction:column;padding:clamp(26px,2.8vw,40px);border-radius:18px;border:1px solid var(--line);background:#fff;transition:border-color .25s,box-shadow .25s,transform .25s}
+.ca-reason:hover{border-color:#1c383052;box-shadow:0 16px 38px #04100b12;transform:translateY(-3px)}
+.ca-reason-n{font-size:clamp(40px,4.4vw,68px);font-weight:600;letter-spacing:-.07em;line-height:.85;color:#1c38301f;font-variant-numeric:tabular-nums}
+.ca-reason h3{margin-top:clamp(20px,2.4vw,32px);font-size:clamp(21px,2.1vw,30px);font-weight:600;letter-spacing:-.045em;line-height:1.14}
+.ca-reason p{margin-top:12px;font-size:15.5px;line-height:1.7;color:var(--muted);max-width:52ch}
+
+/* the lead reason runs the full height of the pair beside it */
+.ca-reason-lead{grid-row:1/span 2;background:var(--forest);color:var(--paper);border-color:var(--forest);
+  background-image:linear-gradient(#ffffff0f 1px,transparent 1px),linear-gradient(90deg,#ffffff0f 1px,transparent 1px);
+  background-size:64px 64px}
+.ca-reason-lead:hover{border-color:var(--forest);box-shadow:0 18px 44px #04100b26}
+.ca-reason-lead .ca-reason-n{font-size:clamp(56px,6.4vw,104px);color:var(--lime)}
+.ca-reason-lead h3{margin-top:clamp(26px,3vw,40px);font-size:clamp(26px,2.9vw,42px);letter-spacing:-.055em}
+
+/* the card's own sentence, drawn — the lit rail is you, the faint one is the
+   competitor who has not started. aria-hidden, because the copy below says it */
+.ca-viz{display:grid;gap:14px;margin-top:auto;padding-top:clamp(30px,3.6vw,56px)}
+.ca-viz-row{display:grid;grid-template-columns:11px minmax(0,1fr);gap:0 13px;align-items:center}
+.ca-viz-dot{width:11px;height:11px;border-radius:50%;border:2px solid #ffffff3d}
+.ca-viz-rail{height:2px;border-radius:2px;background:repeating-linear-gradient(90deg,#ffffff3d 0 7px,transparent 7px 14px)}
+.ca-viz em{grid-column:2;font-style:normal;margin-top:9px;font-size:13px;font-weight:600;letter-spacing:-.005em;color:#9cb3a6}
+.ca-viz .is-now .ca-viz-dot{border-color:var(--lime);background:var(--lime);box-shadow:0 0 0 5px #a5d65b24}
+.ca-viz .is-now .ca-viz-rail{background:linear-gradient(90deg,var(--lime),#a5d65b26)}
+.ca-viz .is-now em{color:var(--lime)}
+.ca-reason-lead p{margin-top:14px;font-size:clamp(16px,1.3vw,18px);color:#c3d3c8;max-width:46ch}
+
+/* the argument is "act now", so the section closes on the action */
+.ca-why-cta{display:flex;align-items:center;flex-wrap:wrap;gap:10px 22px;margin-top:clamp(26px,3vw,40px)}
+.ca-why-cta a{display:inline-flex;align-items:center;gap:12px;font-size:15px;font-weight:700;letter-spacing:-.015em;color:var(--forest);padding-bottom:6px;border-bottom:2px solid var(--brand-lime)}
+.ca-why-cta a:hover{color:var(--brand-lime)}
+.ca-why-cta span{font-size:14px;color:var(--muted)}
 
 /* ===== closing form ====================================================== */
 .ca-close{background:var(--forest);color:var(--paper);padding-block:clamp(66px,7.4vw,112px);scroll-margin-top:24px}
@@ -170,6 +197,9 @@
   .ca-head{flex-direction:column;align-items:flex-start}
   .ca-available-grid,.ca-close-grid,.ca-faq-grid{gap:30px}
   .ca-how-grid{grid-template-columns:1fr}
+  .ca-reasons{grid-template-columns:minmax(0,1fr);gap:12px}
+  .ca-reason-lead{grid-row:auto}
+  .ca-reason-lead h3{margin-top:0}
 }
 
 @media(max-width:720px){
@@ -191,10 +221,18 @@
   .ca-available-copy p{font-size:15.5px}
   .ca-how-card{padding:22px}
   .ca-how-icon{margin-bottom:16px}
-  .ca-reason{grid-template-columns:minmax(0,1fr);gap:0;padding-block:24px}
-  .ca-reason-n{padding-top:0;margin-bottom:9px}
-  .ca-reason h3{font-size:21px}
-  .ca-reason p{font-size:15.5px;margin-top:10px}
+  .ca-reason{padding:22px 20px;border-radius:14px}
+  .ca-reason-n{font-size:38px}
+  .ca-reason h3{margin-top:18px;font-size:21px}
+  .ca-reason p{font-size:15px;margin-top:10px}
+  .ca-reason-lead .ca-reason-n{font-size:52px}
+  .ca-reason-lead h3{margin-top:20px;font-size:24px}
+  .ca-viz{padding-top:24px;gap:12px}
+  .ca-viz em{font-size:12.5px;margin-top:8px}
+  .ca-reason-lead p{font-size:15.5px}
+  .ca-why-cta{gap:8px 18px}
+  .ca-why-cta a{font-size:14.5px}
+  .ca-why-cta span{font-size:13px}
   .ca-promises li{font-size:15.5px}
   .ca-faq-intro .button{width:100%;justify-content:space-between}
   .ca-faq-item summary{font-size:16px;gap:16px}
@@ -221,6 +259,6 @@
 }
 
 @media(prefers-reduced-motion:reduce){
-  .ca-submit,.ca-how-card,.ca-faq-icon,.ca-faq-intro .button{transition:none}
-  .ca-submit:hover,.ca-faq-intro .button:hover{transform:none}
+  .ca-submit,.ca-how-card,.ca-reason,.ca-faq-icon,.ca-faq-intro .button{transition:none}
+  .ca-submit:hover,.ca-reason:hover,.ca-faq-intro .button:hover{transform:none}
 }

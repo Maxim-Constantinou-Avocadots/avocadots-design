@@ -1161,7 +1161,7 @@ heading-to-first-line gap is 14px, not 52px, and the page is ~620px shorter.
 Measured 1920 → 320px (plus 1024, the engine's documented floor): no overflow, no horizontal
 scroll, no console errors. Every "Our Mission" link across the site now points at `mission.html`.
 
-## 9l. ChatGPT Ads Cyprus landing page — V0.32
+## 9l. ChatGPT Ads Cyprus landing page — V0.32, "why now" V0.33
 
 `dist/chatgpt-ads.html`, `dist/chatgpt-ads.css`, `dist/chatgpt-ads.js`. Built from a supplied
 copy document (`ChatGPT-Ads-Cyprus-Landing-Page.docx`) for the existing `/chatgpt-ads` URL.
@@ -1220,9 +1220,32 @@ Both internal links in the doc were verified to resolve before shipping:
 20 posts `blog.html` lists). The hero image is the studio's own illustration from the first post,
 with the doc's specified alt text, `chatgpt ads cyprus`.
 
+### "Why acting now matters" — rebuilt V0.33
+
+The three reasons first shipped as full-width text rows under hairline rules. Correct, and it
+read as a printed document: no containment, no colour, no scale contrast, three rows of identical
+weight. Now an **asymmetric card grid** — reason 01 is a tall forest card spanning both rows with
+the faint grid texture and a 104px lime numeral; 02 and 03 stack beside it as white cards with
+muted numerals. Below 950px the lead card stops spanning and all three stack.
+
+Card 01 carries a small diagram of **its own sentence**: a lit lime rail labelled "You, live in AI
+conversations" over a dashed muted rail labelled "Competitors, still planning". That is the
+card's copy — "brands that launch now are seen in AI conversations before competitors even start
+planning" — drawn, not a new claim, and it is `aria-hidden` because the paragraph beneath says
+it in words. **Do not turn it into a chart**; there is no data behind it, only the sentence.
+
+The section closes on a link to the second form, because a "why act now" argument that ends in
+white space is an argument with no next step.
+
+Spacing note: the lead card's breathing space belongs between the numeral and the
+diagram-plus-statement group, so `margin-top:auto` sits on `.ca-viz`, not on the `h3`. With it on
+the `h3` the gap fell between the diagram and the statement it illustrates, separating the two
+things that belong together.
+
 Measured 1920 → 320px: no overflow, no horizontal scroll, no console errors. Both forms checked
-for empty submit, malformed email, short phone and a valid submit, and the sticky bar for
-show/hide against both forms.
+for empty submit, malformed email, short phone and a valid submit, the sticky bar for show/hide
+against both forms, and the grid for exact top/bottom alignment of the lead card against the
+pair beside it at every width down to 1024.
 
 ## 10. Preserve the homepage's content and rhythm
 

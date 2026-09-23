@@ -1,6 +1,6 @@
 # Avocadots — homepage redesign
 
-Static prototype of the Avocadots homepage redesign. Design baseline **V0.32**.
+Static prototype of the Avocadots homepage redesign. Design baseline **V0.33**.
 
 `design.md` is the design contract: read it before changing anything visual.
 
