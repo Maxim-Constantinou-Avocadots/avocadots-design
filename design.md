@@ -1052,6 +1052,61 @@ all verified. Every "Blog"/"Blogs" link across the site now points at `blog.html
 **Topics** links still point at the live category archives, since this page has no per-category
 URL.
 
+## 9j. About page — V0.30
+
+`dist/about.html`, `dist/about.css`, `dist/about.js`. Built from the redesigned
+`/about-avocadots-design-studio-1?rc=test-site`, kept section for section **except the hero**.
+
+### The one thing that changed
+
+The redesign's hero was a lime gradient band with a faint grid, a centred dark-green headline,
+a centred sub and four white ticked pills — the `/web-design` template from §9e. Every other page
+in this prototype opens on the shared forest `.opening`, so that hero was the single thing making
+this page read as a different site.
+
+It is now the same hero as work / careers / blog / faq: eyebrow with status dot, left-aligned
+headline with a lime second line, lead, a yellow CTA plus a text link, and a closing bar. **The
+four credentials are kept** (Certified Wix Partner, Shopify Experts, 150+ websites delivered,
+30-day launch guarantee) — they moved from white pills into that bar, which uses the same
+hairline-divider geometry as the work and careers proof bars, with a lime tick on each.
+
+The live hero also mis-spells it **"Certified WIx Partner"** (capital I). Corrected here.
+
+### Everything else is the page as designed
+
+Bento (150+ tile, 2020 tile, "The first call", "The room"), the yellow promise band with its six
+chips, the eight team cards with their per-person accent colour, the story panel with the
+2020/2022/2024/2026 timeline, the founder quote, the "Open office. Closed loops." card, the
+closing CTA, and the six FAQs — all verbatim. FAQ answers were read out of the collapsed DOM,
+since the accordions do not expose them to `innerText`.
+
+**Live-page bug not reproduced:** the story section shows the *same photograph* twice, captioned
+"Day One" and "The Room Now". There is no 2020 photo to pair it with, so this page shows it once,
+captioned "The room now", and the second studio photo is used in the bento's "The room" tile.
+
+### Assets
+
+`dist/assets/about-<name>-1.webp` (eight greyscale cut-outs, 432×440) and
+`about-studio-0/1.webp`. The live page ships each headshot twice — colour and greyscale — as a
+hover pair; the cards render the greyscale one, so only that is kept. The cut-outs are
+transparent, so the **card supplies the colour block behind them**, and the avatar clusters give
+each face its own tinted disc rather than a bare white circle.
+
+**Careful with the cleanup glob.** `rm assets/about-*-0.webp` was meant to drop the unused colour
+headshots and also matched `about-studio-0.webp`, which the page needs. Caught by the 404 in the
+render check, not by review.
+
+### The double-escaped quote glyph
+
+`.ab-quote p::before` was written as `content:"\\201C"`. A CSS unicode escape takes **one**
+backslash; two makes it the literal text, and the card rendered `\201C` in 92px lime across the
+founder's quote. Now `content:"\201C"`, verified by reading the computed `::before` content back
+as `"“"`.
+
+Measured 1920 → 320px: no overflow, no horizontal scroll, no console errors, all images resolve,
+FAQ accordion opens and closes. Every "About Us" link across the site now points at `about.html`;
+`hero-concepts.html` still points at the live URL because it publishes as a separate artifact.
+
 ## 10. Preserve the homepage's content and rhythm
 
 The user requested an elevated homepage while keeping its existing sections. Preserve this order and its real assets:
