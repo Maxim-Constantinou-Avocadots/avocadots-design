@@ -156,11 +156,11 @@ The 1600px limit includes padding because the site uses `box-sizing: border-box`
 
 Do not give every component a large pill shape. Soft corners should belong to a consistent family.
 
-## 7. Canonical Growth Engine component — current V0.35
+## 7. Canonical Growth Engine component — current V0.38
 
 Used on `index.html` and `mission.html`. Markup for both is emitted by one
 generator, so **edit the generator, not the two pages**. CSS is the `V0.35` block at the end of
-`styles.css`.
+`styles.css`, plus the `V0.36` / `V0.37` / `V0.38` blocks after it.
 
 ### Why V0.16 was replaced
 
@@ -190,23 +190,61 @@ line is the About page's verbatim origin sentence about separate vendors.
 
 Colour codes the direction: **lime = inputs, yellow = outputs.** Keep it.
 
-### The connector, and why there is no geometry contract any more
+### V0.36–V0.37 — the finish pass
 
-Each bus is an inline SVG of **straight lines only**, with `preserveAspectRatio="none"` and
-`vector-effect="non-scaling-stroke"`. It stretches to whatever height its column happens to be
-without distorting the stroke, so there are no node percentages to maintain and nothing can
-escape its box. **Do not reintroduce curves here** — a curve under non-uniform scaling is exactly
-what forced the old contract.
+V0.35 was accepted as a concept and rejected as a finished thing: *"I dont like the lines, the
+green box looks plain. The section looks better as a concept but looks unfinished still."*
+Three complaints, three fixes:
 
-Below 950px the panel goes single-column and each bus becomes a short vertical rule
-(`justify-self:center` — in a grid, `align-self` is the block axis and will not centre it
-horizontally; that was a real bug in the first pass).
+**1. No connectors at all.** The straight-line bus SVGs are gone. However they are drawn,
+hairlines between boxes read as a flowchart, and the section is not a flowchart. Direction is
+carried by **one arrow badge in each gap** — a lime circle before the core, a yellow one after it,
+so the badge itself carries the input/output colour code. **Do not reintroduce connectors**, in
+any form, curved or straight.
+
+**2. The core holds an object, not just type.** Concentric rings live on `.eng-core`'s own
+`background-image` (`repeating-radial-gradient(circle at 50% 38%, …)`) so they bleed past the
+box's edges instead of sitting inside it as a contained graphic — that bleed is what stops it
+reading as a slab. At their centre sits the studio mark on a solid forest disc with a soft white
+ring. A white radial highlight sits over the lime gradient for depth.
+
+The mark on lime must be the **dark forest variant** (the first swatch in `mark.png`) — it is
+applied as `filter:brightness(0) invert(1)` over a `#1c3830` disc, so the glyph is knocked out
+white on dark, not lime on lime.
+
+**3. The "unfinished" feel** came from an untouched rounded rectangle. The panel now has a
+lime→yellow hairline across its top edge (`.eng-panel::before`), each stage label sits on a rule,
+and the dead space inside is tightened.
+
+Below 950px the panel goes single-column and the arrow badges rotate 90° to point down the page,
+so left-to-right becomes top-to-bottom. They need `justify-self:center` — **in a grid `align-self`
+is the block axis** and will not centre them horizontally; that was a real bug in the first pass.
+
+### V0.38 — the cascade repair, and the rule it exists for
+
+V0.36 re-declared `.eng-panel{grid-template-columns: …five tracks… }` **outside a media query**,
+i.e. after the V0.35 `@media(max-width:950px)` that collapses the panel. A media query adds no
+specificity, so source order won and **the panel stayed in its desktop grid at every width**:
+below ~950px the five tracks squeezed to ~60px each, the core became a vertical sliver and the
+outcome cards ran off the viewport. V0.38 re-states the stacked overrides.
+
+> **Rule for `styles.css`:** this file is append-only, so when a later block restyles a component
+> that already has responsive overrides, **re-state those overrides in the same block**. A bare
+> appended declaration silently outranks every media query above it.
 
 ### Verification
 
-The render check asserts **no `.eng-node`, `.eng-core` or `.eng-bus` escapes `.eng-panel`** at
-1920 / 1440 / 1180 / 1024 / 950 / 720 / 540 / 380 / 320, on both pages. Keep that assertion if
-the component changes again.
+The render check asserts **no `.eng-node`, `.eng-core`, `.eng-arrow`, `.eng-stage` or
+`.eng-core-glyph` escapes `.eng-panel`**, that nothing under `.growth` exceeds the viewport, that
+the document does not scroll horizontally, and that the core's mark actually loaded — at
+1920 / 1440 / 1180 / 1024 / 950 / 720 / 540 / 380 / 320, on both pages. Keep that assertion if the
+component changes again.
+
+Re-tested against the V0.38 bug deliberately reintroduced: the sweep fires at 390 (12 findings,
+both escapes and viewport overflow) but is **clean at 720**, where the squeezed five-column
+layout still fits geometrically while being obviously wrong to look at — a sliver of a core
+between two narrow columns. **The sweep is a floor, not a review.** Look at the rendered section
+at a mid width as well.
 
 ## 8. Canonical Contact-inspired awards component
 

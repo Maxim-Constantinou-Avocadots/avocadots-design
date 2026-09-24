@@ -601,3 +601,109 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
   .eng-node,.eng-cta{transition:none}
   .eng-cta:hover{transform:none}
 }
+
+
+/* ============================================================================
+   V0.36 — Growth Engine finish pass. Three complaints, three fixes:
+
+   1. "I don't like the lines" — the bus SVGs are gone. However they are drawn,
+      hairlines between boxes read as a flowchart. Direction is now carried by
+      one lime arrow badge in each gap. Do not reintroduce connectors.
+   2. "the green box looks plain" — the core was a flat gradient rectangle with
+      type on it. It now holds an object: concentric rings closing on the
+      studio's own mark, over the brand grid, with real depth.
+   3. "looks unfinished" — stage labels sit on a rule, the panel has a lime
+      top edge and a gradient ground, and the dead space inside is tightened.
+   ========================================================================= */
+
+.eng-panel{grid-template-columns:minmax(0,1fr) clamp(52px,5.4vw,84px) minmax(0,.88fr) clamp(52px,5.4vw,84px) minmax(0,1fr);
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#ffffff0f,#ffffff05);border-color:#ffffff29}
+/* a lime hairline along the top edge — the one detail that stops the panel
+   reading as an untouched rounded rectangle */
+.eng-panel::before{content:"";position:absolute;inset:0 0 auto;height:1px;
+  background:linear-gradient(90deg,#a5d65b00,#a5d65b99 22%,#e9c33499 78%,#e9c33400)}
+
+.eng-stage-label{padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid #ffffff1a;color:#9cb3a6}
+
+/* the gap between columns: one badge, not a wire */
+.eng-arrow{display:grid;place-items:center;align-self:center}
+.eng-arrow svg{width:20px;height:20px}
+.eng-arrow{width:clamp(38px,3.6vw,46px);height:clamp(38px,3.6vw,46px);border-radius:50%;
+  border:1px solid #a5d65b3d;background:#a5d65b14;color:var(--lime)}
+.eng-panel>.eng-arrow:last-of-type{border-color:#e9c3343d;background:#e9c33414;color:var(--yellow)}
+
+/* ---- the core ---------------------------------------------------------- */
+.eng-core{position:relative;overflow:hidden;gap:0;
+  background:linear-gradient(158deg,#9ad24f,var(--brand-lime) 46%,#5f962a);
+  background-image:linear-gradient(158deg,#9ad24f,#86bd42 46%,#5f962a),
+    linear-gradient(#1c383014 1px,transparent 1px),linear-gradient(90deg,#1c383014 1px,transparent 1px);
+  background-size:auto,44px 44px,44px 44px;
+  box-shadow:0 26px 70px #86bd4233,inset 0 1px 0 #ffffff5c,inset 0 -1px 0 #1c383029}
+
+.eng-core-glyph{position:relative;display:grid;place-items:center;width:clamp(96px,9vw,124px);aspect-ratio:1;margin-bottom:clamp(16px,1.8vw,22px)}
+.eng-core-glyph svg{position:absolute;inset:0;width:100%;height:100%}
+.eng-core-glyph img{position:relative;width:38%;height:auto;display:block}
+
+.eng-core-badge{background:#1c383024;color:#1c3830}
+.eng-core strong{margin-top:0}
+.eng-core-sub{color:#1c3830b8}
+
+@media(max-width:950px){
+  /* stacked: the arrow turns to point down the page */
+  .eng-arrow{justify-self:center;margin-block:16px;transform:rotate(90deg)}
+  .eng-core-glyph{width:86px;margin-bottom:14px}
+}
+
+@media(max-width:720px){
+  .eng-stage-label{padding-bottom:10px;margin-bottom:13px}
+  .eng-core-glyph{width:76px}
+  .eng-arrow{margin-block:13px}
+}
+
+@media(prefers-reduced-motion:reduce){.eng-arrow{transition:none}}
+
+
+/* V0.37 — the core was still a plain slab of lime. The concentric rings move
+   from a small inline glyph onto the core's own background, so they bleed past
+   its edges and give the box depth; the glyph keeps only the studio mark, on a
+   solid disc at the centre of them. */
+.eng-core{
+  background-image:
+    repeating-radial-gradient(circle at 50% 38%,#1c383000 0 46px,#1c383017 46px 47.4px,#1c383000 47.4px 47.5px),
+    radial-gradient(circle at 50% 38%,#ffffff40,#ffffff00 58%),
+    linear-gradient(158deg,#9ad24f,#86bd42 46%,#5f962a);
+  background-size:auto,auto,auto}
+
+.eng-core-glyph{width:auto;aspect-ratio:auto;display:grid;place-items:center;
+  width:clamp(64px,6vw,82px);height:clamp(64px,6vw,82px);border-radius:50%;
+  background:#1c3830;box-shadow:0 10px 26px #1c383040,0 0 0 8px #ffffff1f}
+.eng-core-glyph img{width:46%;filter:brightness(0) invert(1)}
+
+@media(max-width:950px){.eng-core-glyph{width:66px;height:66px}}
+@media(max-width:720px){.eng-core-glyph{width:60px;height:60px}}
+
+
+/* ============================================================================
+   V0.38 — cascade repair for the engine panel.
+
+   V0.36 re-declared .eng-panel{grid-template-columns:…5 columns…} outside a
+   media query, i.e. AFTER the V0.35 @media(max-width:950px) that collapses the
+   panel to one column. A media query adds no specificity, so source order won
+   and the panel stayed in its desktop grid at every width: below ~950px the
+   five tracks were squeezed to ~60px each, the core became a vertical sliver
+   and the outcome cards overflowed the viewport.
+
+   Rule for this file: when a later block restyles a component that already has
+   responsive overrides, re-state those overrides in the same block. Appending a
+   bare declaration silently outranks every media query above it.
+   ========================================================================= */
+
+@media(max-width:950px){
+  .eng-panel{grid-template-columns:minmax(0,1fr);gap:0;
+    padding:clamp(20px,3vw,26px);border-radius:18px}
+  .eng-core{padding:clamp(28px,5vw,34px) 22px}
+  /* the rings read best as a halo behind the mark, so on a wide short core
+     pull their centre up to sit on the glyph rather than the copy */
+  .eng-core-sub{max-width:38ch}
+}
