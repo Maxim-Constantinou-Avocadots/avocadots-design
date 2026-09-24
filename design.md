@@ -1085,6 +1085,84 @@ for empty submit, malformed email, short phone and a valid submit, the sticky ba
 against both forms, and the grid for exact top/bottom alignment of the lead card against the
 pair beside it at every width down to 1024.
 
+## 9m. Canonical footer — V0.39
+
+Used on all 11 pages that carry a full footer. `contact.html` keeps its own compact
+`.ac-footer`, because that page is a single funnel and a 6-column footer would give people a way
+out of it. Markup is emitted by `tools/gen_footer.py` — **edit the generator, not the
+pages.** It was 11 hand-maintained copies that differed only in the `Home` href, which is exactly
+how a shared component drifts; the generator now writes one block into every page.
+
+### Why V0.1 was replaced
+
+The user's words: *"This footer is not a good design approach. I want a premium looking footer
+and I want it to be clean and branded."* Specifics, measured on the rendered page:
+
+| Problem | Detail |
+| --- | --- |
+| Dead space | The invite orb was `position:absolute` at the top right of a 130px headline, so roughly 300px of the band was empty. |
+| Duplicated CTA | A yellow "Contact us" button sat ~100px below a link that already said the same thing, in the same colour. |
+| Flat link dump | Five equal columns of 14px links with no hierarchy, above an address block that ran out of content after three lines. |
+| Fake sixth column | A second `<h3>Topics</h3>` half way down the Company column read as a ragged extra column, not a group. |
+| Template shape | Two full-bleed rules chopping the band into three even slabs. |
+
+### What V0.39 is
+
+**One invite, bound together.** The orb is a grid child beside the type, not an absolute box
+floating over it, and `.fx-invite-copy` is `width:max-content` so the column shrink-wraps to the
+longest line. Without that the title is a block filling the `1fr` track and the orb sits ~580px
+from the end of the words even though the grid `gap` is only 58px — **the gap was never the
+problem, the block width was.** The duplicate "Contact us" button is gone; the headline is the CTA.
+
+**A real identity block**, not an address stub: lockup, the studio's own positioning line from the
+homepage hero, email, phone, address, and the socials. It has enough in it to hold a column.
+
+**Four nav columns with no sub-headings** — Services (6) / Studio (6) / Explore (4) / Topics (4).
+Same destinations as before, regrouped so nothing needs a second `<h3>`.
+
+**Socials are circular icon badges**, the same shape as the engine's arrow badges. All six marks
+are stroke-drawn at 1.7 to match the mega-menu icon set; **a row mixing filled and stroked marks
+reads as borrowed assets.** Each has an `aria-label` because the glyph carries no text.
+
+**Branded surface, not applied decoration:** the lime→yellow hairline from the engine panel runs
+along the footer's top edge, and the engine core's concentric rings bleed out of the bottom-right
+corner. The rings are drawn in CSS (`repeating-radial-gradient`) rather than scaling the 96px
+brand mark up to 700px, and they are masked with a radial fade so they dissolve before reaching
+any text — unmasked they crossed the Topics column and read as a rendering artifact.
+
+### Traps this component has already hit
+
+- **The brand mark is the dark forest swatch.** `.brand img` knocks it out white with
+  `filter:brightness(0) invert(1)`. `.fx-lockup img` did not, so a forest mark sat invisible on a
+  forest background. Any new lockup needs that filter.
+- `justify-self`, not `align-self`, centres the orb when the invite stacks — in a grid
+  `align-self` is the block axis.
+- The old `footer-*` rules were **deleted** in the same pass (42 rules, ~2.8KB, scattered across
+  four media blocks), not left to rot. The new prefix is `fx-` so there is no half-migrated state.
+  Dead rules in a stylesheet shared by 13 pages are how class-name collisions happen later — this
+  project already lost ~700px of page height to one (`.wk-body`, §9g).
+
+### Breakpoints
+
+| Width | Identity block |
+| --- | --- |
+| > 1180 | A column beside the nav. |
+| 861–1180 | A **horizontal band** — lockup + line, contact, socials. Stacking it above the nav here would leave the whole right half of the footer empty, which is the dead space the invite was rebuilt to remove. |
+| ≤ 860 | Plain stack. Below this the band stops paying for itself: the six social badges are 290px and no longer fit a half-width column, so they wrap 5+1, and the tagline gets pushed down by whichever neighbour is tallest. |
+
+A 2-up attempt at 860 put `.fx-contact` and `.fx-social` in the same grid cell. **An overlap is
+invisible to an overflow or escape check** — nothing leaves the viewport, the text just sits on
+top of other text — so the sweep now asserts that no two `.fx-id` children intersect.
+
+### Verification
+
+The sweep renders **every page** at 1920 / 1440 / 1180 / 1100 / 1024 / 950 / 900 / 861 / 860 /
+820 / 768 / 720 / 540 / 380 / 320 (the widths either side of each breakpoint, not just round
+numbers) and
+asserts: nothing in the footer exceeds the viewport or escapes `.footer`, no horizontal document
+scroll, the lockup mark actually loaded, **every footer link has a non-empty accessible name and
+a real href** (no `#`), and social tap targets stay ≥32px at ≤540. No console errors.
+
 ## 10. Preserve the homepage's content and rhythm
 
 The user requested an elevated homepage while keeping its existing sections. Preserve this order and its real assets:
