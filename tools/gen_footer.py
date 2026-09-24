@@ -88,42 +88,75 @@ ARROW = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
          '<path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg>')
 
-# The positioning line and the locality line are the studio's own words, from
-# the homepage hero and the FAQ respectively. Do not write new claims here.
+MARK = '<img class="fx-tick" src="assets/brand-mark.png" alt="" width="96" height="96">'
+
+# Three ways to start, not three buttons that do the same thing. The Calendly
+# link is the studio's real one, already used on branding.html.
+WAYS = [
+ ("Write to us", "crew@avocadots.com", "mailto:crew@avocadots.com", False),
+ ("Call the studio", "+357 22 251025", "tel:+35722251025", False),
+ ("Prefer to talk it through?", "Book a free consultation",
+  "https://calendly.com/avocadots-design-studio/free-digital-consultation", True),
+]
+
+def way(k, v, href, ext):
+    out = ' target="_blank" rel="noopener"' if ext else ''
+    arrow = '<span class="fx-way-go" aria-hidden="true">&#8599;</span>'
+    return ('<a class="fx-way" href="%s"%s><span class="fx-way-k">%s</span>'
+            '<span class="fx-way-v">%s</span>%s</a>' % (href, out, k, v, arrow))
+
+# The marquee runs the studio's own six services. Doubled so the loop is
+# seamless; aria-hidden because every name is already a link in the nav below.
+MARQUEE_ITEMS = ["Branding","Web Design","E-Commerce","Digital Marketing","CRM","ChatGPT Ads"]
+_run = "".join('<span>%s</span>%s' % (t, MARK) for t in MARQUEE_ITEMS)
+MARQUEE = ('<div class="fx-marquee" aria-hidden="true"><div class="fx-marquee-track">'
+           + _run + _run + '</div></div>')
+
+CONTACT_COL = (
+ '<div class="fx-col fx-col-contact"><h3>Get in touch</h3>'
+   '<ul>'
+     '<li><a href="mailto:crew@avocadots.com">crew@avocadots.com</a></li>'
+     '<li><a href="tel:+35722251025">+357 22 251025</a></li>'
+   '</ul>'
+   '<p class="fx-addr">Tziortzi Dimitrof<br>Nicosia 1048, Cyprus</p>'
+   '<ul class="fx-social">' + "".join(social_item(*s) for s in SOCIAL) + '</ul>'
+ '</div>')
+
 FOOTER = (
 '<footer class="footer">'
+
   '<div class="wrap">'
-
-    '<a class="fx-invite" href="contact.html">'
-      '<span class="fx-invite-copy">'
-        '<span class="eyebrow">The next good thing starts here.</span>'
-        '<span class="fx-invite-title">Let&rsquo;s make<br><em>some growth.</em></span>'
-      '</span>'
-      '<span class="fx-orb" aria-hidden="true">' + ARROW + '</span>'
-    '</a>'
-
-    '<div class="fx-main">'
-      '<div class="fx-id">'
-        '<span class="fx-lockup"><img src="assets/brand-mark.png" alt="" width="96" height="96"><span>avocadots</span></span>'
+    '<div class="fx-cta">'
+      '<p class="eyebrow">The next good thing starts here.</p>'
+      '<div class="fx-cta-top">'
+        '<a class="fx-invite" href="contact.html">'
+          '<span class="fx-invite-title">Let&rsquo;s make<br>some growth.</span>'
+          '<span class="fx-orb" aria-hidden="true">' + ARROW + '</span>'
+        '</a>'
         '<p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p>'
-        '<ul class="fx-contact">'
-          '<li><a href="mailto:crew@avocadots.com">crew@avocadots.com</a></li>'
-          '<li><a href="tel:+35722251025">+357 22 251025</a></li>'
-          '<li><span>Tziortzi Dimitrof<br>Nicosia 1048, Cyprus</span></li>'
-        '</ul>'
-        '<ul class="fx-social">' + "".join(social_item(*s) for s in SOCIAL) + '</ul>'
       '</div>'
-      '<nav class="fx-nav" aria-label="Footer">' + "".join(column(*c) for c in COLUMNS) + '</nav>'
+      '<div class="fx-ways">' + "".join(way(*w) for w in WAYS) + '</div>'
     '</div>'
+  '</div>'
+
+  + MARQUEE +
+
+  '<div class="wrap">'
+    '<nav class="fx-nav" aria-label="Footer">'
+      + "".join(column(*c) for c in COLUMNS) + CONTACT_COL +
+    '</nav>'
 
     '<div class="fx-base">'
-      '<p class="fx-where"><span class="status-dot" aria-hidden="true"></span>Nicosia, Cyprus &mdash; working with clients across Europe.</p>'
+      '<span class="fx-lockup"><img src="assets/brand-mark.png" alt="" width="96" height="96"><span>avocadots</span></span>'
+      '<p class="fx-clock"><span class="status-dot" aria-hidden="true"></span>'
+        '<span data-clock>Nicosia, Cyprus</span></p>'
       '<p class="fx-legal"><span>&copy; 2026 Avocadots</span>'
         '<a href="https://www.avocadots.com/terms-and-conditions">Terms &amp; Conditions</a>'
         '<a href="https://www.avocadots.com/privacy-policy">Privacy Policy</a></p>'
     '</div>'
-
   '</div>'
+
+  '<script src="footer.js" defer></script>'
 '</footer>')
 
 # --- inject ------------------------------------------------------------------

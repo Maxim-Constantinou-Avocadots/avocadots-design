@@ -1085,83 +1085,87 @@ for empty submit, malformed email, short phone and a valid submit, the sticky ba
 against both forms, and the grid for exact top/bottom alignment of the lead card against the
 pair beside it at every width down to 1024.
 
-## 9m. Canonical footer — V0.39
+## 9m. Canonical footer — V0.40
 
-Used on all 11 pages that carry a full footer. `contact.html` keeps its own compact
-`.ac-footer`, because that page is a single funnel and a 6-column footer would give people a way
-out of it. Markup is emitted by `tools/gen_footer.py` — **edit the generator, not the
-pages.** It was 11 hand-maintained copies that differed only in the `Home` href, which is exactly
-how a shared component drifts; the generator now writes one block into every page.
+All 11 pages with a full footer. `contact.html` keeps its own compact `.ac-footer`, because that
+page is a single funnel and a 6-column footer would give people a way out of it. Markup is
+emitted by `tools/gen_footer.py` — **edit the generator, not the pages.** The clock script is
+`dist/footer.js`, pulled in by a `<script>` inside the generated block so no page's own JS file
+has to know about it.
 
-### Why V0.1 was replaced
+### The three passes, and what each was told
 
-The user's words: *"This footer is not a good design approach. I want a premium looking footer
-and I want it to be clean and branded."* Specifics, measured on the rendered page:
+| Version | Feedback | What actually changed |
+| --- | --- | --- |
+| V0.1 | *"not a good design approach… I want a premium looking footer, clean and branded"* | Full rebuild. |
+| V0.39 | *"the top section looks weird and the layout is a bit off. Create something that stands out more."* | See below. |
+| V0.40 | current | — |
 
-| Problem | Detail |
-| --- | --- |
-| Dead space | The invite orb was `position:absolute` at the top right of a 130px headline, so roughly 300px of the band was empty. |
-| Duplicated CTA | A yellow "Contact us" button sat ~100px below a link that already said the same thing, in the same colour. |
-| Flat link dump | Five equal columns of 14px links with no hierarchy, above an address block that ran out of content after three lines. |
-| Fake sixth column | A second `<h3>Topics</h3>` half way down the Company column read as a ragged extra column, not a group. |
-| Template shape | Two full-bleed rules chopping the band into three even slabs. |
+**"The top section looks weird."** V0.39 had a headline and an orb floating in an otherwise
+empty band. That reads as leftover space rather than composition, and nudging the pieces does
+not fix it — **the content needed a surface.** It is now a lime panel, so the accent colour *is*
+the statement instead of a highlight sitting inside a dark void.
 
-### What V0.39 is
+**"The layout is a bit off."** V0.39 split the lower half `1.3fr` identity / `2.45fr` nav, which
+left the identity column short and made the proportions look arbitrary. The contact details are
+now simply a fifth nav column, so the lower half is **five equal tracks** with nothing to
+balance by eye.
 
-**One invite, bound together.** The orb is a grid child beside the type, not an absolute box
-floating over it, and `.fx-invite-copy` is `width:max-content` so the column shrink-wraps to the
-longest line. Without that the title is a block filling the `1fr` track and the orb sits ~580px
-from the end of the words even though the grid `gap` is only 58px — **the gap was never the
-problem, the block width was.** The duplicate "Contact us" button is gone; the headline is the CTA.
+**"Stands out more."** Two additions, both made of things the studio already owns:
+- a full-bleed **marquee of the six services**, punctuated by the brand mark, dividing the panel
+  from the nav;
+- the **studio clock** in the base bar — `Intl.DateTimeFormat` with `timeZone:'Europe/Nicosia'`,
+  so DST is handled rather than hard-coded as an offset.
 
-**A real identity block**, not an address stub: lockup, the studio's own positioning line from the
-homepage hero, email, phone, address, and the socials. It has enough in it to hold a column.
+The user supplied a reference (PadiSave) that ends on an oversized wordmark, and said explicitly
+not to copy it. **That device is deliberately not used here.**
 
-**Four nav columns with no sub-headings** — Services (6) / Studio (6) / Explore (4) / Topics (4).
-Same destinations as before, regrouped so nothing needs a second `<h3>`.
+### Rules this component now carries
 
-**Socials are circular icon badges**, the same shape as the engine's arrow badges. All six marks
-are stroke-drawn at 1.7 to match the mega-menu icon set; **a row mixing filled and stroked marks
-reads as borrowed assets.** Each has an `aria-label` because the glyph carries no text.
-
-**Branded surface, not applied decoration:** the lime→yellow hairline from the engine panel runs
-along the footer's top edge, and the engine core's concentric rings bleed out of the bottom-right
-corner. The rings are drawn in CSS (`repeating-radial-gradient`) rather than scaling the 96px
-brand mark up to 700px, and they are masked with a radial fade so they dissolve before reaching
-any text — unmasked they crossed the Topics column and read as a rendering artifact.
-
-### Traps this component has already hit
-
-- **The brand mark is the dark forest swatch.** `.brand img` knocks it out white with
-  `filter:brightness(0) invert(1)`. `.fx-lockup img` did not, so a forest mark sat invisible on a
-  forest background. Any new lockup needs that filter.
+- **The panel is lime, and the headline is one tone.** The V0.39 two-tone headline
+  (white + lime) cannot survive on a lime panel: lime-on-lime and white-on-lime are both around
+  1.9:1 and fail. Forest on lime is 7.5:1. If the panel colour ever changes, re-check this before
+  reintroducing an accent word.
+- **Three ways to start, not three buttons that do the same thing.** Write / call / book. The
+  Calendly URL is the studio's real one, already used on `branding.html`. This is not the
+  duplicate-CTA problem V0.1 had — that was two links to the same destination.
+- **The marquee is decorative.** Every name in it is a real link in the nav directly below, so it
+  is `aria-hidden` and contains no anchors. The checker asserts both.
+- The marquee track is `width:max-content` and deliberately wider than the screen; its parent
+  clips it. **The overflow check must skip the track** or it reports a false positive on every
+  page at every width.
+- Outlined marquee type is behind `@supports (-webkit-text-stroke)`. Without the guard,
+  `color:transparent` renders nothing at all where stroke is unsupported.
+- The six social badges are a `repeat(3,36px)` grid, not a wrapping flex row: at 40px they are
+  290px wide, never fit a fifth of the grid, and break 5+1.
+- **The brand mark is the dark forest swatch** and needs `filter:brightness(0) invert(1)`
+  wherever it sits on a dark ground (the base lockup, the marquee ticks). A mark with no filter
+  renders forest-on-forest and simply vanishes — that was a real V0.39 bug.
 - `justify-self`, not `align-self`, centres the orb when the invite stacks — in a grid
   `align-self` is the block axis.
-- The old `footer-*` rules were **deleted** in the same pass (42 rules, ~2.8KB, scattered across
-  four media blocks), not left to rot. The new prefix is `fx-` so there is no half-migrated state.
-  Dead rules in a stylesheet shared by 13 pages are how class-name collisions happen later — this
-  project already lost ~700px of page height to one (`.wk-body`, §9g).
 
 ### Breakpoints
 
-| Width | Identity block |
-| --- | --- |
-| > 1180 | A column beside the nav. |
-| 861–1180 | A **horizontal band** — lockup + line, contact, socials. Stacking it above the nav here would leave the whole right half of the footer empty, which is the dead space the invite was rebuilt to remove. |
-| ≤ 860 | Plain stack. Below this the band stops paying for itself: the six social badges are 290px and no longer fit a half-width column, so they wrap 5+1, and the tagline gets pushed down by whichever neighbour is tallest. |
-
-A 2-up attempt at 860 put `.fx-contact` and `.fx-social` in the same grid cell. **An overlap is
-invisible to an overflow or escape check** — nothing leaves the viewport, the text just sits on
-top of other text — so the sweep now asserts that no two `.fx-id` children intersect.
+| Width | CTA panel | Nav |
+| --- | --- | --- |
+| > 1100 | headline + promise as two poles of one row; three ways across the bottom | 5 columns |
+| 861–1100 | as above | 3 columns |
+| ≤ 860 | panel stacks; the ways' column rules become row rules | 2 columns |
+| ≤ 720 | orb drops below the headline | 2 columns |
+| ≤ 380 | — | 1 column |
 
 ### Verification
 
-The sweep renders **every page** at 1920 / 1440 / 1180 / 1100 / 1024 / 950 / 900 / 861 / 860 /
-820 / 768 / 720 / 540 / 380 / 320 (the widths either side of each breakpoint, not just round
-numbers) and
-asserts: nothing in the footer exceeds the viewport or escapes `.footer`, no horizontal document
-scroll, the lockup mark actually loaded, **every footer link has a non-empty accessible name and
-a real href** (no `#`), and social tap targets stay ≥32px at ≤540. No console errors.
+`tools/check_footer.py` renders **every page at 17 widths** — the widths either side of each
+breakpoint, not just round numbers. It asserts: nothing overflows the viewport or escapes
+`.footer`; no horizontal document scroll; no two siblings inside `.fx-cta-top`, `.fx-ways`,
+`.fx-base` or `.fx-nav` overlap; every image loads; the lockup mark and clock element exist;
+every link has a non-empty accessible name and a real href; the marquee stays `aria-hidden` with
+no anchors inside; social tap targets stay ≥32px at ≤540. No console errors.
+
+**An overlap is invisible to an overflow check** — nothing leaves the viewport, the text just
+lands on other text. That check exists because a 2-up identity layout in V0.39 put two blocks in
+one grid cell and the sweep passed it clean.
 
 ## 10. Preserve the homepage's content and rhythm
 

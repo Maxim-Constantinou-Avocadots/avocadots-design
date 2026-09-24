@@ -12,7 +12,11 @@ That is how the old footer ended up as 11 near-identical variants differing only
 python3 tools/gen_footer.py
 ```
 
-It writes into `dist/` using an absolute path, so it runs from anywhere.
+It writes into `dist/` using an absolute path, so it runs from anywhere, and is idempotent —
+re-running against unchanged output reports "0 pages".
+
+The generated block pulls in `dist/footer.js` (the studio clock) with its own `<script>` tag, so
+no page's own JS file needs to know the footer exists.
 
 > The Growth Engine (design.md §7) is generated the same way, but its script writes an
 > `engine.frag` next to itself for a second script to pick up, and neither is committed yet.
@@ -21,11 +25,12 @@ It writes into `dist/` using an absolute path, so it runs from anywhere.
 
 ## Checks
 
-`check_footer.py` renders every page at 15 widths — the widths either side of each breakpoint,
+`check_footer.py` renders every page at 17 widths — the widths either side of each breakpoint,
 not just round numbers — and asserts the footer does not overflow the viewport, escape
-`.footer`, overlap itself, scroll the document sideways, lose the lockup mark, or carry a link
-with no accessible name or a dead `#` href. It also checks social tap targets stay ≥32px on
-small screens. Needs a static server on port 8099:
+`.footer`, overlap itself, scroll the document sideways, lose an image, or carry a link with no
+accessible name or a dead `#` href. It also checks the decorative marquee stays `aria-hidden`
+with no anchors inside, and that social tap targets stay ≥32px on small screens. Needs a static
+server on port 8099:
 
 ```
 cd dist && python3 -m http.server 8099 &
