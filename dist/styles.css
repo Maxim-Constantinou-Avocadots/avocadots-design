@@ -491,3 +491,113 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 .hero-strip{grid-template-columns:1fr}
 .hero-tile-frame{aspect-ratio:1.5}
 }
+
+
+/* ============================================================================
+   V0.35 — Unified Growth Engine, rebuilt. Supersedes the V0.16 diagram.
+
+   The old one floated three cards at staggered offsets, wired them to a flat
+   yellow disc with 1px curves, and read as a wireframe. It also only showed
+   THAT the disciplines connect — never what the client gets out of it.
+
+   Now: one contained panel, read left to right — what goes in, the engine,
+   what comes out. The outcomes are the mission statement's own promise
+   ("clarity, conversion, and long-term momentum"), so the section finally
+   states the offer instead of illustrating a noun.
+
+   All classes are `eng-` prefixed. The V0.16 `.engine-*` rules above no longer
+   match any markup; do not revive them.
+   ========================================================================= */
+
+.growth{background:var(--deep);color:var(--paper);overflow:hidden;position:relative}
+/* one soft lime bloom behind the core, so the centre of the panel carries the
+   light rather than the section being a flat dark rectangle */
+.growth::before{content:"";position:absolute;left:50%;top:58%;width:min(1100px,90vw);aspect-ratio:1.6;
+  transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,#a5d65b1f,#a5d65b00 72%)}
+.growth>.wrap{position:relative}
+
+.eng-head{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(28px,4vw,72px);flex-wrap:wrap;margin-bottom:clamp(36px,4.2vw,60px)}
+.eng-head .eyebrow{color:#9cb3a6;margin-bottom:20px}
+.eng-head h2{font-size:clamp(34px,4.6vw,72px);font-weight:600;line-height:1;letter-spacing:-.065em}
+.eng-head h2>span{color:var(--lime)}
+.eng-head-aside{max-width:440px}
+.eng-head-aside p{font-size:16px;line-height:1.7;color:#cfddd2}
+.eng-cta{margin-top:20px;background:var(--yellow);color:var(--forest)}
+.eng-cta:hover{transform:translateY(-2px)}
+
+/* inputs | bus | core | bus | outputs — one panel, so nothing floats */
+.eng-panel{display:grid;grid-template-columns:minmax(0,1fr) clamp(48px,5vw,76px) minmax(0,.92fr) clamp(48px,5vw,76px) minmax(0,1fr);
+  align-items:stretch;padding:clamp(24px,2.6vw,38px);border:1px solid #ffffff1f;border-radius:24px;
+  background:#ffffff08;backdrop-filter:blur(2px)}
+
+.eng-stage{display:flex;flex-direction:column;min-width:0}
+.eng-stage-label{font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#8ba393;margin:0 0 14px}
+.eng-list{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:12px;flex:1;list-style:none;padding:0;margin:0}
+
+.eng-node{display:flex;flex-direction:column;justify-content:center;padding:clamp(16px,1.6vw,22px);border:1px solid #ffffff21;border-radius:14px;background:#0f2a2199;transition:border-color .25s,background .25s}
+.eng-node:hover{border-color:#a5d65b52;background:#12332699}
+.eng-node-n{font-size:11px;font-weight:700;letter-spacing:.11em;color:var(--lime)}
+.eng-node h3{margin-top:7px;font-size:clamp(18px,1.7vw,24px);font-weight:600;letter-spacing:-.04em;line-height:1.1}
+.eng-node p{margin-top:7px;font-size:13.5px;line-height:1.55;color:#a9bdb0}
+
+/* outcomes are the payoff, so they carry the yellow and a tick, not a number */
+.eng-node-out{border-color:#e9c33433;background:#e9c3340d}
+.eng-node-out:hover{border-color:#e9c33466;background:#e9c33414}
+.eng-node-out h3{margin-top:9px;color:var(--yellow)}
+.eng-tick{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#e9c33429;color:var(--yellow)}
+.eng-tick svg{width:14px;height:14px}
+
+/* the bus: straight lines + non-scaling stroke, so it stretches to the
+   column height at any width and can never overflow its own box */
+.eng-bus{display:block;align-self:stretch;color:#a5d65b6b}
+.eng-bus svg{display:block;width:100%;height:100%}
+
+.eng-core{display:flex;flex-direction:column;justify-content:center;text-align:center;align-items:center;
+  padding:clamp(24px,2.6vw,36px) clamp(18px,2vw,28px);border-radius:20px;
+  background:linear-gradient(160deg,var(--brand-lime),#6ea62f);color:var(--forest);
+  box-shadow:0 22px 60px #86bd4229,inset 0 1px 0 #ffffff4d}
+.eng-core-badge{display:inline-flex;align-items:center;min-height:26px;padding:4px 13px;border-radius:30px;background:#1c383021;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+.eng-core strong{display:block;margin-top:16px;font-size:clamp(24px,2.7vw,40px);font-weight:600;letter-spacing:-.055em;line-height:1.02}
+.eng-core-sub{display:block;margin-top:13px;font-size:13.5px;line-height:1.55;color:#1c3830c4;max-width:24ch}
+
+.eng-foot{margin-top:clamp(24px,2.8vw,38px);font-size:clamp(15px,1.25vw,17.5px);line-height:1.65;color:#a9bdb0;max-width:70ch}
+.eng-foot strong{color:#eef0ec;font-weight:600}
+
+@media(max-width:1180px){
+  .eng-node p{font-size:13px}
+  .eng-core-sub{font-size:13px}
+}
+
+@media(max-width:950px){
+  /* stacked: the bus rotates to a short vertical link between the stages, so
+     the left-to-right reading becomes top-to-bottom without breaking */
+  .eng-panel{grid-template-columns:minmax(0,1fr);gap:0;padding:clamp(20px,3vw,26px);border-radius:18px}
+  .eng-list{grid-template-rows:auto}
+  .eng-bus{height:46px;justify-self:center;width:2px;margin-block:14px;background:linear-gradient(#a5d65b6b,#a5d65b6b);border-radius:2px}
+  .eng-bus svg{display:none}
+  .eng-core{padding:26px 22px}
+  .eng-core-sub{max-width:34ch}
+  .eng-stage-label{margin-bottom:12px}
+}
+
+@media(max-width:720px){
+  .eng-head{flex-direction:column;align-items:flex-start;margin-bottom:32px}
+  .eng-head h2{font-size:clamp(32px,8.4vw,46px)}
+  .eng-cta{width:100%;justify-content:space-between}
+  .eng-node{padding:17px}
+  .eng-node h3{font-size:20px}
+  .eng-core strong{font-size:26px}
+  .eng-foot{font-size:15px}
+}
+
+@media(max-width:380px){
+  .eng-node h3{font-size:18px}
+  .eng-core strong{font-size:23px}
+  .eng-core-badge{font-size:10px;letter-spacing:.09em}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .eng-node,.eng-cta{transition:none}
+  .eng-cta:hover{transform:none}
+}

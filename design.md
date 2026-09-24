@@ -156,277 +156,57 @@ The 1600px limit includes padding because the site uses `box-sizing: border-box`
 
 Do not give every component a large pill shape. Soft corners should belong to a consistent family.
 
-## 7. Canonical Growth Engine component — current V0.16
+## 7. Canonical Growth Engine component — current V0.35
 
-This is the most important current component to preserve when continuing the latest work.
+Used on `index.html` and `mission.html`. Markup for both is emitted by one
+generator, so **edit the generator, not the two pages**. CSS is the `V0.35` block at the end of
+`styles.css`.
 
-### Content: keep exactly unless copy changes are requested
+### Why V0.16 was replaced
 
-**Eyebrow:** 04 / The Unified Growth Engine
+V0.16 floated three cards at staggered offsets, wired them to a flat yellow disc with 1px curves,
+and enforced a strict geometry contract (viewBox `1200 600`, `aspect-ratio:2/1`, node percentages,
+a 1024px stacked floor) that kept breaking — nodes escaped the container at 951–1023px, the
+`:nth-child` translate rules leaked into the stacked layout, and it had to be re-fixed repeatedly.
 
-**Heading:**
+It was rejected five times. The styling was only half the problem. **The diagram showed that the
+three disciplines connect, and never what the client gets** — three nouns wired to a bubble
+labelled "Growth". A reader learned nothing about the offer.
 
-> Good on their own.  
-> Better together.
+### What V0.35 is
 
-The second line is yellow.
+One contained panel read left to right: **what goes in → the engine → what comes out.**
 
-**Description:**
+| Column | Content |
+| --- | --- |
+| What goes in | Brand / Website / Marketing, numbered, copy unchanged from V0.16 |
+| The engine | Lime panel: "One team. One system." + "One point of contact, from the first call to the numbers afterwards." |
+| What comes out | **Clarity / Conversion / Momentum**, yellow with ticks |
 
-> Your brand, website, and marketing should move in the same direction. We bring them together, with one team focused on your growth.
+The outcomes are the mission statement's own promise — "delivers clarity, conversion, and
+long-term momentum" — and each description is that page's own wording. **This is the part that
+makes the section state the offer; do not replace the outcomes with more nouns.** The closing
+line is the About page's verbatim origin sentence about separate vendors.
 
-**CTA:** Explore the growth engine  
-**Destination:** https://www.avocadots.com/unified-growth
+Colour codes the direction: **lime = inputs, yellow = outputs.** Keep it.
 
-| Index | Title | Description |
-| --- | --- | --- |
-| 01 | Brand | A clear identity that shapes every touchpoint. |
-| 02 | Website | A digital experience that turns interest into action. |
-| 03 | Marketing | Campaigns that bring the right people to your business. |
+### The connector, and why there is no geometry contract any more
 
-### Structure
+Each bus is an inline SVG of **straight lines only**, with `preserveAspectRatio="none"` and
+`vector-effect="non-scaling-stroke"`. It stretches to whatever height its column happens to be
+without distorting the stroke, so there are no node percentages to maintain and nothing can
+escape its box. **Do not reintroduce curves here** — a curve under non-uniform scaling is exactly
+what forced the old contract.
 
-- Solid forest section.
-- Two equal columns on wide desktop: introduction/CTA left, three stacked cards right.
-- Column gap: `clamp(48px, 7vw, 112px)`.
-- Section padding: 104px vertically; 88px at 1180px; 64px at 720px.
-- Both columns align vertically to their centres.
-- All three descriptions are visible immediately.
-- One actual action: the CTA. The cards are informational, not clickable.
+Below 950px the panel goes single-column and each bus becomes a short vertical rule
+(`justify-self:center` — in a grid, `align-self` is the block axis and will not centre it
+horizontally; that was a real bug in the first pass).
 
-### Exact card treatment
+### Verification
 
-```css
-.engine-disciplines {
-  display: grid;
-  gap: 16px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.engine-disciplines > li {
-  display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
-  gap: 20px;
-  padding: 26px 28px;
-  border: 1px solid #ffffff1f;
-  border-radius: 16px;
-  background: #ffffff0a;
-  box-shadow: 0 6px 18px #0c24191a;
-}
-```
-
-The background is white at approximately 4% opacity **over forest**. Do not turn it into a solid pale green card. The border is approximately 12% white opacity. The yellow number is a small text index, not a badge or icon.
-
-- Title: 30–40px; description: 16px; title-to-description gap: 10px.
-- Below 1180px: 25px card padding, 18px inner gap, 34px title.
-- Below 950px: overall columns stack; each card can place its title and description beside one another when there is enough width.
-- Below 720px: title and description stack; 24px card padding; 14px radius and gap; 31px title.
-- Below 380px: 22px vertical / 20px horizontal card padding; 29px title.
-
-Do not restore rings, diagrams, connector arrows, a central logo hub, service tags, selection controls, or a second paragraph that changes when a card is clicked. Do not add hover movement that implies these informational cards are links.
-
-### V0.13 — presence pass
-
-The user reported they could scroll past this section without stopping, and asked it to carry
-the page's "wow" moment, because it is where the studio's difference is explained. Four
-measurable causes were found in the V0.10 build, and all four are now fixed:
-
-1. It carried the **smallest display heading on the page** (68px cap, against 86px for awards,
-   85px for the people cards and 78px for a generic section H2).
-2. It was the **third forest section**, sharing a surface with the hero and awards.
-3. It was **absent from the reveal system** — `.section-heading, .project-link, .studio-copy,
-   .blog-link, .people-card` named no engine selector, so nothing happened on scroll.
-4. It is the **only major section with no imagery**, so the eye has nothing to land on.
-
-The fix adds no new elements. Per §1, the lift comes from surface, scale and contrast:
-
-```css
-.growth{background:var(--deep);padding-block:136px;position:relative;isolation:isolate;overflow:hidden}
-.growth:before{content:"";position:absolute;inset:0;z-index:-1;
-  background:radial-gradient(ellipse at 84% 6%,#86bd4218,transparent 62%);pointer-events:none}
-
-.engine-layout{grid-template-columns:1.1fr 1fr;gap:clamp(48px,6vw,104px)}
-.engine-copy h2{font-size:clamp(44px,5.2vw,82px);line-height:1.04;letter-spacing:-.062em}
-.engine-disciplines>li{padding:30px 32px;gap:22px;grid-template-columns:34px minmax(0,1fr);
-  border:1px solid #ffffff26;background:#ffffff0f;box-shadow:0 10px 28px #0818110f}
-.engine-disciplines h3{font-size:clamp(34px,3.5vw,54px);letter-spacing:-.05em}
-```
-
-- `--deep` makes this the darkest surface on the page, so it stops reading as another forest
-  band and yellow hits harder. The wash follows the Contact reference and is intentionally faint.
-- The heading moves from the smallest display size on the page to among the largest. The left
-  column widens to `1.1fr` so the two documented lines still hold; **measured in Chromium, the
-  heading stays exactly two lines from 1600px down to 320px.** Change either value and re-measure.
-- The disciplines become typographic statements (54px cap, up from 40px) rather than card titles.
-  With no imagery in this section, the type is the visual.
-- The card wash rises from 4% to 6% white and the border from 12% to 15%, which keeps the same
-  *perceived* contrast now that the ground is darker. It is still white-over-dark, not a solid
-  pale green card.
-- `.engine-copy` and `.engine-disciplines>li` join the existing reveal system, with the three
-  cards staggered 0 / 0.09 / 0.18s. This uses the site's existing 28px/700ms reveal, not a new
-  motion language, and `prefers-reduced-motion` still disables it.
-
-What did **not** change: the two-column composition, the copy, the CTA, the non-interactive
-cards, and every rejected treatment in §3 stays rejected. The cards gained no hover, because
-they still have no destination.
-
-Still open: this remains the only major section with no real visual content. If it needs to
-carry more, the next step is evidence rather than ornament — and that needs the user's input,
-not invented material.
-
-### V0.14 — three disciplines, one panel
-
-After V0.13 the user still found the section uninteresting. The remaining fault was not scale,
-it was that **the composition argued against the copy**: a headline reading "Better together"
-was rendered as three separated, near-identical cards, so the section read as a generic
-three-service list rather than the studio's differentiator.
-
-The three cards become three rows inside one panel — distinct on their own, visibly one thing.
-This borrows the composed-panel language of the contact and awards sections the user called on
-brand, and the green top edge §4 already reserves for panel edges. It is the first brand green
-in this section.
-
-```css
-.engine-disciplines{display:block;gap:0;
-  border:1px solid #ffffff24;border-top:4px solid var(--brand-lime);
-  border-radius:24px;background:#ffffff0d;box-shadow:0 18px 44px #0818111f;overflow:hidden}
-
-.engine-disciplines>li{border:0;border-radius:0;background:transparent;box-shadow:none;
-  padding:34px 36px;gap:24px;grid-template-columns:38px minmax(0,1fr)}
-.engine-disciplines>li+li{border-top:1px solid #ffffff1c}
-.engine-number{font-size:17px;font-weight:500;padding-top:13px}
-```
-
-- `overflow:hidden` is load-bearing: it clips the row dividers to the panel's radius.
-- The yellow index grows to 17px. It is still a text index, not a badge or icon.
-- The panel reveals as **one unit** — `.engine-disciplines`, not its rows. The V0.13 per-row
-  stagger is retired and explicitly zeroed, because rows fading in inside an already-visible
-  panel read as broken.
-- Row padding steps: 28px/30px at 1180, 30px/32px at 950, 26px/22px at 720, 22px/18px at 380.
-
-What did **not** change: the two-column composition and stacked order §3 says to continue with,
-the copy, the CTA, and the rows staying non-interactive. No diagram, hub, connector, tag, badge
-or control was added. Measured in Chromium 1600px→320px: heading holds two lines, no title
-wraps, no overflow.
-
-**Still the open lever.** This section remains the only major one with no real visual content,
-and three rounds of composition work have now taken the design-only route about as far as it
-goes. If it must carry more, the next step is evidence, not ornament: a real figure per
-discipline, or one real project per discipline. Both need the user's confirmation — §10's
-figures must not be silently moved or merged, and which project demonstrates which discipline
-is not something to guess.
-
-### V0.15 — the headline gets the page's display scale
-
-V0.13 and V0.14 both failed to make this section land. The reason was structural, not a matter
-of tuning: **the heading was trapped in a half-width column**, so it capped at 82px while the
-hero runs `clamp(64px,8.05vw,128px)` and the footer invite `clamp(58px,8.5vw,130px)`. No
-type-size value inside that column could ever reach the page's own display scale.
-
-The heading now spans the full container at that scale. This is the page's proven "stop"
-device, reused, not a new one imported from outside the concept.
-
-### Structure
-
-```html
-<div class="wrap engine-layout">
-  <div class="engine-head">   <!-- eyebrow + h2, spans both columns -->
-  <div class="engine-copy">   <!-- intro + CTA -->
-  <ol class="engine-disciplines">  <!-- the V0.14 panel -->
-```
-
-```css
-.engine-layout{display:grid;grid-template-columns:.78fr 1.22fr;
-  column-gap:clamp(44px,5vw,88px);row-gap:clamp(44px,4.6vw,72px);align-items:start}
-.engine-head{grid-column:1/-1;min-width:0}
-.engine-head h2{font-size:clamp(46px,7.9vw,122px);font-weight:500;
-  line-height:1.01;letter-spacing:-.072em}
-```
-
-- `align-items:start` is load-bearing. Centring the second row left a visible void between the
-  headline and the intro; the intro must sit flush with the panel's top edge.
-- 122px cap, measured: **the heading holds exactly two lines from 1920px down to 320px**, and no
-  discipline title wraps. Re-measure if the cap, the column ratio or the copy changes.
-- The intro rises to 19px, the disciplines to a 58px cap, both to hold their own against the
-  larger heading.
-- Reveal cascades `.engine-head` → `.engine-copy` (0.08s) → `.engine-disciplines` (0.14s).
-
-§3's "continue with" still holds: intro and the stacked disciplines keep their two-column
-relationship beneath the headline. No diagram, hub, connector, tag, badge or control was added,
-and the rows stay non-interactive.
-
-**Remaining lever.** This is still the only major section with no real visual content. Three
-rounds of composition work have exhausted the design-only route; anything further should be
-evidence (a real figure or a real project per discipline) and needs the user's confirmation.
-
-### V0.16 — the engine shown as a connected system
-
-**This supersedes part of §3.** After V0.15 the user said the section still read as "title,
-description, CTA and a few cards", and supplied references (a community-network graphic, Slack's
-"brings your team and your tools together") whose common property was *visible connections that
-are easy to understand*. They asked for connections, branded, not copied.
-
-§3 rejected an earlier diagram — overlapping circles, a central logo hub, boxed selectors,
-changing explanations. The recorded reason is "visually messy and harder to understand". That
-rejection stands **as a reason, not as a ban on the idea**: this version keeps every constraint
-that made the old one fail, and shows connections anyway.
-
-### The idea
-
-Three discipline nodes on the left. One path leaves each. The three paths **merge into a single
-line before they reach the outcome**. The merge is the "Better together." claim made visible,
-which is what neither the V0.10 cards nor the V0.14 panel could do — both showed separation
-while the headline claimed union.
-
-- No hub, no overlapping shapes, no selectors, no tags, nothing that changes on click.
-- Nothing in the diagram is focusable or clickable; the CTA remains the only action.
-- Feeder paths use brand green, the merged segment and the outcome use brand yellow — inputs in
-  the brand colour, result in the action colour.
-- The outcome reads `Growth`, a word already in the section's own eyebrow and intro. No new
-  claim, figure or label was invented.
-
-### Geometry contract — read before moving anything
-
-The SVG `viewBox` is `1200 600` with `preserveAspectRatio="xMidYMid meet"`, and
-`.engine-diagram` is `aspect-ratio:2/1`. Because those match, a node at `left:30%` sits exactly
-on viewBox `x=360`. **Node positions and path endpoints are one system: move a node and you must
-move its path endpoint by the same amount, or the wire detaches.**
-
-| Node | CSS position | Path endpoint |
-| --- | --- | --- |
-| Brand | `left:0; top:15.83%` (w 30%) | `360 95` |
-| Website | `left:7.5%; top:50%` (w 30%) | `450 300` |
-| Marketing | `left:0; top:84.17%` (w 30%) | `360 505` |
-| Merge point | — | `830 300` |
-| Growth | `left:85%; top:50%`, w 18.33% | circle edge `910 300` |
-
-All nodes use `transform:translateY(-50%)`, so they are anchored by their vertical centre.
-
-### The 1024px floor
-
-Below roughly 1024px the container height falls faster than the node text can, and the outer
-nodes escape the container — measured 6px over at 990px, 9px at 951px. So the diagram has a
-hard floor: **at/below 1023px it becomes a stack** of the same nodes in reading order, joined by
-short green connectors, ending on the same yellow outcome. The concept survives; only the
-geometry is dropped.
-
-This is the one component with a breakpoint outside §13's set, because the floor is set by the
-diagram's own geometry rather than by the page grid. Do not "tidy" it back to 950.
-
-When stacking, the `:nth-child` position rules must be neutralised explicitly — they outrank a
-plain `.engine-disciplines>li` override, and leaving their `translateY(-50%)` in place pulls
-every card up over the CTA. That bug was found in rendering, not in review.
-
-### Motion
-
-The paths draw in once on reveal (`stroke-dasharray`/`dashoffset`, 1.15s, staggered
-0.18/0.30/0.42s), then the merged segment, then the outcome fades in at 1.3s. The connection
-reads as something that happens rather than ornament that was always there. Under
-`prefers-reduced-motion` the whole diagram is simply present and fully drawn — verified, nothing
-stays hidden.
+The render check asserts **no `.eng-node`, `.eng-core` or `.eng-bus` escapes `.eng-panel`** at
+1920 / 1440 / 1180 / 1024 / 950 / 720 / 540 / 380 / 320, on both pages. Keep that assertion if
+the component changes again.
 
 ## 8. Canonical Contact-inspired awards component
 
