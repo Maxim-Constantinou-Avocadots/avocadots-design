@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Footer panel — six directions</title><meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="assets/brand-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+body{background:var(--forest);color:var(--paper);margin:0}
+.opt-intro{max-width:70ch;padding:clamp(40px,6vw,80px) var(--gutter) 0}
+.opt-intro h1{font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-.05em;line-height:1.05;margin:0 0 16px}
+.opt-intro p{font-size:16px;line-height:1.7;color:#a9bdb0;margin:0 0 10px}
+.opt{padding:clamp(34px,4vw,56px) var(--gutter)}
+.opt+.opt{border-top:1px solid #ffffff14}
+.opt-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:26px}
+.opt-letter{display:grid;place-items:center;flex-shrink:0;width:38px;height:38px;border-radius:50%;
+  border:1px solid #a5d65b4d;color:var(--lime);font-weight:700;font-size:15px}
+.opt-head h2{margin:0;font-size:21px;font-weight:600;letter-spacing:-.03em}
+.opt-head p{margin:6px 0 0;font-size:14.5px;line-height:1.6;color:#9cb3a6;max-width:64ch}
+.opt .fx-cta{margin:0}
+
+/* ---- A: as live (no overrides) ---- */
+
+/* ---- B: flat lime over a dark base strip ---- */
+.opt-b{}
+.opt-b .fx-cta{padding:0;border-radius:20px;background:var(--brand-lime);box-shadow:0 24px 60px #0b1c1633}
+.opt-b .fx-cta::before{display:none}
+.opt-b .fx-cta-body{padding:clamp(30px,3.6vw,54px)}
+.opt-b .fx-invite-title{font-weight:600}
+.opt-b .fx-ways{margin-top:0;border-top:0;background:#0b1e17;color:var(--paper)}
+.opt-b .fx-way{padding:clamp(19px,2.1vw,28px) clamp(18px,2vw,28px)}
+.opt-b .fx-way:first-child{padding-left:clamp(30px,3.6vw,54px)}
+.opt-b .fx-way:last-child{padding-right:clamp(30px,3.6vw,54px)}
+.opt-b .fx-way+.fx-way{border-left:0;box-shadow:inset 1px 0 0 #ffffff1c;padding-left:clamp(18px,2vw,28px)}
+.opt-b .fx-way-k{color:#8ba393}
+.opt-b .fx-way-v{color:var(--paper)}
+.opt-b .fx-way-go{color:var(--lime)}
+
+/* ---- C: deep forest panel, lime accents ---- */
+.opt-c .fx-cta{padding:0;border-radius:20px;color:var(--paper);
+  background:#0e241c;border:1px solid #a5d65b2e;box-shadow:none}
+.opt-c .fx-cta::before{background:repeating-radial-gradient(circle at 70% 24%,
+  #a5d65b00 0 50px,#a5d65b1f 50px 51.3px,#a5d65b00 51.3px 51.4px)}
+.opt-c .fx-cta-body{padding:clamp(30px,3.6vw,54px)}
+.opt-c .eyebrow{color:#9cb3a6}
+.opt-c .fx-invite-title{font-weight:600;color:var(--paper)}
+.opt-c .fx-orb{background:var(--lime);color:var(--forest)}
+.opt-c .fx-line{color:#a9bdb0}
+.opt-c .fx-ways{margin-top:0;border-top:1px solid #ffffff1a}
+.opt-c .fx-way{padding:clamp(19px,2.1vw,28px) clamp(18px,2vw,28px)}
+.opt-c .fx-way:first-child{padding-left:clamp(30px,3.6vw,54px)}
+.opt-c .fx-way:last-child{padding-right:clamp(30px,3.6vw,54px)}
+.opt-c .fx-way+.fx-way{border-left:1px solid #ffffff1a;padding-left:clamp(18px,2vw,28px)}
+.opt-c .fx-way-k{color:#8ba393}
+.opt-c .fx-way-v{color:var(--paper)}
+.opt-c .fx-way-go{color:var(--lime)}
+
+/* ---- D: paper, forest type ---- */
+.opt-d .fx-cta{padding:0;border-radius:20px;background:var(--paper);color:var(--forest);
+  box-shadow:0 24px 60px #0b1c1640}
+.opt-d .fx-cta::before{display:none}
+.opt-d .fx-cta-body{padding:clamp(30px,3.6vw,54px)}
+.opt-d .eyebrow{color:#58695e}
+.opt-d .fx-invite-title{font-weight:600}
+.opt-d .fx-orb{background:var(--forest);color:var(--lime)}
+.opt-d .fx-line{color:#58695e}
+.opt-d .fx-ways{margin-top:0;border-top:1px solid #1c383021}
+.opt-d .fx-way{padding:clamp(19px,2.1vw,28px) clamp(18px,2vw,28px)}
+.opt-d .fx-way:first-child{padding-left:clamp(30px,3.6vw,54px)}
+.opt-d .fx-way:last-child{padding-right:clamp(30px,3.6vw,54px)}
+.opt-d .fx-way+.fx-way{border-left:1px solid #1c383021;padding-left:clamp(18px,2vw,28px)}
+.opt-d .fx-way-k{color:#58695e}
+.opt-d .fx-way-v{color:var(--forest)}
+.opt-d .fx-way-go{color:var(--brand-lime)}
+
+/* ---- E: yellow ---- */
+.opt-e .fx-cta{padding:0;border-radius:20px;background:var(--yellow);color:var(--forest);
+  box-shadow:0 24px 60px #0b1c1633}
+.opt-e .fx-cta::before{background:repeating-radial-gradient(circle at 70% 24%,
+  #1c383000 0 50px,#1c383014 50px 51.3px,#1c383000 51.3px 51.4px)}
+.opt-e .fx-cta-body{padding:clamp(30px,3.6vw,54px)}
+.opt-e .eyebrow{color:#1c3830b8}
+.opt-e .fx-invite-title{font-weight:600}
+.opt-e .fx-orb{background:var(--forest);color:var(--yellow)}
+.opt-e .fx-line{color:#1c3830cc}
+.opt-e .fx-ways{margin-top:0;border-top:1px solid #1c383029}
+.opt-e .fx-way{padding:clamp(19px,2.1vw,28px) clamp(18px,2vw,28px)}
+.opt-e .fx-way:first-child{padding-left:clamp(30px,3.6vw,54px)}
+.opt-e .fx-way:last-child{padding-right:clamp(30px,3.6vw,54px)}
+.opt-e .fx-way+.fx-way{border-left:1px solid #1c383029;padding-left:clamp(18px,2vw,28px)}
+.opt-e .fx-way-k{color:#1c383099}
+.opt-e .fx-way-v{color:var(--forest)}
+.opt-e .fx-way-go{color:#1c383085}
+
+/* ---- F: no panel, rules only ---- */
+.opt-f .fx-cta{padding:0;border-radius:0;background:none;box-shadow:none;color:var(--paper);
+  border-top:1px solid #a5d65b5c;border-bottom:1px solid #ffffff1a}
+.opt-f .fx-cta::before{display:none}
+.opt-f .fx-cta-body{padding:clamp(30px,3.6vw,50px) 0}
+.opt-f .eyebrow{color:#9cb3a6}
+.opt-f .fx-invite-title{font-weight:600;color:var(--paper)}
+.opt-f .fx-orb{background:var(--lime);color:var(--forest)}
+.opt-f .fx-line{color:#a9bdb0}
+.opt-f .fx-ways{margin-top:0;border-top:1px solid #ffffff1a}
+.opt-f .fx-way{padding:clamp(19px,2.1vw,26px) clamp(18px,2vw,26px)}
+.opt-f .fx-way:first-child{padding-left:0}
+.opt-f .fx-way:last-child{padding-right:0}
+.opt-f .fx-way+.fx-way{border-left:1px solid #ffffff1a;padding-left:clamp(18px,2vw,26px)}
+.opt-f .fx-way-k{color:#8ba393}
+.opt-f .fx-way-v{color:var(--paper)}
+.opt-f .fx-way-go{color:var(--lime)}
+</style></head>
+<body>
+<div class="opt-intro">
+  <h1>Footer panel &mdash; six directions</h1>
+  <p>Same content, same markup, six treatments. Tell me a letter and I&rsquo;ll build it out properly across all 11 pages.</p>
+  <p>A is what is live now. B is the flat version you said was worse &mdash; included so the comparison is honest.</p>
+</div>
+<section class="opt opt-a"><header class="opt-head"><span class="opt-letter">A</span><div><h2>Gradient lime</h2><p>What is live right now. The one you said looked better before I flattened it.</p></div></header><div class="fx-cta"><div class="fx-cta-body"><p class="eyebrow">The next good thing starts here.</p><div class="fx-cta-top"><a class="fx-invite" href="#"><span class="fx-invite-title">Let&rsquo;s make<br>some growth.<span class="fx-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></span></a><p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p></div></div><div class="fx-ways"><a class="fx-way" href="#"><span class="fx-way-k">Write to us</span><span class="fx-way-body"><span class="fx-way-v">crew@avocadots.com</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Call the studio</span><span class="fx-way-body"><span class="fx-way-v">+357 22 251025</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Prefer to talk it through?</span><span class="fx-way-body"><span class="fx-way-v">Book a free consultation</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a></div></div></section><section class="opt opt-b"><header class="opt-head"><span class="opt-letter">B</span><div><h2>Flat lime + dark base</h2><p>What I shipped last and you said was worse. Here for direct comparison.</p></div></header><div class="fx-cta"><div class="fx-cta-body"><p class="eyebrow">The next good thing starts here.</p><div class="fx-cta-top"><a class="fx-invite" href="#"><span class="fx-invite-title">Let&rsquo;s make<br>some growth.<span class="fx-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></span></a><p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p></div></div><div class="fx-ways"><a class="fx-way" href="#"><span class="fx-way-k">Write to us</span><span class="fx-way-body"><span class="fx-way-v">crew@avocadots.com</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Call the studio</span><span class="fx-way-body"><span class="fx-way-v">+357 22 251025</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Prefer to talk it through?</span><span class="fx-way-body"><span class="fx-way-v">Book a free consultation</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a></div></div></section><section class="opt opt-c"><header class="opt-head"><span class="opt-letter">C</span><div><h2>Deep forest, lime accents</h2><p>Dark panel instead of a light one. You have called it &ldquo;this green section&rdquo; three times &mdash; this tests whether the big light block is itself the problem.</p></div></header><div class="fx-cta"><div class="fx-cta-body"><p class="eyebrow">The next good thing starts here.</p><div class="fx-cta-top"><a class="fx-invite" href="#"><span class="fx-invite-title">Let&rsquo;s make<br>some growth.<span class="fx-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></span></a><p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p></div></div><div class="fx-ways"><a class="fx-way" href="#"><span class="fx-way-k">Write to us</span><span class="fx-way-body"><span class="fx-way-v">crew@avocadots.com</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Call the studio</span><span class="fx-way-body"><span class="fx-way-v">+357 22 251025</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Prefer to talk it through?</span><span class="fx-way-body"><span class="fx-way-v">Book a free consultation</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a></div></div></section><section class="opt opt-d"><header class="opt-head"><span class="opt-letter">D</span><div><h2>Paper, forest type</h2><p>Light but not green. Maximum contrast against the dark footer; lime only on the orb.</p></div></header><div class="fx-cta"><div class="fx-cta-body"><p class="eyebrow">The next good thing starts here.</p><div class="fx-cta-top"><a class="fx-invite" href="#"><span class="fx-invite-title">Let&rsquo;s make<br>some growth.<span class="fx-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></span></a><p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p></div></div><div class="fx-ways"><a class="fx-way" href="#"><span class="fx-way-k">Write to us</span><span class="fx-way-body"><span class="fx-way-v">crew@avocadots.com</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Call the studio</span><span class="fx-way-body"><span class="fx-way-v">+357 22 251025</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Prefer to talk it through?</span><span class="fx-way-body"><span class="fx-way-v">Book a free consultation</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a></div></div></section><section class="opt opt-e"><header class="opt-head"><span class="opt-letter">E</span><div><h2>Yellow</h2><p>Your actual action colour &mdash; every button on the site is this yellow.</p></div></header><div class="fx-cta"><div class="fx-cta-body"><p class="eyebrow">The next good thing starts here.</p><div class="fx-cta-top"><a class="fx-invite" href="#"><span class="fx-invite-title">Let&rsquo;s make<br>some growth.<span class="fx-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></span></a><p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p></div></div><div class="fx-ways"><a class="fx-way" href="#"><span class="fx-way-k">Write to us</span><span class="fx-way-body"><span class="fx-way-v">crew@avocadots.com</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Call the studio</span><span class="fx-way-body"><span class="fx-way-v">+357 22 251025</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Prefer to talk it through?</span><span class="fx-way-body"><span class="fx-way-v">Book a free consultation</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a></div></div></section><section class="opt opt-f"><header class="opt-head"><span class="opt-letter">F</span><div><h2>No panel at all</h2><p>Rules instead of a box. The type sits on the footer&rsquo;s own ground, framed top and bottom.</p></div></header><div class="fx-cta"><div class="fx-cta-body"><p class="eyebrow">The next good thing starts here.</p><div class="fx-cta-top"><a class="fx-invite" href="#"><span class="fx-invite-title">Let&rsquo;s make<br>some growth.<span class="fx-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></span></a><p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p></div></div><div class="fx-ways"><a class="fx-way" href="#"><span class="fx-way-k">Write to us</span><span class="fx-way-body"><span class="fx-way-v">crew@avocadots.com</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Call the studio</span><span class="fx-way-body"><span class="fx-way-v">+357 22 251025</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a><a class="fx-way" href="#"><span class="fx-way-k">Prefer to talk it through?</span><span class="fx-way-body"><span class="fx-way-v">Book a free consultation</span><span class="fx-way-go" aria-hidden="true">&#8599;</span></span></a></div></div></section>
+</body></html>

@@ -736,73 +736,72 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 .footer::before{content:"";position:absolute;inset:0 0 auto;height:1px;z-index:1;
   background:linear-gradient(90deg,#a5d65b00,#a5d65b8f 20%,#e9c3348f 80%,#e9c33400)}
 
-/* ---- the CTA panel ------------------------------------------------------
-   V0.40.2. "I need something more solid." A gradient is the opposite of solid
-   by definition — soft, atmospheric, no edges — so three passes of polishing
-   one were never going to land. Gone, along with the corner rings and the
-   white bloom. The panel is now two flat blocks:
-
-     the brand lime, exactly as the token defines it, carrying the headline
-     ────────────────────────────────────────────────────────────────────
-     a deep forest strip carrying the three ways to start
-
-   Two solid fields with a hard edge between them. The forest strip also
-   bridges the panel into the dark footer below instead of the whole thing
-   floating as one bright slab, and it moves the small text off lime entirely,
-   so no part of the panel is near a contrast floor. Corners are tighter
-   (was 30px) and the headline is heavier (was 500): both read as built rather
-   than blown. */
-
-.fx-cta{position:relative;overflow:hidden;
+/* ---- the CTA panel ------------------------------------------------------- */
+/* Same lime family as the engine core, so the page opens and closes on the
+   same surface. Text is forest on lime: 7.5:1, comfortably AA at any size.
+   The V0.39 two-tone (white/lime headline) is gone on purpose — lime or white
+   type on a lime panel is ~1.9:1 and fails, so the panel carries the colour
+   and the headline stays one confident tone. */
+.fx-cta{position:relative;display:block;
   margin:clamp(48px,5.4vw,76px) 0 clamp(36px,3.8vw,52px);
-  border-radius:clamp(14px,1.4vw,20px);
-  background:var(--brand-lime);color:var(--forest);
-  box-shadow:0 24px 60px #0b1c1633}
+  padding:clamp(30px,3.6vw,58px);border-radius:clamp(20px,2.2vw,30px);
+  color:var(--forest);overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 16%,#ffffff5c,#ffffff00 48%),
+    linear-gradient(145deg,#aadc61,#8fc549 60%,#7fb53d);
+  box-shadow:0 30px 80px #86bd4224}
 
-.fx-cta-body{padding:clamp(30px,3.6vw,54px)}
-.fx-cta .eyebrow{color:#1c3830b8;margin-bottom:clamp(20px,2.4vw,30px)}
+/* the engine core's rings, in the top-right corner where the row would
+   otherwise be empty — masked so they dissolve before they reach the headline */
+.fx-cta::before{content:"";position:absolute;right:0;top:0;
+  width:min(640px,60%);aspect-ratio:1;pointer-events:none;
+  background:repeating-radial-gradient(circle at 70% 24%,
+    #1c383000 0 50px,#1c383014 50px 51.3px,#1c383000 51.3px 51.4px);
+  -webkit-mask-image:radial-gradient(circle at 70% 24%,#000,#0000 70%);
+  mask-image:radial-gradient(circle at 70% 24%,#000,#0000 70%)}
+.fx-cta-top,.fx-ways{position:relative;z-index:1}
 
-/* headline and promise are the two poles of one row, so the row has no empty
-   third; the gap between them is then breathing room, not leftover space */
+.fx-cta .eyebrow{color:#1c3830b3;margin-bottom:clamp(20px,2.4vw,30px)}
+/* headline and promise are the two poles of one row. The promise is pushed
+   to the panel's right edge so the row has no empty third; the gap between
+   them is then the breathing room, which reads as intent rather than leftover. */
 .fx-cta-top{display:grid;grid-template-columns:minmax(0,auto) minmax(0,auto);
   justify-content:space-between;gap:clamp(24px,3.6vw,56px);align-items:center}
 
 .fx-invite{display:block}
-.fx-invite-title{display:block;font-size:clamp(38px,6.2vw,94px);font-weight:600;
-  line-height:1;letter-spacing:-.062em}
+.fx-invite-title{display:block;font-size:clamp(38px,5.4vw,78px);font-weight:500;
+  line-height:1;letter-spacing:-.06em}
 /* inline, on the end of the last line — a free-standing circle between the
    headline and the promise reads as attached to neither */
 .fx-orb{display:inline-grid;place-items:center;vertical-align:middle;
   margin-left:.3em;width:clamp(40px,3.9vw,58px);aspect-ratio:1;
   border-radius:50%;background:var(--forest);color:var(--lime);
+  box-shadow:0 12px 28px #1c383033;
   transition:transform .45s cubic-bezier(.2,.7,.3,1)}
 .fx-orb svg{width:38%;height:38%;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
-.fx-invite:hover .fx-orb{transform:scale(1.07)}
+.fx-invite:hover .fx-orb{transform:scale(1.06)}
 .fx-invite:hover .fx-orb svg{transform:translate(3px,-3px)}
 .fx-invite:focus-visible{outline:2px solid var(--forest);outline-offset:8px;border-radius:10px}
 
 .fx-line{margin:0;max-width:34ch;
-  font-size:clamp(14.5px,1.25vw,17px);line-height:1.65;color:#1c3830cc}
+  font-size:clamp(14.5px,1.25vw,17px);line-height:1.65;color:#1c3830c4}
 
-/* the forest strip: three ways to start, three real cells, whole-cell hit area */
+/* three ways to start, not three buttons that do the same thing */
 .fx-ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  background:#0b1e17;color:var(--paper)}
-.fx-way{display:block;padding:clamp(19px,2.1vw,28px) clamp(18px,2vw,28px);
-  transition:background .25s}
-.fx-way:first-child{padding-left:clamp(30px,3.6vw,54px)}
-.fx-way:last-child{padding-right:clamp(30px,3.6vw,54px)}
-.fx-way+.fx-way{box-shadow:inset 1px 0 0 #ffffff1c}
-.fx-way:hover{background:#143024}
+  margin-top:clamp(26px,3.2vw,44px);border-top:1px solid #1c383029}
+.fx-way{position:relative;display:block;
+  padding:clamp(18px,2vw,26px) clamp(14px,1.6vw,22px) 0 0}
+.fx-way+.fx-way{border-left:1px solid #1c383029;padding-left:clamp(16px,1.8vw,26px)}
 .fx-way-k{display:block;font-size:11.5px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#8ba393}
-.fx-way-v{display:inline;font-size:clamp(15px,1.3vw,17px);font-weight:600;
-  letter-spacing:-.02em;color:var(--paper)}
-.fx-way-body{display:block;margin-top:6px}
-.fx-way-go{display:inline-block;margin-left:7px;font-size:15px;color:var(--lime);
-  transition:transform .25s}
+  text-transform:uppercase;color:#1c383099}
+.fx-way-v{display:inline;margin-top:5px;font-size:clamp(15px,1.3vw,17px);
+  font-weight:600;letter-spacing:-.02em;color:var(--forest)}
+.fx-way-body{display:block;margin-top:5px}
+.fx-way-go{display:inline-block;margin-left:7px;font-size:15px;color:#1c383085;
+  transition:transform .25s,color .25s}
 .fx-way:hover .fx-way-v{text-decoration:underline;text-underline-offset:4px;
   text-decoration-thickness:1px}
-.fx-way:hover .fx-way-go{transform:translate(2px,-2px)}
+.fx-way:hover .fx-way-go{transform:translate(2px,-2px);color:var(--forest)}
 
 /* ---- the services marquee ------------------------------------------------ */
 /* Full-bleed, so it sits outside .wrap. Decorative: every name below it is a
@@ -870,9 +869,8 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
   .fx-cta-top{grid-template-columns:minmax(0,1fr);gap:22px}
   /* stacked: the column rule becomes a row rule */
   .fx-ways{grid-template-columns:minmax(0,1fr)}
-  .fx-way+.fx-way{box-shadow:inset 0 1px 0 #ffffff1c}
-  /* stacked, every cell is an outer cell, so all of them take the body inset */
-  .fx-way{padding-left:clamp(30px,3.6vw,54px);padding-right:clamp(30px,3.6vw,54px)}
+  .fx-way{padding:16px 0}
+  .fx-way+.fx-way{border-left:0;border-top:1px solid #1c383029;padding-left:0}
   .fx-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 

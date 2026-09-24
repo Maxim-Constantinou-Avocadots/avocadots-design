@@ -127,7 +127,6 @@ FOOTER = (
 
   '<div class="wrap">'
     '<div class="fx-cta">'
-      '<div class="fx-cta-body">'
       '<p class="eyebrow">The next good thing starts here.</p>'
       '<div class="fx-cta-top">'
         '<a class="fx-invite" href="contact.html">'
@@ -136,7 +135,6 @@ FOOTER = (
           '</span>'
         '</a>'
         '<p class="fx-line">We bring branding, websites, and marketing together to move ambitious businesses forward.</p>'
-      '</div>'
       '</div>'
       '<div class="fx-ways">' + "".join(way(*w) for w in WAYS) + '</div>'
     '</div>'
