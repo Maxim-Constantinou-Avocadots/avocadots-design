@@ -1124,8 +1124,22 @@ not to copy it. **That device is deliberately not used here.**
 
 - **The panel is lime, and the headline is one tone.** The V0.39 two-tone headline
   (white + lime) cannot survive on a lime panel: lime-on-lime and white-on-lime are both around
-  1.9:1 and fail. Forest on lime is 7.5:1. If the panel colour ever changes, re-check this before
-  reintroducing an accent word.
+  1.9:1 and fail. If the panel colour ever changes, re-check this before reintroducing an accent
+  word.
+- **Check the gradient's darkest stop, not its average.** The first pass ran to `#69a231`, which
+  is **4.11:1** against the forest text sitting on it — under AA — and that dark corner is what
+  made the panel look muddy. The complaint and the audit failure had the same cause. The range is
+  now `#aadc61 → #8fc549 → #7fb53d`, i.e. **7.9:1 → 6.2:1 → 5.2:1**, passing everywhere.
+- **The orb is punctuation, not an object.** Set free-standing between the headline and the
+  promise it reads as attached to neither, which is the same "floating in an undefined space"
+  problem the whole rebuild started from. It is now `display:inline-grid` on the end of the last
+  line, `vertical-align:middle` — which self-adjusts across the headline's clamp range, where a
+  hand-tuned em offset does not.
+- **The rings are their own masked layer, not a background stop.** As a layer in `.fx-cta`'s
+  background stack they swept the full panel and cut arcs through the headline. On `::before`
+  with a radial mask they sit in the top-right corner — filling the one part of the row that has
+  nothing in it — and dissolve before reaching any text. `.fx-cta-top` and `.fx-ways` need
+  `position:relative;z-index:1` to stay above that layer.
 - **Three ways to start, not three buttons that do the same thing.** Write / call / book. The
   Calendly URL is the studio's real one, already used on `branding.html`. This is not the
   duplicate-CTA problem V0.1 had — that was two links to the same destination.
