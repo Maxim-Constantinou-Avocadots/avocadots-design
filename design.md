@@ -1126,20 +1126,34 @@ not to copy it. **That device is deliberately not used here.**
   (white + lime) cannot survive on a lime panel: lime-on-lime and white-on-lime are both around
   1.9:1 and fail. If the panel colour ever changes, re-check this before reintroducing an accent
   word.
-- **Check the gradient's darkest stop, not its average.** The first pass ran to `#69a231`, which
-  is **4.11:1** against the forest text sitting on it — under AA — and that dark corner is what
-  made the panel look muddy. The complaint and the audit failure had the same cause. The range is
-  now `#aadc61 → #8fc549 → #7fb53d`, i.e. **7.9:1 → 6.2:1 → 5.2:1**, passing everywhere.
+- **There is no gradient on this panel, and there should not be one again.** Two passes were
+  spent polishing one — first because its darkest stop was `#69a231`, **4.11:1** against the
+  forest text on it and under AA, then because the softened version still read as vague. The
+  answer to *"I need something more solid"* was that **a gradient is the opposite of solid by
+  definition** — soft, atmospheric, edgeless — so no amount of polishing it could land. The panel
+  is two flat fields with a hard edge between them:
+
+  | Field | Colour | Carries |
+  | --- | --- | --- |
+  | top | `var(--brand-lime)` `#86bd42`, flat | eyebrow, headline, promise |
+  | base strip | `#0b1e17`, flat | the three ways to start |
+
+  Contrast: forest on lime **5.65:1**; on the strip, paper **15.1:1**, the muted key **6.4:1**,
+  the lime arrow **8.8:1**. Nothing is near a floor any more, because no small text sits on lime.
+- **The strip is darker than the footer, not lighter.** `--deep` `#122c24` is only **1.17:1**
+  against the footer's forest, so the panel's bottom edge dissolved into the page. `#0b1e17` is
+  1.37:1 — still quiet, but it reads as a base the panel stands on.
+- **The strip's outer cells take the body's padding.** Full-bleed cells left the first key 26px
+  to the left of the headline above it. Solid means the grid lines up: outer cells inset to match
+  `.fx-cta-body`, while the dividers still run the panel's full width.
 - **The orb is punctuation, not an object.** Set free-standing between the headline and the
   promise it reads as attached to neither, which is the same "floating in an undefined space"
   problem the whole rebuild started from. It is now `display:inline-grid` on the end of the last
   line, `vertical-align:middle` — which self-adjusts across the headline's clamp range, where a
   hand-tuned em offset does not.
-- **The rings are their own masked layer, not a background stop.** As a layer in `.fx-cta`'s
-  background stack they swept the full panel and cut arcs through the headline. On `::before`
-  with a radial mask they sit in the top-right corner — filling the one part of the row that has
-  nothing in it — and dissolve before reaching any text. `.fx-cta-top` and `.fx-ways` need
-  `position:relative;z-index:1` to stay above that layer.
+- **No rings, no bloom, no shadow glow on this panel.** They were added to fill the top-right
+  of the row and to give the gradient depth; both went with the gradient. A flat field does not
+  need rescuing with texture, and texture is what made it read as soft.
 - **Three ways to start, not three buttons that do the same thing.** Write / call / book. The
   Calendly URL is the studio's real one, already used on `branding.html`. This is not the
   duplicate-CTA problem V0.1 had — that was two links to the same destination.
