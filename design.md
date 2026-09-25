@@ -1085,7 +1085,7 @@ for empty submit, malformed email, short phone and a valid submit, the sticky ba
 against both forms, and the grid for exact top/bottom alignment of the lead card against the
 pair beside it at every width down to 1024.
 
-## 9m. Canonical footer — V0.40
+## 9m. Canonical footer — V0.40.3
 
 All 11 pages with a full footer. `contact.html` keeps its own compact `.ac-footer`, because that
 page is a single funnel and a 6-column footer would give people a way out of it. Markup is
@@ -1126,34 +1126,24 @@ not to copy it. **That device is deliberately not used here.**
   (white + lime) cannot survive on a lime panel: lime-on-lime and white-on-lime are both around
   1.9:1 and fail. If the panel colour ever changes, re-check this before reintroducing an accent
   word.
-- **There is no gradient on this panel, and there should not be one again.** Two passes were
-  spent polishing one — first because its darkest stop was `#69a231`, **4.11:1** against the
-  forest text on it and under AA, then because the softened version still read as vague. The
-  answer to *"I need something more solid"* was that **a gradient is the opposite of solid by
-  definition** — soft, atmospheric, edgeless — so no amount of polishing it could land. The panel
-  is two flat fields with a hard edge between them:
-
-  | Field | Colour | Carries |
-  | --- | --- | --- |
-  | top | `var(--brand-lime)` `#86bd42`, flat | eyebrow, headline, promise |
-  | base strip | `#0b1e17`, flat | the three ways to start |
-
-  Contrast: forest on lime **5.65:1**; on the strip, paper **15.1:1**, the muted key **6.4:1**,
-  the lime arrow **8.8:1**. Nothing is near a floor any more, because no small text sits on lime.
-- **The strip is darker than the footer, not lighter.** `--deep` `#122c24` is only **1.17:1**
-  against the footer's forest, so the panel's bottom edge dissolved into the page. `#0b1e17` is
-  1.37:1 — still quiet, but it reads as a base the panel stands on.
-- **The strip's outer cells take the body's padding.** Full-bleed cells left the first key 26px
-  to the left of the headline above it. Solid means the grid lines up: outer cells inset to match
-  `.fx-cta-body`, while the dividers still run the panel's full width.
+- **The panel is a lime gradient, and small text must clear its darkest stop.** An early version
+  ran to `#69a231`, which is **4.11:1** against the forest text sitting on it — under AA — and
+  that dark corner was also what made it look muddy. The range is now
+  `#aadc61 → #8fc549 → #7fb53d`, i.e. **7.9:1 → 6.2:1 → 5.2:1**. Check the darkest stop, never
+  the average.
+- **A flat two-field version was built and rejected.** `V0.40.2` replaced the gradient with a
+  flat `--brand-lime` field over a `#0b1e17` strip, in answer to *"I need something more solid."*
+  The response was *"its worse now than before"*, and it was reverted to this gradient. Six
+  directions were then put side by side in `dist/footer-options.html` and this one was chosen.
+  **Do not re-propose the flat split** — it has been seen and turned down.
 - **The orb is punctuation, not an object.** Set free-standing between the headline and the
   promise it reads as attached to neither, which is the same "floating in an undefined space"
   problem the whole rebuild started from. It is now `display:inline-grid` on the end of the last
   line, `vertical-align:middle` — which self-adjusts across the headline's clamp range, where a
   hand-tuned em offset does not.
-- **No rings, no bloom, no shadow glow on this panel.** They were added to fill the top-right
-  of the row and to give the gradient depth; both went with the gradient. A flat field does not
-  need rescuing with texture, and texture is what made it read as soft.
+- **One light source.** The gradient's light end, the white highlight and the rings all sit on
+  the same point (top right). An earlier version lit it from the top left and highlighted the top
+  right at once, and the middle read as a dip between them.
 - **Three ways to start, not three buttons that do the same thing.** Write / call / book. The
   Calendly URL is the studio's real one, already used on `branding.html`. This is not the
   duplicate-CTA problem V0.1 had — that was two links to the same destination.
@@ -1171,6 +1161,32 @@ not to copy it. **That device is deliberately not used here.**
   renders forest-on-forest and simply vanishes — that was a real V0.39 bug.
 - `justify-self`, not `align-self`, centres the orb when the invite stacks — in a grid
   `align-self` is the block axis.
+
+### The polish pass (V0.40.3)
+
+*"Revert to this, just make sure its polished."* An audit found the alignment already exact —
+every content left edge on the same x, every right edge on the same x, symmetric padding — so the
+defects were elsewhere:
+
+- **Two light sources.** The gradient ran at `145deg` (lightest at the top *left*) while the white
+  highlight sat at the top *right*, so the middle read as a dip between them. Now `225deg`.
+- **The rings did not share the highlight's centre.** They were painted on a `60%`-wide square
+  anchored top-right, so `70% 24%` *of that box* landed ~45% down the panel while the highlight's
+  `82% 16%` was near the top. Both are now stated against a full-panel `inset:0` box at
+  `80% 18%` — the same coordinates, so they land together.
+- **The rings must be dropped below 860px.** Their mask radius is relative to the panel's
+  farthest-corner distance, and on a narrow tall stacked panel that pushes them straight through
+  the headline. They exist only to fill the empty right side of the two-pole row; stacked, there
+  is no such row.
+- **The orb sat ~0.07em low.** `vertical-align:middle` centres on the parent's x-height, which is
+  below the optical centre of the caps it punctuates. `top:-.07em` brings it within **0.1px** of
+  half a line-height below the two-line block's centre — measured, not eyeballed.
+- The orb's shadow was `0 12px 28px`; on a small circle over a light panel that reads as a smudge
+  rather than a lift. Now `0 7px 18px` at lower alpha.
+
+The wide gap between headline and promise at desktop widths is **intentional** — they are two
+poles of one row and the rings occupy the space between. It has been raised with the user and
+left as is.
 
 ### Breakpoints
 

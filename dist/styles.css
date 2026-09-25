@@ -747,18 +747,18 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
   padding:clamp(30px,3.6vw,58px);border-radius:clamp(20px,2.2vw,30px);
   color:var(--forest);overflow:hidden;
   background:
-    radial-gradient(circle at 82% 16%,#ffffff5c,#ffffff00 48%),
-    linear-gradient(145deg,#aadc61,#8fc549 60%,#7fb53d);
+    radial-gradient(circle at 80% 18%,#ffffff54,#ffffff00 50%),
+    linear-gradient(225deg,#aadc61,#8fc549 56%,#7fb53d);
   box-shadow:0 30px 80px #86bd4224}
 
-/* the engine core's rings, in the top-right corner where the row would
-   otherwise be empty — masked so they dissolve before they reach the headline */
-.fx-cta::before{content:"";position:absolute;right:0;top:0;
-  width:min(640px,60%);aspect-ratio:1;pointer-events:none;
-  background:repeating-radial-gradient(circle at 70% 24%,
+/* the engine core's rings, sharing the highlight's centre exactly — the box
+   spans the whole panel so 80%/18% means the same point in both, and the mask
+   stops them well before the headline */
+.fx-cta::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-radial-gradient(circle at 80% 18%,
     #1c383000 0 50px,#1c383014 50px 51.3px,#1c383000 51.3px 51.4px);
-  -webkit-mask-image:radial-gradient(circle at 70% 24%,#000,#0000 70%);
-  mask-image:radial-gradient(circle at 70% 24%,#000,#0000 70%)}
+  -webkit-mask-image:radial-gradient(circle at 80% 18%,#000,#0000 40%);
+  mask-image:radial-gradient(circle at 80% 18%,#000,#0000 40%)}
 .fx-cta-top,.fx-ways{position:relative;z-index:1}
 
 .fx-cta .eyebrow{color:#1c3830b3;margin-bottom:clamp(20px,2.4vw,30px)}
@@ -773,10 +773,11 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
   line-height:1;letter-spacing:-.06em}
 /* inline, on the end of the last line — a free-standing circle between the
    headline and the promise reads as attached to neither */
-.fx-orb{display:inline-grid;place-items:center;vertical-align:middle;
+.fx-orb{position:relative;top:-.07em;
+  display:inline-grid;place-items:center;vertical-align:middle;
   margin-left:.3em;width:clamp(40px,3.9vw,58px);aspect-ratio:1;
   border-radius:50%;background:var(--forest);color:var(--lime);
-  box-shadow:0 12px 28px #1c383033;
+  box-shadow:0 7px 18px #1c38302b;
   transition:transform .45s cubic-bezier(.2,.7,.3,1)}
 .fx-orb svg{width:38%;height:38%;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
 .fx-invite:hover .fx-orb{transform:scale(1.06)}
@@ -866,6 +867,11 @@ h2{font-size:clamp(40px,5vw,78px);font-weight:500;line-height:1.08;letter-spacin
 }
 
 @media(max-width:860px){
+  /* the rings exist to fill the empty right side of the two-pole row. Stacked
+     there is no such row, and the mask radius is relative to the panel's
+     corner distance — on a narrow tall panel that puts them straight through
+     the headline. */
+  .fx-cta::before{display:none}
   .fx-cta-top{grid-template-columns:minmax(0,1fr);gap:22px}
   /* stacked: the column rule becomes a row rule */
   .fx-ways{grid-template-columns:minmax(0,1fr)}
